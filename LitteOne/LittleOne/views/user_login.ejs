@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Login</title>
+    <link rel="stylesheet" href="/styles/login/style.css">
+     <link href="/styles/login/floating-labels.css" rel="stylesheet">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script type="text/javascript" src="/styles/login/script.js">
+
+    </script>
+
+<style >
+.register-info-box {
+  padding: 0  !important;
+}
+.login-reg-panel {
+
+    width: 50% !important;
+  }
+</style>
+
+  </head>
+  <body>
+    <br><br><br>
+
+
+
+<div class="login-reg-panel" style="margin-left:3%;">
+
+		<div class="register-info-box" style="margin-left: 10%;">
+			<h2>Don't have an account?</h2>
+			<p>Signup with your details</p>
+			<label id="label-login" for="log-login-show"><a href="/users/signup">Register</a></label>
+		</div>
+
+
+		<div class="white-panel" style="width:57%;margin-left:50%;position:relative!important;">
+			<div class="login-show">
+        <%- include ('partials/messages.ejs') %>
+
+				<h2>LOGIN</h2>
+
+        <%if(email){%>
+        <form method="post"   action="/users/login/pw">
+          <div class="form-label-group">
+                <input type="text" style="height:50px" id="inputuser" name="email" class="form-control" placeholder="Email" required value="<%= email %>" />
+                <label for="inputuser">Email</label>
+
+
+
+
+          </div>
+          <div class="form-label-group">
+            <input style="height:50px" type="password" id="password" name="password" class="form-control" placeholder="password" required />
+
+            <label for="password">Password</label>
+          </div>
+          <canvas id="canvas" style="border: 1px; padding: 2px; background-image: url('../styles/login/back2.jpg');" width="100" height="35"></canvas>
+          <div style="margin-top: -12%;margin-left: 28%;">
+            <a onclick='capchaReload();' style="color: black;"><i class="fa fa-repeat" style="font-size:18px"></i></a>
+
+          </div>
+
+            <input style="height:40px;width: 35%;margin-left: 46%;margin-top: -12%;" type="text" id="cpid" name="captcha" class="form-control" placeholder="captcha" required />
+
+
+            <input type="hidden" name="c" id="check">
+            <br>
+
+				<input style="background-color:#60bfdc" type="submit" name='button' value="Login" onclick="capchamatch();">
+      </form>
+      <a href="/users/forgot" class="a">Forgot password?</a>
+
+
+      <%}else{%>
+          <form method="post"   action="/users/login">
+            <div class="form-label-group">
+              <input type="text" style="height:50px" id="inputuser" name="email" class="form-control" placeholder="Email" required />
+              <label for="inputuser">Email</label>
+            </div>
+
+
+          <input type="submit" name='button' value="Next">
+        </form>
+        <a href="/users/forgot" class="a">Forgot password?</a>
+
+        <a href="/users/google" style="margin-top:15%;margin-left:23%">
+          <img border="0" alt="W3Schools" src="/styles/login/google.png" width="200" height="50">
+        </a>
+      <%}%>
+
+
+			</div>
+		</div>
+    </div>
+</body>
+    <script>
+
+        var ca;
+        function onPageloadFunc()
+        {
+            ca=capcha();
+
+        }
+        window.onload=onPageloadFunc();
+
+        function capchaReload()
+        {
+            ca=capcha();
+        }
+
+        function capcha()
+        {
+            var num1=Math.floor(Math.random()*10);
+            var num2=Math.floor(Math.random()*10);
+            var num3=Math.floor(Math.random()*10);
+
+            var arr1 = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+            var arr2=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+
+            var i = Math.floor(Math.random()*26);
+            var j = Math.floor(Math.random()*26);
+
+
+            var alpha1 = arr1[i];
+            var alpha2 = arr2[j];
+
+            var array = [num1,num2,num3,alpha1,alpha2]
+
+            var i1 = Math.floor(Math.random()*4);
+            var i2 = Math.floor(Math.random()*4);
+            var i3 = Math.floor(Math.random()*4);
+            var i4 = Math.floor(Math.random()*4);
+            var i5 = Math.floor(Math.random()*4);
+
+
+            var ch1 = array[i1];
+            var ch2 = array[i2];
+            var ch3 = array[i3];
+            var ch4 = array[i4];
+            var ch5 = array[i5];
+
+            var canvas = document.getElementById("canvas");
+            var context = canvas.getContext("2d");
+            context.font = "30px monospace";
+
+            context.clearRect(0,0,canvas.width,canvas.height);
+
+            context.fillText(ch1,9,20);
+            context.fillText(ch2,24,26);
+            context.fillText(ch3,36,20);
+            context.fillText(ch4,50,22);
+            context.fillText(ch5,64,24);
+
+
+            console.log(ch1+""+ch2+""+ch3+""+ch4+""+ch5);
+            return myCodeCapcha = ch1+""+ch2+""+ch3+""+ch4+""+ch5;
+        }
+
+        function capchamatch(){
+            // document.print(myCodeCapcha);
+            console.log(ca);
+            var inputcapcha= document.getElementById("cpid").value;
+            if(inputcapcha!==ca)
+            {
+                document.getElementById('check').value=false;
+                return false;
+
+
+
+            }
+            else{
+                console.log("success")
+                document.getElementById('check').value=true;
+                return true;
+            }
+        }
+    </script>
+
+</html>

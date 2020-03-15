@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/styles/counselors.css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+
+    <script src="https://kit.fontawesome.com/ea0619ce99.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js" ></script> -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+    <title></title>
+
+    <style>
+      #wander {
+  line-height: 50px;
+  position: fixed;
+  float: left;
+  margin: 35px 150px;
+  color: #fff;
+  font-weight: 600 !important ;
+  font-size: 14px;
+  letter-spacing: 2px;
+  transition: 1s;
+  font-weight: bold;
+  font-size:20px;
+}
+
+nav {
+  position: fixed;
+  width: 100%;
+  line-height: 60px;
+  z-index: 1000;
+  overflow-y: visible;
+  border-bottom: 1px solid #f2f2f2;
+  border-width: thin;
+  padding: 10px;
+  transition: background 300ms linear;
+}
+
+nav ul {
+  line-height: 50px;
+  list-style: none;
+  background: rgba(0, 0, 0, 0);
+  color: #fff;
+  padding: 0;
+  text-align: right;
+  margin: 0;
+  padding-right: 40px;
+  transition: 1s;
+}
+
+nav ul li {
+  display: inline-block;
+  padding: 10px 20px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 16px;
+}
+.notifimg{
+    color: #fff;
+    background-color: #adb5bd;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    border-radius: 50%;
+    height: 48px;
+    width: 48px
+  }
+  .items{
+    font-size:18px;
+  }
+
+#background {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F38%2F2020%2F01%2FGettyImages-643782350-2000.jpg&q=85");
+  min-height: 900px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+
+
+
+
+
+
+
+/*! CSS Used from: https://demos.creative-tim.com/argon-design-system-pro/assets/css/nucleo-icons.css */
+.ni{display:inline-block;font:normal normal normal 14px/1 NucleoIcons;font-size:inherit;text-rendering:auto;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+.ni-favourite-28::before{content:"\ea34";}
+.ni-watch-time::before{content:"\ea5d";}
+/*! CSS Used from: https://demos.creative-tim.com/argon-design-system-pro/assets/css/argon-design-system.min.css?v=1.0.2 */
+*,:after,:before{box-sizing:border-box;}
+section{display:block;}
+h2,h4{margin-top:0;margin-bottom:.5rem;}
+p{margin-top:0;margin-bottom:1rem;}
+a{color:#5e72e4;background-color:transparent;}
+a,a:hover{text-decoration:none;}
+a:hover{color:#233dd2;}
+img{border-style:none;}
+img{vertical-align:middle;}
+h2,h4{margin-bottom:.5rem;font-family:inherit;font-weight:400;line-height:1.5;color:#32325d;}
+h2{font-size:2rem;}
+h4{font-size:1.5rem;}
+.container{width:100%;padding-right:15px;padding-left:15px;margin-right:auto;margin-left:auto;}
+@media (min-width:576px){
+.container{max-width:540px;}
+}
+@media (min-width:768px){
+.container{max-width:720px;}
+}
+@media (min-width:992px){
+.container{max-width:960px;}
+}
+@media (min-width:1200px){
+.container{max-width:1040px;}
+}
+.row{display:flex;flex-wrap:wrap;margin-right:-15px;margin-left:-15px;}
+.col-12,.col-lg-4,.col-md-6,.col-md-10{position:relative;width:100%;padding-right:15px;padding-left:15px;}
+.col-12{flex:0 0 100%;max-width:100%;}
+@media (min-width:768px){
+.col-md-6{flex:0 0 50%;max-width:50%;}
+.col-md-10{flex:0 0 83.333333%;max-width:83.333333%;}
+}
+@media (min-width:992px){
+.col-lg-4{flex:0 0 33.333333%;max-width:33.333333%;}
+}
+.card{display:flex;flex-direction:column;min-width:0;word-wrap:break-word;background-color:#fff;background-clip:border-box;border:.0625rem solid rgba(0,0,0,.05);border-radius:.25rem;}
+.card-body{flex:1 1 auto;padding:1.5rem;}
+.card-title{margin-bottom:1.25rem;}
+.card-footer{padding:1.25rem 1.5rem;background-color:#f6f9fc;border-top:.0625rem solid rgba(0,0,0,.05);}
+.card-footer:last-child{border-radius:0 0 0.1875rem 0.1875rem;}
+.rounded{border-radius:.25rem!important;}
+.shadow{box-shadow:0 15px 35px rgba(50,50,93,.1),0 5px 15px rgba(0,0,0,.07)!important;}
+.mb-5{margin-bottom:3rem!important;}
+@media print{
+*,:after,:before{text-shadow:none!important;box-shadow:none!important;}
+a:not(.btn){text-decoration:underline;}
+img{page-break-inside:avoid;}
+h2,p{orphans:3;widows:3;}
+h2{page-break-after:avoid;}
+.container{min-width:992px!important;}
+}
+.opacity-8{opacity:.8!important;}
+[class*=shadow]{transition:all .15s ease;}
+.avatar{color:#fff;background-color:#adb5bd;display:inline-flex;align-items:center;justify-content:center;font-size:1rem;border-radius:50%;height:48px;width:48px;}
+.card{position:relative;}
+.card.card-plain{background:transparent;box-shadow:none;border:none;}
+.mx-auto{margin-right:auto!important;}
+.mx-auto{margin-left:auto!important;}
+p{font-size:1rem;}
+p{font-weight:300;line-height:1.7;}
+.card-blog{overflow:hidden;}
+.card-blog.card-plain .card-body{padding:15px 0;}
+.card-blog .card-image .img{width:100%;background-size:cover;background-position:50% 50%;}
+.card-body .card-footer{position:relative;bottom:0;left:0;background-color:transparent!important;width:100%;color:#fff;padding:5px 0 0!important;border-top:none!important;}
+.stats{font-size:.8em;}
+.stats i{margin-right:5px;position:relative;top:2px;}
+.stats.stats-right{float:right;line-height:30px;position:relative;}
+.author{position:relative;display:inline-block;text-align:left;}
+.author .avatar{width:30px;height:30px;overflow:hidden;border-radius:50%;margin-right:5px;}
+.card{margin-bottom:30px;box-shadow:0 15px 35px rgba(50,50,93,.1),0 5px 15px rgba(0,0,0,.07);border:0;}
+.card .card-title{margin-bottom:.5rem;}
+.card .card-footer{background-color:#fff;}
+.sections-page [class*=blogs-]{padding:80px 0;}
+.blogs-5 .card .card-footer .author,.blogs-5 .card .card-footer .stats{color:#172b4d;}
+/*! CSS Used fontfaces */
+@font-face{font-family:'NucleoIcons';src:url('https://demos.creative-tim.com/argon-design-system-pro/assets/fonts/nucleo-icons.eot');src:url('https://demos.creative-tim.com/argon-design-system-pro/assets/fonts/nucleo-icons.eot') format('embedded-opentype'), url('https://demos.creative-tim.com/argon-design-system-pro/assets/fonts/nucleo-icons.woff2') format('woff2'), url('https://demos.creative-tim.com/argon-design-system-pro/assets/fonts/nucleo-icons.woff') format('woff'), url('https://demos.creative-tim.com/argon-design-system-pro/assets/fonts/nucleo-icons.ttf') format('truetype'), url('https://demos.creative-tim.com/argon-design-system-pro/assets/fonts/nucleo-icons.svg') format('svg');font-weight:normal;font-style:normal;}
+
+
+
+
+
+
+
+
+
+/*! CSS Used from: https://demos.creative-tim.com/argon-design-system-pro/assets/css/nucleo-icons.css */
+.ni{display:inline-block;font:normal normal normal 14px/1 NucleoIcons;font-size:inherit;text-rendering:auto;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+.ni-bold-right::before{content:"\ea11";}
+/*! CSS Used from: https://demos.creative-tim.com/argon-design-system-pro/assets/css/argon-design-system.min.css?v=1.0.2 */
+*,:after,:before{box-sizing:border-box;}
+section{display:block;}
+h3,h5,h6{margin-top:0;margin-bottom:.5rem;}
+p{margin-top:0;margin-bottom:1rem;}
+a{color:#5e72e4;background-color:transparent;}
+a,a:hover{text-decoration:none;}
+a:hover{color:#233dd2;}
+button{border-radius:0;}
+button:focus{outline:1px dotted;outline:5px auto -webkit-focus-ring-color;}
+button{margin:0;font-family:inherit;font-size:inherit;line-height:inherit;}
+button{overflow:visible;}
+button{text-transform:none;}
+[type=button],button{-webkit-appearance:button;}
+[type=button]::-moz-focus-inner,button::-moz-focus-inner{padding:0;border-style:none;}
+h3,h5,h6{margin-bottom:.5rem;font-family:inherit;font-weight:400;line-height:1.5;color:#32325d;}
+h3{font-size:1.75rem;}
+h5{font-size:1.25rem;}
+h6{font-size:1rem;}
+.display-3{font-size:2.1875rem;}
+.display-3{font-weight:600;line-height:1.5;}
+.container{width:100%;padding-right:15px;padding-left:15px;margin-right:auto;margin-left:auto;}
+@media (min-width:576px){
+.container{max-width:540px;}
+}
+@media (min-width:768px){
+.container{max-width:720px;}
+}
+@media (min-width:992px){
+.container{max-width:960px;}
+}
+@media (min-width:1200px){
+.container{max-width:1040px;}
+}
+.row{display:flex;flex-wrap:wrap;margin-right:-15px;margin-left:-15px;}
+.col-lg-3,.col-lg-6,.col-md-8{position:relative;width:100%;padding-right:15px;padding-left:15px;}
+@media (min-width:768px){
+.col-md-8{flex:0 0 66.666667%;max-width:66.666667%;}
+}
+@media (min-width:992px){
+.col-lg-3{flex:0 0 25%;max-width:25%;}
+.col-lg-6{flex:0 0 50%;max-width:50%;}
+}
+.btn{display:inline-block;font-weight:600;color:#525f7f;text-align:center;vertical-align:middle;user-select:none;background-color:transparent;border:1px solid transparent;padding:.625rem 1.25rem;line-height:1.5;border-radius:.25rem;transition:all .15s ease;}
+@media (prefers-reduced-motion:reduce){
+.btn{transition:none;}
+}
+.btn:hover{color:#525f7f;text-decoration:none;}
+.btn:focus{outline:0;box-shadow:0 7px 14px rgba(50,50,93,.1),0 3px 6px rgba(0,0,0,.08);}
+.btn:disabled{opacity:.65;box-shadow:none;}
+.btn-primary{color:#fff;background-color:#5e72e4;border-color:#5e72e4;box-shadow:0 4px 6px rgba(50,50,93,.11),0 1px 3px rgba(0,0,0,.08);}
+.btn-primary:hover{color:#fff;background-color:#3d55df;border-color:#324cdd;}
+.btn-primary:focus{box-shadow:0 4px 6px rgba(50,50,93,.11),0 1px 3px rgba(0,0,0,.08),0 0 0 0 rgba(118,135,232,.5);}
+.btn-primary:disabled{color:#fff;background-color:#5e72e4;border-color:#5e72e4;}
+.card{display:flex;flex-direction:column;min-width:0;word-wrap:break-word;background-color:#fff;background-clip:border-box;border:.0625rem solid rgba(0,0,0,.05);border-radius:.25rem;}
+.card-body{flex:1 1 auto;padding:1.5rem;}
+.card-title{margin-bottom:1.25rem;}
+.align-items-center{align-items:center!important;}
+.mt-1{margin-top:.25rem!important;}
+.mt-4{margin-top:1.5rem!important;}
+.mb-5{margin-bottom:3rem!important;}
+@media print{
+*,:after,:before{text-shadow:none!important;box-shadow:none!important;}
+a:not(.btn){text-decoration:underline;}
+h3,p{orphans:3;widows:3;}
+h3{page-break-after:avoid;}
+.container{min-width:992px!important;}
+}
+.opacity-8{opacity:.8!important;}
+.text-white{color:#fff!important;}
+.btn{position:relative;text-transform:uppercase;will-change:transform;letter-spacing:.025em;font-size:.875rem;}
+.btn:hover{box-shadow:0 7px 14px rgba(50,50,93,.1),0 3px 6px rgba(0,0,0,.08);transform:translateY(-1px);}
+.btn-inner--icon i:not(.fa){position:relative;}
+.btn-icon .btn-inner--text:not(:last-child){margin-right:.75em;}
+.card{position:relative;}
+p{font-size:1rem;}
+.lead,p{font-weight:300;line-height:1.7;}
+.lead{font-size:1.25rem;margin-top:1.5rem;}
+.card-blog{overflow:hidden;}
+.card-background{background-position:50%;background-size:cover;text-align:center;}
+.card-background .card-body{position:relative;z-index:2;min-height:330px;padding-top:60px;padding-bottom:60px;}
+.card-background .card-body .content-bottom{position:absolute;bottom:10px;text-align:left;}
+.card-background.card-blog{overflow:hidden;height:330px;}
+.card-background .full-background{background-position:50%;background-size:cover;text-align:center;margin-bottom:30px;width:100%;height:100%;position:absolute;border-radius:.3rem;backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:all 1s cubic-bezier(.2,1,.22,1);-webkit-transition:all 1s cubic-bezier(.2,1,.22,1);}
+.card-background[data-animation=zooming]:hover .full-background{transform:scale(1.07);-webkit-transform:scale(1.07);}
+.card-background[data-animation=zooming]{transition:all .3s cubic-bezier(.2,1,.22,1);-webkit-transition:all .3s cubic-bezier(.2,1,.22,1);}
+.card-background[data-animation=zooming] a:not(.btn){height:100%;}
+.card-background[data-animation=zooming] .card-body{padding-bottom:30px;margin:initial;height:100%;}
+.card-background[data-animation=zooming]:hover{transform:scale(1.07);-webkit-transform:scale(1.07);z-index:2;}
+.card-background .card-title{color:#fff;}
+.card-background:after{position:absolute;top:0;bottom:0;left:0;height:100%;z-index:1;width:100%;display:block;content:"";background:rgba(0,0,0,.6);}
+.card{margin-bottom:30px;box-shadow:0 15px 35px rgba(50,50,93,.1),0 5px 15px rgba(0,0,0,.07);border:0;}
+.card .card-title{margin-bottom:.5rem;}
+@media (max-width:575.98px){
+.card-background[data-animation=zooming] a:not(.btn){height:auto!important;}
+}
+.sections-page [class*=blogs-]{padding:80px 0;}
+/*! CSS Used fontfaces */
+@font-face{font-family:'NucleoIcons';src:url('https://demos.creative-tim.com/argon-design-system-pro/assets/fonts/nucleo-icons.eot');src:url('https://demos.creative-tim.com/argon-design-system-pro/assets/fonts/nucleo-icons.eot') format('embedded-opentype'), url('https://demos.creative-tim.com/argon-design-system-pro/assets/fonts/nucleo-icons.woff2') format('woff2'), url('https://demos.creative-tim.com/argon-design-system-pro/assets/fonts/nucleo-icons.woff') format('woff'), url('https://demos.creative-tim.com/argon-design-system-pro/assets/fonts/nucleo-icons.ttf') format('truetype'), url('https://demos.creative-tim.com/argon-design-system-pro/assets/fonts/nucleo-icons.svg') format('svg');font-weight:normal;font-style:normal;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </style>
+
+  </head>
+
+
+  <body>
+
+    <nav id="nav" style="z-index:15;border:none;" class="navpic">
+    <div class="logo">
+      <span id="wander">FIRSTBORNS</span>
+    </div>
+    <div class="menu"  style="overflow:visible!important;">
+      <ul id="ul" style="margin-left:60%;margin-top:1.7%;">
+        <center>
+         <li><a class="items" href="/cos/home"><i class="fas fa-home"></i></a></li>
+         <li><a class="items" href="/blog"><i class="fas fa-blog"></i></a></li>
+         <li class="dropdown">
+           <i style="font-size:18px;" class="fas fa-bell dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+         </li>
+         <li class="dropdown" style="margin-left:-4%;">
+             <button style="color:white;font-size:16px;margin-top:-2%;" class="items btn btn-outline-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <i style="font-size:18px;" class="items far fa-user-circle"><small><b>name </b></small></i>
+             </button>
+             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+               <a style="padding-top:2px;" class="dropdown-item" href="/users">Profile</a>
+               <a style="padding-top:2px;" class="dropdown-item" href="/wanderlist/">WanderList</a>
+               <a style="padding-top:2px;" class="dropdown-item" href="/cos/logout">Logout</a>
+             </div>
+         </li>
+       </center>
+      </ul>
+    </div>
+  </nav>
+
+  <div id="background">
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="team-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 mx-auto text-center mb-5">
+          <h3 class="display-3" style="font-size: 3rem;font-weight: 600;">Meet our awesome team</h3>
+          <p class="lead">People are so scared to lose that they don't even try. Like, one thing people can't say is that I'm not trying, and I'm not trying my hardest, and I'm not trying to do the best way I know how.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-6">
+          <div class="card card-profile">
+            <div class="card-header bg-info" style="background-image: url('./assets/img/ill/inn.svg')">
+              <div class="card-avatar">
+                <a href="javascript:;">
+                  <img class="img img-raised rounded-circle" src="https://mzjewel.com/wp-content/uploads/2019/11/2c1d5578da20ceabc4a28343769a5c91.jpg">
+                </a>
+              </div>
+            </div>
+            <div class="card-body pt-0">
+              <div class="d-flex justify-content-between">
+                <a href="javascript:;" class="btn btn-sm btn-info mr-4 mt-3" style="color:white;background-color:#17a2b8">Connect</a>
+                <a href="javascript:;" class="btn btn-sm btn-default float-right mt-3" style="color:white;background-color:#212529;">Message</a>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="card-profile-stats d-flex justify-content-center">
+                    <div>
+                      <span class="heading">22</span>
+                      <span class="description">Friends</span>
+                    </div>
+                    <div>
+                      <span class="heading">10</span>
+                      <span class="description">Photos</span>
+                    </div>
+                    <div>
+                      <span class="heading">89</span>
+                      <span class="description">Comments</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="text-center">
+                <h5 class="h4">
+                  Melanie Paisley<span class="font-weight-light">, 31</span>
+                </h5>
+                <div class="font-weight-300">
+                  <i class="ni location_pin mr-2"></i>Beijing, China
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="col-lg-4 col-md-6">
+          <div class="card card-profile" data-background="cover">
+            <img class="img pattern pattern-top" src="./assets/img/ill/linth3.svg" alt="cover">
+            <div class="card-header">
+              <div class="card-avatar">
+                <a href="javascript:;">
+                  <img class="img img-raised rounded-circle" src="./assets/img/faces/michael.jpg">
+                </a>
+              </div>
+            </div>
+            <div class="card-body pt-0">
+              <div class="text-center">
+                <h5 class="h5 mt-3">
+                  Byron Reese<span class="font-weight-light">, 29</span>
+                </h5>
+                <div class="font-weight-300">
+                  <i class="ni location_pin mr-2"></i>California
+                </div>
+              </div>
+              <div class="card-profile-stats d-flex justify-content-center">
+                <div>
+                  <span class="heading">23K</span>
+                  <span class="description">Followers</span>
+                </div>
+                <div>
+                  <span class="heading">47</span>
+                  <span class="description">Posts</span>
+                </div>
+              </div>
+              <button type="button" class="btn btn-lg btn-success btn-block">Like!</button>
+            </div>
+          </div>
+        </div> -->
+        <div class="col-lg-4 col-md-6" style="margin-top: 50px;">
+          <div class="card card-profile">
+            <div class="card-header bg-info" style="background-image: url('https://demos.creative-tim.com/argon-design-system-pro/assets/img/ill/inn.svg')">
+              <div class="card-avatar">
+                <a href="javascript:;">
+                  <img class="img img-raised rounded-circle" src="./assets/img/faces/team-3.jpg">
+                </a>
+              </div>
+            </div>
+            <div class="card-body pt-0">
+              <div class="d-flex justify-content-between">
+                <a href="javascript:;" class="btn btn-sm btn-info mr-4 mt-3" style="color:white;background-color:#17a2b8">Connect</a>
+                <a href="javascript:;" class="btn btn-sm btn-default float-right mt-3" style="color:white;background-color:#212529;">Message</a>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="card-profile-stats d-flex justify-content-center">
+                    <div>
+                      <span class="heading">22</span>
+                      <span class="description">Friends</span>
+                    </div>
+                    <div>
+                      <span class="heading">10</span>
+                      <span class="description">Photos</span>
+                    </div>
+                    <div>
+                      <span class="heading">89</span>
+                      <span class="description">Comments</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="text-center">
+                <h5 class="h4">
+                  Johana Doe<span class="font-weight-light">, 29</span>
+                </h5>
+                <div class="font-weight-300">
+                  <i class="ni location_pin mr-2"></i>California
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="card card-profile">
+            <div class="card-header bg-info" style="background-image: url('./assets/img/ill/inn.svg')">
+              <div class="card-avatar">
+                <a href="javascript:;">
+                  <img class="img img-raised rounded-circle" src="./assets/img/faces/team-3.jpg">
+                </a>
+              </div>
+            </div>
+            <div class="card-body pt-0">
+              <div class="d-flex justify-content-between">
+                <a href="javascript:;" class="btn btn-sm btn-info mr-4 mt-3" style="color:white;background-color:#17a2b8">Connect</a>
+                <a href="javascript:;" class="btn btn-sm btn-default float-right mt-3" style="color:white;background-color:#212529;">Message</a>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="card-profile-stats d-flex justify-content-center">
+                    <div>
+                      <span class="heading">22</span>
+                      <span class="description">Friends</span>
+                    </div>
+                    <div>
+                      <span class="heading">10</span>
+                      <span class="description">Photos</span>
+                    </div>
+                    <div>
+                      <span class="heading">89</span>
+                      <span class="description">Comments</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="text-center">
+                <h5 class="h4">
+                  Johana Doe<span class="font-weight-light">, 29</span>
+                </h5>
+                <div class="font-weight-300">
+                  <i class="ni location_pin mr-2"></i>California
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+<div style="background-color: #e9ecef6e;">
+  <section class="blogs-5" style="margin-top: 40px;">
+    <div class="container" >
+      <div class="row" >
+        <div class="col-md-10 mx-auto" style="margin-top:50px;">
+          <h2 class="title mb-5">You may also like:</h2>
+          <div class="row">
+            <div class="col-lg-4 col-md-6">
+              <div class="card card-blog card-plain">
+                <div class="card-image shadow">
+                  <a href="javascript:;">
+                    <img class="img rounded" src="https://mzjewel.com/wp-content/uploads/2019/11/2c1d5578da20ceabc4a28343769a5c91.jpg">
+                  </a>
+                </div>
+                <div class="card-body">
+                  <h4 class="card-title">
+                    <a href="javascript:;">That’s One Way To Ditch Your Passenger</a>
+                  </h4>
+                  <p class="card-description">
+                    As near as we can tell, this guy must have thought he was going over backwards and tapped the rear...
+                  </p>
+                  <div class="card-footer">
+                    <div class="author">
+                      <img src="./assets/img/faces/team-3.jpg" alt="..." class="avatar img-raised">
+                      <span>Mike John</span>
+                    </div>
+                    <div class="stats stats-right opacity-8">
+                      <i class="ni ni-watch-time"></i> 5 min read
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <div class="card card-blog card-plain">
+                <div class="card-image shadow">
+                  <a href="javascript:;">
+                    <img class="img rounded" src="https://mzjewel.com/wp-content/uploads/2019/11/2c1d5578da20ceabc4a28343769a5c91.jpg">
+                  </a>
+                </div>
+                <div class="card-body">
+                  <h4 class="card-title">
+                    <a href="javascript:;">Shark Week: How to Watch It Scientist</a>
+                  </h4>
+                  <p class="card-description">
+                    Just when you thought it was safe to turn on your television, the Discovery Channel's "Shark Week"...
+                  </p>
+                  <div class="card-footer">
+                    <div class="author">
+                      <img src="./assets/img/faces/team-2.jpg" alt="..." class="avatar img-raised">
+                      <span>Jona Zmud</span>
+                    </div>
+                    <div class="stats stats-right opacity-8">
+                      <i class="ni ni-watch-time"></i> 5 min read
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-12">
+              <div class="card card-blog card-plain">
+                <div class="card-image shadow">
+                  <a href="javascript:;">
+                    <img class="img rounded" src="https://mzjewel.com/wp-content/uploads/2019/11/2c1d5578da20ceabc4a28343769a5c91.jpg">
+                  </a>
+                </div>
+                <div class="card-body">
+                  <h4 class="card-title">
+                    <a href="javascript:;">Who's Afraid of the Self-Driving Car?</a>
+                  </h4>
+                  <p class="card-description">
+                    It's been 60 years since the cover of Popular Mechanics magazine gave us the promise of flying cars...
+                  </p>
+                  <div class="card-footer">
+                    <div class="author">
+                      <img src="./assets/img/faces/team-5.jpg" alt="..." class="avatar img-raised">
+                      <span>Marc Oliver</span>
+                    </div>
+                    <div class="stats stats-right opacity-8">
+                      <i class="ni ni-favourite-28"></i> 2.4K
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+
+
+
+
+
+
+
+<section class="blogs-1" style="margin-top:50px;">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-md-8">
+        <h3 class="display-3">Our recent writings</h3>
+        <p class="lead mt-1">The time is now for it to be okay to be great. People in this world shun people for being great. </p>
+      </div>
+    </div>
+    <div class="row align-items-center">
+      <div class="col-lg-3">
+        <div class="card card-blog card-background" data-animation="zooming">
+          <div class="full-background" style="background-image: url('./assets/img/theme/josh-appel.jpg"></div>
+          <a href="javascript:;">
+            <div class="card-body">
+              <div class="content-bottom">
+                <h6 class="card-category text-white opacity-8">New Challenges</h6>
+                <h5 class="card-title">Touch on a trend</h5>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="card card-blog card-background" data-animation="zooming">
+          <div class="full-background" style="background-image: url('./assets/img/theme/john-hoang.jpg"></div>
+          <a href="javascript:;">
+            <div class="card-body">
+              <div class="content-bottom">
+                <h6 class="card-category text-white opacity-8">New Opportunities</h6>
+                <h5 class="card-title">Constantly growing</h5>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="card card-blog card-background" data-animation="zooming">
+          <div class="full-background" style="background-image: url('./assets/img/theme/kit-suman.jpg"></div>
+          <a href="javascript:;">
+            <div class="card-body">
+              <div class="content-bottom">
+                <h6 class="card-category text-white opacity-8">Sales Leads</h6>
+                <h5 class="card-title">Configure Blockchain Technology</h5>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <div class="card card-blog card-background" data-animation="zooming">
+          <div class="full-background" style="background-image: url('./assets/img/sections/damian.jpg"></div>
+          <a href="javascript:;">
+            <div class="card-body">
+              <div class="content-bottom">
+                <h6 class="card-category text-white opacity-8">AI at the Edge</h6>
+                <h5 class="card-title">Research Byte</h5>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="card card-blog card-background" data-animation="zooming">
+          <div class="full-background" style="background-image: url('./assets/img/sections/ashim.jpg"></div>
+          <a href="javascript:;">
+            <div class="card-body">
+              <div class="content-bottom">
+                <h6 class="card-category text-white opacity-8">Spectrum</h6>
+                <h5 class="card-title">Data Virtualization</h5>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="card card-blog card-background" data-animation="zooming">
+          <div class="full-background" style="background-image: url('./assets/img/sections/odin.jpg"></div>
+          <a href="javascript:;">
+            <div class="card-body">
+              <div class="content-bottom">
+                <h6 class="card-category text-white opacity-8">Touch on a trend</h6>
+                <h5 class="card-title">New Challenges</h5>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-icon btn-primary mt-4" type="button">
+      <span class="btn-inner--text">Show more</span>
+      <span class="btn-inner--icon"><i class="ni ni-bold-right"></i></span>
+    </button>
+  </div>
+</section>
+
+
+
+
+
+
+
+    <script>
+      window.onscroll = function(){
+    var navbar = document.getElementById('nav')
+    var wander = document.getElementById('wander')
+    var items = document.getElementsByClassName('items')
+    var count = document.getElementById('count')
+    var btn = document.getElementById('dropdownMenuButton')
+    var ul = document.getElementById('ul')
+
+    if (window.pageYOffset < 250){
+      navbar.style.background = "rgba(0, 0, 0, 0)";
+      navbar.style.boxShadow = 'none';
+      wander.style.color = "#ffffff";
+      wander.style.marginTop = "35px"
+      ul.style.marginTop = "1.7%";
+      btn.style.color = '#ffffff';
+      for(var i=0; i<items.length; i++){
+        items[i].style.color = "#ffffff";
+        items[i].onmouseover = function(){
+          items[i].style.color = "#06b995";
+        }
+      }
+    } else {
+      navbar.style.background = '#fff';
+      navbar.style.boxShadow = "0 4px 4px -2px #495057";
+      wander.style.color = "#60bfdc";
+      btn.style.color = '#60bfdc';
+      wander.style.marginTop = "17px"
+      ul.style.marginTop = "0.4%";
+      for(var i=0; i<items.length; i++){
+        items[i].style.color = "#60bfdc";
+        items[i].onmouseover = function(){
+          items[i].style.color = "black";
+        }
+      }
+    }
+  }
+
+    </script>
+
+  </body>
+</html>

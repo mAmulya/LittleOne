@@ -1,0 +1,411 @@
+<html>
+    <head>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+
+  <style>
+      /*
+Code snippet by maridlcrmn for Bootsnipp.com
+Follow me on Twitter @maridlcrmn
+*/
+
+.navbar-brand { position: relative; z-index: 2; }
+
+.navbar-nav.navbar-right .btn { position: relative; z-index: 2; padding: 4px 20px; margin: 10px auto; }
+
+.navbar .navbar-collapse { position: relative; }
+.navbar .navbar-collapse .navbar-right > li:last-child { padding-left: 22px; }
+
+.navbar .nav-collapse { position: absolute; z-index: 1; top: 0; left: 0; right: 0; bottom: 0; margin: 0; padding-right: 120px; padding-left: 80px; width: 100%; }
+.navbar.navbar-default .nav-collapse { background-color: #4272D7; }
+.navbar .nav-collapse .navbar-form { border-width: 0; box-shadow: none; }
+.nav-collapse>li { float: right; }
+
+.btn.btn-circle { border-radius: 50px; }
+.btn.btn-outline { background-color: transparent; }
+
+@media screen and (max-width: 767px) {
+    .navbar .navbar-collapse .navbar-right > li:last-child { padding-left: 15px; padding-right: 15px; }
+
+    .navbar .nav-collapse { margin: 7.5px auto; padding: 0; }
+    .navbar .nav-collapse .navbar-form { margin: 0; }
+    .nav-collapse>li { float: none; }
+}
+@import url('https://fonts.googleapis.com/css?family=Abel');
+
+    html, body {
+
+      font-family: Abel, Arial, Verdana, sans-serif;
+    }
+
+    .center {
+      position: relative;
+      /* top: 50%;
+      left: 50%; */
+      /* -webkit-transform: translate(-50%, -50%); */
+    }
+
+    .card {
+      width: 450px;
+      height: 250px;
+      background-color: #fff;
+      background: linear-gradient(#f8f8f8, #fff);
+      box-shadow: 0 8px 16px -8px rgba(0,0,0,0.4);
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+      margin: 1.5rem;
+      float:left
+    }
+
+    .card h4 {
+      text-align: center;
+    }
+
+    .card .additional {
+      position: absolute;
+      width: 150px;
+      height: 100%;
+      background: linear-gradient(#dE685E, #EE786E);
+      transition: width 0.4s;
+      overflow: hidden;
+      z-index: 2;
+    }
+
+    .card.green .additional {
+      background: linear-gradient(#92bCa6, #A2CCB6);
+    }
+
+
+    .card:hover .additional {
+      width: 100%;
+      border-radius: 0 5px 5px 0;
+    }
+
+    .card .additional .user-card {
+      width: 150px;
+      height: 100%;
+      position: relative;
+      float: left;
+    }
+
+    .card .additional .user-card::after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 10%;
+      right: -2px;
+      height: 80%;
+      border-left: 2px solid rgba(0,0,0,0.025);
+    }
+
+
+
+    .card .additional .user-card .points {
+      top: 85%;
+    }
+
+    .card .additional .user-card svg {
+      top: 50%;
+    }
+
+    .card .additional .more-info {
+      width: 300px;
+      float: left;
+      position: absolute;
+      left: 150px;
+      height: 100%;
+
+    }
+
+    .card .additional .more-info h4 {
+      color: #fff;
+      margin-bottom: 0;
+    }
+
+    .card.green .additional .more-info h4 {
+      color: #224C36;
+    }
+
+    .card .additional .coords {
+      margin-top:20px;
+      margin-right: 40px;
+    margin-left: 20px;
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    .card.green .additional .coords {
+      color: #325C46;
+    }
+
+    .card .additional .coords span + span {
+      float: right;
+    }
+
+    .card .additional .stats {
+      font-size: 2rem;
+      display: flex;
+      position: absolute;
+      bottom: 1rem;
+      left: 1rem;
+      right: 1rem;
+      top: auto;
+      color: #fff;
+    }
+
+    .card.green .additional .stats {
+      color: #325C46;
+    }
+
+    .card .additional .stats > div {
+      flex: 1;
+      text-align: center;
+    }
+
+    .card .additional .stats i {
+      display: block;
+    }
+
+    .card .additional .stats div.title {
+      font-size: 0.75rem;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .card .additional .stats div.value {
+      font-size: 1.5rem;
+      font-weight: bold;
+      line-height: 1.5rem;
+    }
+
+    .card .additional .stats div.value.infinity {
+      font-size: 2.5rem;
+    }
+
+    .card .general {
+      width: 300px;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 1;
+      box-sizing: border-box;
+      padding: 1rem;
+      padding-top: 0;
+    }
+
+    .card .general .more {
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      font-size: 0.9em;
+    }
+
+
+    </style>
+
+</head>
+    <body>
+        <div class="container-fluid" style="width:100%;padding:0px !important">
+            <!-- Second navbar for categories -->
+
+
+            <!-- Second navbar for sign in -->
+            <nav class="navbar navbar-default" style="background-color: #4272D7;height:70px;">
+              <div class="container" style="width: 100%;color:black">
+                 <!--Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header"  style="margin-top:0.8%">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-2">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="#" style="color:white;font-size: medium;">LITTLEONE</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="navbar-collapse-2" style="margin-top:0.8%">
+                  <ul class="nav navbar-nav navbar-right">
+
+                    <li><a href="#" style="color:white;font-size: medium;">Doctors</a></li>
+                    <li><a href="#" style="color:white;font-size: medium;">Counselors</a></li>
+                    <li>
+                      <a class="btn btn-default btn-outline btn-circle"  data-toggle="collapse"  aria-expanded="false" aria-controls="nav-collapse2" style="color:white;font-size: medium;" href="/admin/logout">Log out</a>
+                    </li>
+                  </ul>
+                  <div class="collapse nav navbar-nav nav-collapse" id="nav-collapse2">
+                    <form class="navbar-form navbar-right form-inline" role="form">
+                      <div class="form-group">
+                        <label class="sr-only" for="Email">Email</label>
+                        <input type="email" class="form-control" id="Email" placeholder="Email" autofocus required />
+                      </div>
+                      <div class="form-group">
+                        <label class="sr-only" for="Password">Password</label>
+                        <input type="password" class="form-control" id="Password" placeholder="Password" required />
+                      </div>
+                      <button type="submit" class="btn btn-success">Sign in</button>
+                    </form>
+                  </div>
+                </div><!-- /.navbar-collapse -->
+              </div><!-- /.container -->
+            </nav><!-- /.navbar -->
+
+
+        </div><!-- /.container-fluid -->
+
+<div style="padding-left:20%;padding-top:5%">
+    <h3 style="margin-left:27%">Pending Verifications</h3>
+    <br>
+
+        <% for(i=0;i < docs.length;i++ ){ %>
+
+          <div class="center">
+            <div class="card green">
+              <div class="additional">
+                <div class="user-card">
+                  <div class="points center">
+                <form action="/admin/verify" method="POST">
+                    <input type="hidden"  value="<%= docs[i].email%>" name="email" >
+
+                    <button class="btn btn-info btn-sm" name="accept" value=1 style="margin-left:15px">
+                        Accept
+                    </button>
+                    <button class="btn btn-info btn-sm" name="reject" value=-1>
+                        Reject
+                    </button>
+                </form>
+                  </div>
+                  <img src='<%= docs[i].img.path %>' style="border-radius:50%;width:90%;height:55%;margin-top:5px;margin-left:8px;">
+                </div>
+                <div class="more-info">
+                  <br>
+                  <h4 ><%= docs[i].name%></h4>
+                  <div class="coords">
+                    <span style="font-size:medium">Registration number</span>
+                    <span style="font-size:medium">: <%= docs[i].reg_no%></span>
+                  </div>
+                  <div class="coords">
+                    <span style="font-size:medium">Year of Regiteration</span>
+                    <span style="font-size:medium">: <%= docs[i].year%></span>
+                  </div>
+                  <div class="coords">
+                    <span style="font-size:medium">State Council</span>
+                    <span style="font-size:medium">: <%= docs[i].council%></span>
+                  </div>
+                  <div class="coords">
+                    <span style="font-size:medium">Doctor Type</span>
+                    <span style="font-size:medium">: <%= docs[i].doc_type%></span>
+                  </div>
+
+                </div>
+
+              </div>
+              <div class="general">
+                <br>
+                <h4 ><%= docs[i].name%></h4>
+                <div class="more-info" style="margin-top: 20px;">
+                    <div class="coords" style="margin-top: 20px;">
+                      <span>Phone Number</span>
+                      <span>: <%= docs[i].phonenumber%></span>
+                    </div>
+                    <div class="coords" style="margin-top: 20px;">
+                      <span>City</span>
+                      <span>: <%= docs[i].city%></span>
+                    </div>
+                    <div class="coords" style="margin-top: 20px;">
+                      <span>Email Id</span>
+                      <span>: <%= docs[i].email%></span>
+                    </div>
+
+
+                  </div>
+
+
+
+              </div>
+            </div>
+
+          </div>
+
+        <%}%>
+
+        <% for(i=0;i < cos.length;i++ ){ %>
+
+          <div class="center">
+            <div class="card green">
+              <div class="additional">
+                <div class="user-card">
+                  <div class="points center">
+                <form action="/admin/verify_co" method="POST">
+                    <input type="hidden"  value="<%= cos[i].email%>" name="email" >
+
+                    <button class="btn btn-info btn-sm" name="accept" value=1 style="margin-left:15px">
+                        Accept
+                    </button>
+                    <button class="btn btn-info btn-sm" name="reject" value=-1>
+                        Reject
+                    </button>
+                </form>
+                  </div>
+                  <img src='<%= cos[i].img.path %>' style="border-radius:50%;width:90%;height:55%;margin-top:5px;margin-left:8px;">
+                </div>
+                <div class="more-info">
+                  <br>
+                  <h4 ><%= cos[i].name%></h4>
+                  <div class="coords">
+                    <span style="font-size:medium">Registration number</span>
+                    <span style="font-size:medium">: <%= cos[i].reg_no%></span>
+                  </div>
+                  <div class="coords">
+                    <span style="font-size:medium">Year of Regiteration</span>
+                    <span style="font-size:medium">: <%= cos[i].year%></span>
+                  </div>
+                  <div class="coords">
+                    <span style="font-size:medium">State Council</span>
+                    <span style="font-size:medium">: <%= cos[i].council%></span>
+                  </div>
+                  <div class="coords">
+                    <span style="font-size:medium">Doctor Type</span>
+                    <span style="font-size:medium">: <%= cos[i].type%></span>
+                  </div>
+
+                </div>
+
+              </div>
+              <div class="general">
+                <br>
+                <h4 ><%= cos[i].name%></h4>
+                <div class="more-info" style="margin-top: 20px;">
+                    <div class="coords" style="margin-top: 20px;">
+                      <span>Phone Number</span>
+                      <span>: <%= cos[i].phonenumber%></span>
+                    </div>
+                    <div class="coords" style="margin-top: 20px;">
+                      <span>City</span>
+                      <span>: <%= cos[i].city%></span>
+                    </div>
+                    <div class="coords" style="margin-top: 20px;">
+                      <span>Email Id</span>
+                      <span>: <%= cos[i].email%></span>
+                    </div>
+
+
+                  </div>
+
+
+
+              </div>
+            </div>
+
+          </div>
+
+        <%}%>
+
+      </div>
+
+    </body>
+</html>

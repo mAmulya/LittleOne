@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Reset Password</title>
+    <link rel="stylesheet" href="../styles/login/style.css">
+     <link href="../styles/login/floating-labels.css" rel="stylesheet">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="../styles/login/script.js">
+
+    </script>
+    <style >
+      .register-info-box {
+        padding: 0  !important;
+      }
+      .login-reg-panel {
+      
+          width: 50% !important;
+        }
+      </style>
+
+
+  </head>
+  <body>
+    <br><br><br>
+    
+
+
+<div class="login-reg-panel" style="margin-left:3%;">
+
+		<div class="register-info-box" style="margin-left: 10%;">
+			<h2>Don't have an account?</h2>
+			<p>One step to create account</p>
+			<label id="label-login" for="log-login-show"><a href="signup">Signup</a></label>
+		</div>
+
+		<div class="white-panel" style="width:52%">
+			<div class="login-show">
+				<h2>Reset Password</h2>
+        <form method="post"  enctype="multipart/form-data">
+          <%- include ('partials/messages.ejs') %>
+          <div class="form-label-group">
+            <input type="email" style="height:50px" id="inputuser" name="email" class="form-control" placeholder="Email" required />
+            <label for="inputuser">Email</label>
+          </div>
+
+				<input type="submit" name='button' value="Reset">
+      </form>
+			</div>
+		</div>
+	</div>
+  </body>
+</html>

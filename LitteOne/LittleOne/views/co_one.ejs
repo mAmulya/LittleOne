@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Home</title>
+
+
+
+    <style>
+      #wander {
+  line-height: 50px;
+  position: fixed;
+  float: left;
+  margin: 35px 150px;
+  color: #fff;
+  font-weight: 600 !important ;
+  font-size: 14px;
+  letter-spacing: 2px;
+  transition: 1s;
+  font-weight: bold;
+  font-size:20px;
+}
+
+nav {
+  position: fixed;
+  width: 100%;
+  line-height: 60px;
+  z-index: 1000;
+  overflow-y: visible;
+  border-bottom: 1px solid #f2f2f2;
+  border-width: thin;
+  padding: 10px;
+  transition: background 300ms linear;
+}
+
+nav ul {
+  line-height: 50px;
+  list-style: none;
+  background: rgba(0, 0, 0, 0);
+  color: #fff;
+  padding: 0;
+  text-align: right;
+  margin: 0;
+  padding-right: 40px;
+  transition: 1s;
+}
+
+nav ul li {
+  display: inline-block;
+  padding: 10px 20px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 16px;
+}
+.notifimg{
+    color: #fff;
+    background-color: #adb5bd;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    border-radius: 50%;
+    height: 48px;
+    width: 48px
+  }
+  .items{
+    font-size:18px;
+  }
+
+
+
+
+
+
+
+#background {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("https://media.gettyimages.com/photos/women-lying-on-bed-kissing-baby-daughter-on-cheek-picture-id723496711?s=2048x2048");
+  min-height: 400px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+
+
+.ql-container{
+  font-size:20px!important;
+}
+
+
+
+</style>
+
+
+<script type="module" src="https://cdn.quilljs.com/1.1.9/quill.js"></script>
+<link href="https://cdn.quilljs.com/1.1.9/quill.snow.css" rel="stylesheet">
+
+
+    <script src="https://kit.fontawesome.com/ea0619ce99.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js" ></script> -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+  </head>
+  <body onload="editorFunc(<%= article.text %>)">
+    <nav id="nav" style="z-index:5;border:none;" class="navpic">
+    <div class="logo">
+      <span id="wander">FIRSTBORNS</span>
+    </div>
+    <div class="menu"  style="overflow:visible!important;">
+      <ul id="ul" style="margin-left:60%;margin-top:1.7%;">
+        <center>
+         <li><a class="items" href="/co/home"><i class="fas fa-home"></i></a></li>
+         <li><a class="items" href="/blog"><i class="fas fa-blog"></i></a></li>
+         <li class="dropdown">
+           <i style="font-size:18px;" class="fas fa-bell dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+         </li>
+         <li class="dropdown" style="margin-left:-4%;">
+             <button style="color:white;font-size:16px;margin-top:-2%;" class="items btn btn-outline-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <i style="font-size:18px;" class="items far fa-user-circle"><small><b><%= counselor.name%></b></small></i>
+             </button>
+             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+               <a style="padding-top:2px;" class="dropdown-item" href="/">Profile</a>
+               <a style="padding-top:2px;" class="dropdown-item" href="//">SavedArticles</a>
+               <a style="padding-top:2px;" class="dropdown-item" href="/cos/logout">Logout</a>
+             </div>
+         </li>
+       </center>
+      </ul>
+    </div>
+  </nav>
+
+<div id="background">
+
+</div>
+
+
+<div style="padding-top:8%">
+  <center>
+  <h3><%=article.title%></h3>
+  </center>
+</div>
+<div style="padding-left:20%;padding-right:20%;padding-top:2%">
+  <section class="blogs-1">
+        <div id="_editor"></div>
+  </section>
+</div>
+
+
+
+  <script>
+    window.onscroll = function(){
+  var navbar = document.getElementById('nav')
+  var wander = document.getElementById('wander')
+  var items = document.getElementsByClassName('items')
+  var count = document.getElementById('count')
+  var btn = document.getElementById('dropdownMenuButton')
+  var ul = document.getElementById('ul')
+
+  if (window.pageYOffset < 250){
+    navbar.style.background = "rgba(0, 0, 0, 0)";
+    navbar.style.boxShadow = 'none';
+    wander.style.color = "#ffffff";
+    wander.style.marginTop = "35px"
+    ul.style.marginTop = "1.7%";
+    btn.style.color = '#ffffff';
+    for(var i=0; i<items.length; i++){
+      items[i].style.color = "#ffffff";
+      items[i].onmouseover = function(){
+        items[i].style.color = "#06b995";
+      }
+    }
+  } else {
+    navbar.style.background = '#fff';
+    navbar.style.boxShadow = "0 4px 4px -2px #495057";
+    wander.style.color = "#60bfdc";
+    btn.style.color = '#60bfdc';
+    wander.style.marginTop = "17px"
+    ul.style.marginTop = "0.4%";
+    for(var i=0; i<items.length; i++){
+      items[i].style.color = "#60bfdc";
+      items[i].onmouseover = function(){
+        items[i].style.color = "black";
+      }
+    }
+  }
+}
+
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+      <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+  <script>
+  function editorFunc(x){
+  var delta = x;
+  console.log(x)
+  var text_editor = new Quill('#_editor', {
+    modules: {
+      toolbar: false,
+    },
+  });
+
+  text_editor.setContents(delta);
+  text_editor.enable(false);
+  };
+  </script>
+
+  </body>
+</html>

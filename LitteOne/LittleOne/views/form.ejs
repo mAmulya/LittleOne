@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<link rel="apple-touch-icon" sizes="76x76" href="../styles/assets/img/apple-icon.png" />
+	<link rel="icon" type="image/png" href="../styles/assets/img/favicon.png" />
+
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+
+	<!-- CSS Files -->
+    <link href="../styles/assets/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="../styles/assets/css/paper-bootstrap-wizard.css" rel="stylesheet" />
+
+	<!-- <script type="text/javascript" src="bootstrap-datetimepicker.de.js" charset="UTF-8"></script> -->
+
+	<script src="https://kit.fontawesome.com/ea0619ce99.js" crossorigin="anonymous"></script>
+
+	<!-- Fonts and Icons -->
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
+	<link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+	<link href="../styles/assets/css/themify-icons.css" rel="stylesheet">
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-NKDMSK6');</script>
+	<!-- End Google Tag Manager -->
+
+	<link rel="stylesheet" href="/styles/booking/booking.css">
+
+
+
+<!--
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.css"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+	</head>
+
+	<body>
+		<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKDMSK6"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+	<div class="image-container set-full-height" style="background-image: url('../styles/assets/img/paper-4.jpeg')">
+
+
+		<div id="myDiv">
+
+
+
+
+
+
+
+
+	    <!--   Big container   -->
+	    <div class="container">
+	        <div class="row">
+		        <div class="col-sm-8 col-sm-offset-2">
+
+
+		            <!--      Wizard container        -->
+		            <div class="wizard-container">
+		                <div class="card wizard-card" data-color="green" id="wizard">
+		                <form method="post" action="/booking#doctors">
+		                <!--        You can switch " data-color="green" "  with one of the next bright colors: "blue", "azure", "orange", "red"       -->
+
+		                    	<div class="wizard-header">
+		                        	<h3 class="wizard-title">Get your appointment</h3>
+		                        	<p class="category">You are a just a step away in appointing your doctor</p>
+		                    	</div>
+								<div class="wizard-navigation">
+									<div class="progress-with-circle">
+									    <div class="progress-bar" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="4" style="width: 15%;"></div>
+									</div>
+									<ul>
+			                            <li>
+											<a href="#location" data-toggle="tab">
+												<div class="icon-circle">
+													<i class="ti-map"></i>
+												</div>
+												Location
+											</a>
+										</li>
+										<li>
+				<a href="#slot" data-toggle="tab">
+					<div class="icon-circle">
+						<i class="ti-calendar"></i>
+					</div>
+					Slot
+				</a>
+			</li>
+
+			             </ul>
+								</div>
+
+		                        <div class="tab-content">
+
+		                            <div class="tab-pane" id="location">
+
+		                            	<div class="row">
+
+																		<div style="padding-top:6%">
+																			<div class="col-sm-12">
+																					<h5 class="info-text"> Let's start with the basic details</h5>
+																		</div>
+																			<div class="col-sm-5 col-sm-offset-1">
+																					<div class="form-group">
+																							<label>Date of appointment</label>
+																							<input class="form-control" type="text" id="datepicker" placeholder="Date of appointment" name="date">
+																					</div>
+																			</div>
+																			<div class="col-sm-5">
+																					<div class="form-group">
+																							<label>location</label>
+																							<div class="input-group">
+																									<input type="text" class="form-control" placeholder="location" name="location" >
+																									<span class="input-group-addon">@</span>
+																							</div>
+																					</div>
+																			</div>
+																		</div>
+
+		                            	</div>
+		                            </div>
+
+																<div class="tab-pane" id="slot">
+		                                <h5 class="info-text">What slot do you prefer? </h5>
+		                                <div class="row">
+																			<div class="col-sm-2"></div>
+		                                    <div class="col-sm-8" >
+		                                        <div class="col-sm-4 form-group">
+													<div class="choice" data-toggle="wizard-checkbox">
+
+		                                                <input class="form-control" type="checkbox" name="slot" value="mrng"/>
+		                                                <div onclick="check('mrng')" class="abcd card card-checkboxes card-hover-effect">
+		                                                    <i id="mrng" class="fas fa-cloud-sun"></i>
+															<p>Morning</p>
+		                                                </div>
+		                                            </div>
+		                                        </div>
+		                                        <div class="col-sm-4" form-group>
+													<div class="choice" data-toggle="wizard-checkbox">
+		                                                <input class="form-control" type="checkbox" name="slot" value="noon"/>
+		                                                <div onclick="check('noon')" class="abcd card card-checkboxes card-hover-effect">
+		                                                    <i id="noon" class="far fa-sun"></i>
+															<p>Afternoon</p>
+		                                                </div>
+		                                            </div>
+		                                        </div>
+																						<div class="col-sm-4 form-group">
+													<div class="choice" data-toggle="wizard-checkbox">
+		                                                <input class="form-control" type="checkbox" name="slot" value="evng"/>
+		                                                <div  class="abcd card card-checkboxes card-hover-effect">
+		                                                    <i id="evng" class="fas fa-moon"></i>
+															<p>Evening</p>
+		                                                </div>
+		                                            </div>
+		                                        </div>
+		                                    </div>
+																				<div class="col-sm-2"></div>
+		                                </div>
+		                            </div>
+
+
+		                        </div>
+														<div class="wizard-footer">
+	                            	<div class="pull-right">
+	                                    <input type='button' class='btn btn-next btn-fill btn-success btn-wd' data-color="green" name='next' value='Next' />
+	                                    <input type='submit' class='btn btn-finish btn-fill btn-success btn-wd' name='submit' value='Finish' />
+									</div>
+
+	                                <div class="pull-left">
+	                                    <input type='button' class='btn btn-previous btn-default btn-wd' name='previous' value='Previous' />
+	                                </div>
+	                                <div class="clearfix"></div>
+		                        </div>
+		                    </form>
+		                </div>
+		            </div> <!-- wizard container -->
+		        </div>
+	        </div> <!-- row -->
+	    </div> <!--  big container -->
+
+
+
+	</div>
+</div>
+
+
+
+<% if (doctors){ %>
+<div style="background-image: url('https://demos.creative-tim.com/argon-design-system-pro-angular/assets/img/ill/testimonial_bg.svg')">
+
+	<div class="container" id="doctors" style="padding-top:11%;padding-bottom:7%">
+	  <div class="row">
+
+			<% doctors.forEach(function(item,index){ %>
+	    <div class="col-md-4">
+	      <div class="our-team" id="card">
+	        <div class="picture" style="margin-bottom:-1%;">
+	          <img style="width:17vh;height:17vh;margin-left:-0.5%;margin-top:3%;" class="img-fluid" src="" >
+	        </div>
+					<form class="" action="/booking/done" method="post" style="margin-bottom:10%">
+
+	        <div class="team-content">
+	          <h3 class="name"><%=item.name%></h3>
+	          <h4 class="title"><%= item.about %></h4>
+						<div style="width:70%;margin-left:15%;margin-top:5%;" class="col-sm-12">
+								<div class="form-group">
+									<div class="row">
+										<div style="margin-top:3%;" class="col-md-3">
+											<label>Timeslot</label>
+										</div>
+										<div class="col-md-9">
+											<select style="float:left;" name="time" class="form-control">
+													<option disabled="" selected="">- select -</option>
+													<% item.time.forEach(function(slot,index){ %>
+														<option value=<%=	slot%>><%=slot%></option>
+													<% }); %>
+
+											</select>
+										</div>
+									</div>
+									</div>
+						</div>
+						<br>
+						<input type='submit' class='btn btn-finish btn-fill btn-success btn-wd' style="margin-top:3%;"/>
+						<p style="display:none;">
+							<input type='text' class='btn btn-finish btn-fill btn-success btn-wd' name='name' value='<%=item.name%>' />
+						</p>
+					</form>
+
+	        </div>
+	        <ul class="social">
+						<li><a href="<%= item.facebook %>" class="fab fa-facebook" aria-hidden="true"></a></li>
+	          <li><a href="<%=item.instagram%>" class="fab fa-instagram" aria-hidden="true"></a></li>
+	          <li><a href="#" class="fab fa-google-plus" aria-hidden="true"></a></li>
+	        </ul>
+	      </div>
+	    </div>
+			<% }); %>
+
+
+
+	  </div>
+	</div>
+
+
+
+
+
+
+<% }%>
+
+<script type="text/javascript">
+
+  var arr = ['mrng', 'noon', 'evng'];
+
+	function check(name){
+		console.log(arr)
+	  document.getElementById(name).checked = true;
+		for(var i=0;i<3;i++){
+			if(arr[i] != name){
+				uncheck(arr[i]);
+			}
+		}
+		console.log(document.getElementById("mrng").checked)
+		console.log(document.getElementById("noon").checked)
+		console.log(document.getElementById("evng").checked)
+	}
+
+	function uncheck(name){
+		console.log(arr)
+		document.getElementById(name).checked = false;
+	}
+
+</script>
+
+<script type="text/javascript">
+$('#datepicker').datetimepicker({
+	format: 'yyyy/mm/dd'
+});
+</script>
+
+<script type="text/javascript">
+	var icons = document.getElementsByClassName('abcd');
+	for(var i=0;i<icons.length;i++){
+		icons[i].onclick = function(){
+			for(var j=0;j<icons.length;j++){
+				icons[j].style.color = "rgba(0, 0, 0, 0.3)";
+			}
+			this.style.color = "#60bfdc";
+		}
+	}
+</script>
+
+
+</body>
+
+	<!--   Core JS Files   -->
+	<script src="../styles/assets/js/jquery-2.2.4.min.js" type="text/javascript"></script>
+	<script src="../styles/assets/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="../styles/assets/js/jquery.bootstrap.wizard.js" type="text/javascript"></script>
+
+	<!--  Plugin for the Wizard -->
+	<script src="../styles/assets/js/demo.js" type="text/javascript"></script>
+	<script src="../styles/assets/js/paper-bootstrap-wizard.js" type="text/javascript"></script>
+
+	<!--  More information about jquery.validate here: https://jqueryvalidation.org/	 -->
+	<script src="../styles/assets/js/jquery.validate.min.js" type="text/javascript"></script>
+
+
+	<script src="../styles/booking/booking.js" type="text/javascript"></script>
+
+
+
+</html>
