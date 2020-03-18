@@ -18,6 +18,8 @@ var Calendar = function(model, options, date){
     EventTargetWholeDay: false,
     DisabledDays: [],
     BookedDates:[],
+    AvailableDates:[],
+    SessionDates:[],
     ModelChange: model
   };
   // Overwriting default values
@@ -236,6 +238,18 @@ function createCalendar(calendar, element, adjuster){
 
         if(calendar.Selected.getFullYear() + '/'+ (calendar.Selected.getMonth()+1).toString().padStart(2, '0')+'/'+ (i+1).toString().padStart(2, '0')==calendar.Options.BookedDates[q]){
           day.className += " bookedDay";
+        }
+      }
+      for(var q = 0; q < calendar.Options.SessionDates.length; q++){
+
+        if(calendar.Selected.getFullYear() + '/'+ (calendar.Selected.getMonth()+1).toString().padStart(2, '0')+'/'+ (i+1).toString().padStart(2, '0')==calendar.Options.SessionDates[q]){
+          day.className += " sessionDay";
+        }
+      }
+      for(var q = 0; q < calendar.Options.AvailableDates.length; q++){
+
+        if(calendar.Selected.getFullYear() + '/'+ (calendar.Selected.getMonth()+1).toString().padStart(2, '0')+'/'+ (i+1).toString().padStart(2, '0')==calendar.Options.AvailableDates[q]){
+          day.className += " availableDay";
         }
       }
 

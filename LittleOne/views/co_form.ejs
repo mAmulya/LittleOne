@@ -574,8 +574,10 @@ cursor: pointer;
 		    <script type="text/javascript">
 		    var events = [];
 
-		    var days=<%-JSON.stringify(dates)%>
-		    var bookeddates=['2020/03/11','2020/04/11']
+		    var days=<%-JSON.stringify(all)%>
+			var bookeddates=['2020/03/11','2020/04/11']
+			var sessiondates=<%-JSON.stringify(s_dates)%>
+			var availabledates=<%-JSON.stringify(dates)%>
 		    var flag=0
 		    var settings = {
 
@@ -590,7 +592,9 @@ cursor: pointer;
 		        EventClick: '',
 		        EventTargetWholeDay: false,
 		        DisabledDates:days,
-		        BookedDates:bookeddates,
+				BookedDates:bookeddates,
+				SessionDates:sessiondates,
+				AvailableDates:availabledates,
 		        flag:0,
 		    };
 
@@ -610,8 +614,16 @@ cursor: pointer;
 		   for(var q = 0; q < days.length; q++){
 		     if(a==days[q]){
 		       f=1
-		       var id=d.getAttribute('id')
-		       document.getElementById(id).classList.remove('disableDay');
+			   var id=d.getAttribute('id')
+			   if(document.getElementById(id).classList.contains('disableDay')){
+				document.getElementById(id).classList.remove('disableDay');
+			   }
+			   if(document.getElementById(id).classList.contains('sessionDay')){
+				document.getElementById(id).classList.remove('sessionDay');
+			   }
+			   if(document.getElementById(id).classList.contains('availableDay')){
+				document.getElementById(id).classList.remove('availableDay');
+			   }
 		       days = days.filter(e => e !== a);
 		       count=count+1;
 		     }
@@ -633,6 +645,7 @@ cursor: pointer;
 		   console.log(days);
 		   var id=d.getAttribute('id')
 		   document.getElementById(id).classList.add('disableDay');
+
 		   var count=0;
 		 }
 

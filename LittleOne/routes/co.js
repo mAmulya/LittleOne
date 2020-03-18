@@ -15,11 +15,19 @@ const Articles=require('../models/Articles');
 router.get('/home',function(req,res){
   console.log(req.user);
       dates=[]
+      s_dates=[]
+      all=[]
       for(var i=0;i<req.user.availabledates.length;i++){
         dates.push(req.user.availabledates[i].date)
       }
+      for(var j=0;j<req.user.sessions.length;j++){
+        for(var k=0;k< req.user.sessions[j].dates.length;k++){
+            s_dates.push(req.user.sessions[j].dates[k])
+        }
+      }
+      all=dates.concat(s_dates)
       console.log(dates);
-      res.render('co_home',{counselor:req.user,dates:dates});
+      res.render('co_home',{counselor:req.user,dates:dates,s_dates:s_dates,all:all,bool:false});
 });
 
 router.get('/myarticles',function(req,res){
@@ -68,7 +76,7 @@ router.get('/form',function(req,res){
 
 
 
-router.post('/cos/dates',urlencodedParser,function(req,res){
+router.post('/cos/dates',urlencodedParser,async function(req,res){
   console.log('------------------');
   console.log(req.body);
   var dates=req.body.finaldays;
@@ -113,22 +121,25 @@ if(req.body.type=='person'){
       availabledates=[]
 
       for (var d=0;d<dates.length;d++){
+        if(dates[d].length!=0){
+          if(mrng.length!=0){
+            availabledates.push({date:dates[d],slot:'mrng',timeslots:mrng})
+          }
+          if(noon.length!=0){
+            availabledates.push({date:dates[d],slot:'noon',timeslots:noon})
+          }
+          if(evng.length!=0){
+            availabledates.push({date:dates[d],slot:'evng',timeslots:evng})
+          }
+        }
 
-        if(mrng.length!=0){
-          availabledates.push({date:dates[d],slot:'mrng',timeslots:mrng})
-        }
-        if(noon.length!=0){
-          availabledates.push({date:dates[d],slot:'noon',timeslots:noon})
-        }
-        if(evng.length!=0){
-          availabledates.push({date:dates[d],slot:'evng',timeslots:evng})
-        }
+
 
       }
       console.log('---------------');
       console.log(availabledates);
 
-      Counselors.updateOne({email:req.user.email},
+      await Counselors.updateOne({email:req.user.email},
                       {$set:{availabledates:availabledates}},function(){})
 
 }
@@ -140,14 +151,14 @@ else{
       limit:req.body.limit,
       topic:req.body.topic,
       bookings:'0'}
-    Counselors.updateOne({email:req.user.email},
+    await Counselors.updateOne({email:req.user.email},
                     {$push:{sessions:sessions}},function(){})
   }
 }
 
 
 
-
+console.log('redirecting you stupi thing--------------------')
 
   res.redirect('/co/home')
 });

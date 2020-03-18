@@ -76,7 +76,17 @@
     background-color: blue;
     color:white
   }
+  .cld-day.sessionDay{
+    opacity: 0.5;
+    background-color: rgb(34, 125, 199);
+    color:white
+  }
 
+  .cld-day.availableDay{
+    opacity: 0.5;
+    background-color: rgb(139, 89, 231);
+    color:white
+  }
   .cld-day.nextMonth, .cld-day.prevMonth{
     opacity: 0.33;
   }

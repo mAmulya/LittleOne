@@ -185,11 +185,11 @@ nav ul li a {
 
     <div id="caleandar" style="margin-left:14%;margin-top:5%">
     </div>
-    <form id="calform">
+    <!-- <form id="calform">
 <input type="text" name="finaldays" id="finaldays" hidden>
-</form>
+</form> -->
 
-<button type="button" style="margin-bottom:3%;margin-left:5%;margin-right:5%;" class="btn btn-success" style="background-color:#06b995 !important;border-color: #06b995 !important" onclick="send()">Save</button>
+<!-- <button type="button" style="margin-bottom:3%;margin-left:5%;margin-right:5%;" class="btn btn-success" style="background-color:#06b995 !important;border-color: #06b995 !important" onclick="send()">Save</button> -->
 
 
 
@@ -251,9 +251,11 @@ nav ul li a {
     <script type="text/javascript">
     var events = [];
 
-    var days=<%-JSON.stringify(dates)%>
+    var days=[]
     var flag=0
     var bookeddates=['2020/03/11','2020/04/11']
+    var sessiondates=<%-JSON.stringify(s_dates)%>
+    var availabledates=<%-JSON.stringify(dates)%>
 
 
     var settings = {
@@ -270,6 +272,8 @@ nav ul li a {
         EventTargetWholeDay: false,
         DisabledDates:days,
         BookedDates:bookeddates,
+        SessionDates:sessiondates,
+        AvailableDates:availabledates,
         flag:0,
     };
 
@@ -278,22 +282,22 @@ nav ul li a {
 
     var divs = document.querySelectorAll('.currMonth');
 
-    var alldays=[]
-    console.log(days)
-    var dd=[]
+    // var alldays=[]
+    // console.log(days)
+    // var dd=[]
 
-    for(var m=0;m<divs.length;m++){
-      var a =divs[m].getAttribute('data-date')
-      var id=divs[m].getAttribute('id')
-      for(var n=0;n<dd.length;n++){
-        if(a==dd[n]){
+    // for(var m=0;m<divs.length;m++){
+    //   var a =divs[m].getAttribute('data-date')
+    //   var id=divs[m].getAttribute('id')
+    //   for(var n=0;n<dd.length;n++){
+    //     if(a==dd[n]){
 
-          document.getElementById(id).classList.add('booked');
+    //       document.getElementById(id).classList.add('booked');
 
-        }
-      }
-      console.log(a)
-    }
+    //     }
+    //   }
+    //   console.log(a)
+    // }
 //
 //     var k = function sel(d) {
 //
