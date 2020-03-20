@@ -7,6 +7,7 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false })
 const nodemailer = require('nodemailer');
 
 const Doctors=require('../models/Doctors');
+const Users=require('../models/Users');
 
 
 var data;
@@ -16,24 +17,25 @@ router.post('/',urlencodedParser, function(req,res){
 
   data=req.body
   console.log(data);
-  res.redirect('/booking')
+  res.redirect('/pedia_booking')
 });
 
 
 router.get('/',function(req,res){
   if (data==undefined){
-        res.render('form',{doctors:false});
+        res.render('pedia_form',{doctors:false});
    }
   else{
        value_form=data
        data=undefined
 
 
-         Doctors.find({$and:[{"city":value_form.location},{"availabledates.date":value_form.date},{"availabledates.slot":value_form.slot}]},function(err,doctors){
+         Doctors.find({$and:[{"doc_type":'pedia'},{"city":value_form.location},{"availabledates.date":value_form.date},{"availabledates.slot":value_form.slot}]},function(err,doctors){
            if(err){
              console.log(err);
            }else{
-
+             console.log('----------------------------');
+             console.log(doctors);
              var docs=[]
              var time=undefined
              var i,j,k;
@@ -51,12 +53,12 @@ router.get('/',function(req,res){
                }
 
                if(time){
-                 docs.push({'name':doctors[i].name,'time':time[0]});
+                 docs.push({'name':doctors[i].name,'time':time[0],'email':doctors[i].email});
                  time=undefined
                }
              }
              console.log(docs);
-             res.render('form',{user:req.user,doctors:docs,value:value_form});
+             res.render('pedia_form',{user:req.user,doctors:docs,value:value_form});
 
            }
          })
@@ -73,7 +75,7 @@ router.post('/done',urlencodedParser, function(req,res){
   console.log(req.body);
 
 
-        Doctors.findOne({name:req.body.name},function(err,doc){
+        Doctors.findOne({email:req.body.email,doc_type:'pedia'},function(err,doc){
            if(err){
                console.log(err);
            }else{
@@ -93,13 +95,17 @@ router.post('/done',urlencodedParser, function(req,res){
                               break;
                             }
                       }
+                      if(slots.length==0){
+                        doc.availabledates.splice(j,1)
+                      }
                       if (check==1){
                         break  }
                    }
                 }
 
                 var itemOne = {
-                  user:'username',
+                  user:req.user.email,
+                  user_name:req.user.name,
                   date_n_time:{date:value_form.date,slot:value_form.slot,time:req.body.time},
                   place:value_form.location,
                   current:true,
@@ -114,28 +120,24 @@ router.post('/done',urlencodedParser, function(req,res){
 
 
                 itemOne = {
-                  doc:doc.name,
+                  doctor:doc.email,
+                  doctor_name:doc.name,
+                  type:doc.doc_type,
                   date_n_time:{date:value_form.date,slot:value_form.slot,time:req.body.time},
                   place:value_form.location,
                   current:true,
                   };
-                 //
-                 // User.updateOne({username:req.user.username},
-                 //                 {$push:{booking:itemOne}},function(){})
 
-                //
-                // var myquery = { name: req.body.name };
-                // var newvalues = { $set: doc };
-                // doc.updateOne(myquery, newvalues, function(err, res) {
-                //   if (err) throw err;
-                //   console.log("1 document updated");
-                // });
+                 Users.updateOne({email:req.user.email},
+                                 {$push:{bookings:itemOne}},function(){})
+
+
 
            }
          })
 
 
-  res.redirect('/booking')
+  res.redirect('/pedia_booking')
 });
 
 

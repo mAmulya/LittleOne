@@ -139,6 +139,7 @@ nav ul li a {
               </div>
               <div class="col-lg-4 order-lg-3 text-lg-right align-self-lg-center" style="margin-left:60%;margin-top:-13%">
                 <div class="card-profile-actions py-4 mt-lg-0">
+                  <a href="/doc/form" class="btn btn-sm btn-info mr-4">Message</a>
                   <a href="#" class="btn btn-sm btn-info mr-4">Connect</a>
                   <a href="#" class="btn btn-sm btn-default float-right">Message</a>
                 </div>
@@ -182,24 +183,26 @@ nav ul li a {
 
     <div id="caleandar" style="margin-left:14%;margin-top:5%">
     </div>
-    <form id="calform">
+    <!-- <form id="calform">
 <input type="text" name="finaldays" id="finaldays" hidden>
 </form>
 
-<button type="button" style="margin-bottom:3%;margin-left:5%;margin-right:5%;" class="btn btn-success" style="background-color:#06b995 !important;border-color: #06b995 !important" onclick="send()">Save</button>
+<button type="button" style="margin-bottom:3%;margin-left:5%;margin-right:5%;" class="btn btn-success" style="background-color:#06b995 !important;border-color: #06b995 !important" onclick="send()">Save</button> -->
 
 
 
     <script type="text/javascript" src="/styles/doc/calendar.js"></script>
     <script src="/styles/assets/js/jquery/jquery.min.js"></script>
 
-
     <script type="text/javascript">
     var events = [];
 
-    var days=<%-JSON.stringify(dates)%>
-    var bookeddates=['2020/03/11','2020/04/11']
+    var days=[]
     var flag=0
+    var bookeddates=<%-JSON.stringify(b_dates)%>
+    var sessiondates=[]
+    var availabledates=<%-JSON.stringify(dates)%>
+
     var settings = {
 
         Color: '',
@@ -214,6 +217,8 @@ nav ul li a {
         EventTargetWholeDay: false,
         DisabledDates:days,
         BookedDates:bookeddates,
+        SessionDates:sessiondates,
+        AvailableDates:availabledates,
         flag:0,
     };
 
@@ -221,83 +226,6 @@ nav ul li a {
     caleandar(element,events,settings);
 
     var divs = document.querySelectorAll('.currMonth');
-
-    var alldays=[]
-    console.log(days)
-    var dd=[]
-
-    for(var m=0;m<divs.length;m++){
-      var a =divs[m].getAttribute('data-date')
-      var id=divs[m].getAttribute('id')
-      for(var n=0;n<dd.length;n++){
-        if(a==dd[n]){
-
-          document.getElementById(id).classList.add('booked');
-
-        }
-      }
-      console.log(a)
-    }
-
-//     var k = function sel(d) {
-//
-//
-//   var a = d.getAttribute('data-date')
-//   var count=0
-//   s=""
-//   f=0
-//   for(var q = 0; q < days.length; q++){
-//     if(a==days[q]){
-//       f=1
-//       var id=d.getAttribute('id')
-//       document.getElementById(id).classList.remove('disableDay');
-//       days = days.filter(e => e !== a);
-//       count=count+1;
-//     }
-//     else {
-//       console.log('days')
-//       console.log(days)
-//       s=s.concat(days[q],"-");
-//     };
-//     };
-//     if(f==0) {
-//       s=s.concat(a);
-//     }
-//  document.getElementById('finaldays').value=s
-//   console.log(s)
-//
-//
-// if (count==0){
-//   days.push(a)
-//   console.log(days);
-//   var id=d.getAttribute('id')
-//   document.getElementById(id).classList.add('disableDay');
-//   var count=0;
-// }
-//
-// }
-
-
-
-    function send(){
-    console.log('called')
-
-
-
-    console.log($('#finaldays').val())
-      $.ajax({
-        type:'POST',
-        url:'docs/dates',
-        data:{
-          dates:$('#finaldays').val(),
-        },
-        success:function(){
-          console.log('lkjhgf');
-          return false
-        }
-      });
-
-    };
 
     </script>
 

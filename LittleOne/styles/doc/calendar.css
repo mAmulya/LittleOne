@@ -73,7 +73,7 @@
   }
   .cld-day.bookedDay{
     opacity: 0.5;
-    background-color: blue;
+    background-color: rgba(25, 154, 142, 0.89);
     color:white
   }
   .cld-day.sessionDay{
@@ -82,9 +82,10 @@
     color:white
   }
 
+
   .cld-day.availableDay{
     opacity: 0.5;
-    background-color: rgb(139, 89, 231);
+    background-color: rgba(29, 33, 179, 0.72);;
     color:white
   }
   .cld-day.nextMonth, .cld-day.prevMonth{

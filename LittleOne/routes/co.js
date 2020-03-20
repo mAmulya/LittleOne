@@ -16,7 +16,7 @@ router.get('/home',function(req,res){
   console.log(req.user);
       dates=[]
       s_dates=[]
-      all=[]
+      b_dates=[]
       for(var i=0;i<req.user.availabledates.length;i++){
         dates.push(req.user.availabledates[i].date)
       }
@@ -25,9 +25,11 @@ router.get('/home',function(req,res){
             s_dates.push(req.user.sessions[j].dates[k])
         }
       }
-      all=dates.concat(s_dates)
+      for(var c=0;c<req.user.bookings;c++){
+        b_dates.push(req.user.bookings[c].date_n_time.date)
+      }
       console.log(dates);
-      res.render('co_home',{counselor:req.user,dates:dates,s_dates:s_dates,all:all,bool:false});
+      res.render('co_home',{counselor:req.user,dates:dates,s_dates:s_dates,b_dates:b_dates});
 });
 
 router.get('/myarticles',function(req,res){
@@ -140,19 +142,19 @@ if(req.body.type=='person'){
       console.log(availabledates);
 
       await Counselors.updateOne({email:req.user.email},
-                      {$set:{availabledates:availabledates}},function(){})
+                      {$addToSet:{availabledates:availabledates}},function(){})
 
 }
 else{
   if(req.body.type=='group'){
     var sessions={
       dates:dates,
-      num_of_days:req.body.num_of_days,
+      num_of_days:dates.length,
       limit:req.body.limit,
       topic:req.body.topic,
       bookings:'0'}
     await Counselors.updateOne({email:req.user.email},
-                    {$push:{sessions:sessions}},function(){})
+                    {$addToSet:{sessions:sessions}},function(){})
   }
 }
 

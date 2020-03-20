@@ -70,7 +70,7 @@
 		            <!--      Wizard container        -->
 		            <div class="wizard-container">
 		                <div class="card wizard-card" data-color="green" id="wizard">
-		                <form method="post" action="/booking#doctors">
+		                <form method="post" action="/pedia_booking#doctors">
 		                <!--        You can switch " data-color="green" "  with one of the next bright colors: "blue", "azure", "orange", "red"       -->
 
 		                    	<div class="wizard-header">
@@ -202,14 +202,16 @@
 
 	<div class="container" id="doctors" style="padding-top:11%;padding-bottom:7%">
 	  <div class="row">
-
+			<% if(doctors.length==0){%>
+					<center><h4>No Doctors are available!!!Try another slot</h4></center>
+					<% }%>
 			<% doctors.forEach(function(item,index){ %>
 	    <div class="col-md-4">
 	      <div class="our-team" id="card">
 	        <div class="picture" style="margin-bottom:-1%;">
 	          <img style="width:17vh;height:17vh;margin-left:-0.5%;margin-top:3%;" class="img-fluid" src="" >
 	        </div>
-					<form class="" action="/booking/done" method="post" style="margin-bottom:10%">
+					<form class="" action="/pedia_booking/done" method="post" style="margin-bottom:10%">
 
 	        <div class="team-content">
 	          <h3 class="name"><%=item.name%></h3>
@@ -236,6 +238,8 @@
 						<input type='submit' class='btn btn-finish btn-fill btn-success btn-wd' style="margin-top:3%;"/>
 						<p style="display:none;">
 							<input type='text' class='btn btn-finish btn-fill btn-success btn-wd' name='name' value='<%=item.name%>' />
+							<input type='hidden' class='btn btn-finish btn-fill btn-success btn-wd' name='email' value='<%=item.email%>' />
+
 						</p>
 					</form>
 

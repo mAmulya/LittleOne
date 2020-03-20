@@ -4,6 +4,7 @@ const MongoClient = require('mongodb').MongoClient;
 
 const BookingSchema = new mongoose.Schema({
   user:String,
+  user_name:String,
   date_n_time:{'date':String,'slot':String,'time':String},
   place:String,
   current:Boolean,

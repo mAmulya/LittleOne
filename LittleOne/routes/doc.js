@@ -12,88 +12,98 @@ const Doctors=require('../models/Doctors');
 
 router.get('/home',function(req,res){
   console.log(req.user);
-  dates=[]
-  for(var i=0;i<req.user.availabledates.length;i++){
-    dates.push(req.user.availabledates[i].date)
-  }
-  console.log(dates);
-  res.render('doc_home',{doctor:req.user,dates:dates});
+      dates=[]
+      b_dates=[]
+      for(var i=0;i<req.user.availabledates.length;i++){
+        dates.push(req.user.availabledates[i].date)
+      }
+
+      for(var c=0;c<req.user.bookings;c++){
+        b_dates.push(req.user.bookings[c].date_n_time.date)
+      }
+      console.log(dates);
+      res.render('doc_home',{doctor:req.user,dates:dates,b_dates:b_dates});
 });
 
-router.post('/docs/dates',urlencodedParser,function(req,res){
-  console.log('kjbvc');
-  var dates=req.body.dates;
+
+router.get('/form',function(req,res){
+  console.log(req.user);
+  res.render('doc_form')
+});
+
+
+
+router.post('/docs/dates',urlencodedParser,async function(req,res){
+  console.log('------------------');
+  console.log(req.body);
+  var dates=req.body.finaldays;
   dates=dates.split('-');
   console.log(dates);
 
-  time1='9:00';
-  time2='18:00';
+  time1=req.body.time1
+  time2=req.body.time2
 
-
-    mrng=[]
-    noon=[]
-    evng=[]
-    console.log(time1.split(':')[0]);
-    console.log(time2.split(':')[0]);
-    var i;
-    for(i=parseInt(time1.split(':')[0]);i<parseInt(time2.split(':')[0]);i++){
-      console.log(i);
-      if(i<12){
-        mrng.push(i+':'+time1.split(':')[1]+'-'+(i+1)+':'+time1.split(':')[1])
-      }
-      else{
-        if(i<15){
-          noon.push(i+':'+time1.split(':')[1]+'-'+(i+1)+':'+time1.split(':')[1])
+      mrng=[]
+      noon=[]
+      evng=[]
+      console.log(time1.split(':')[0]);
+      console.log(time2.split(':')[0]);
+      var i;
+      for(i=parseInt(time1.split(':')[0]);i<parseInt(time2.split(':')[0]);i++){
+        console.log(i);
+        if(i<12){
+          mrng.push(i+':'+time1.split(':')[1]+'-'+(i+1)+':'+time1.split(':')[1])
         }
         else{
-          evng.push(i+':'+time1.split(':')[1]+'-'+(i+1)+':'+time1.split(':')[1])
+          if(i<15){
+            noon.push(i+':'+time1.split(':')[1]+'-'+(i+1)+':'+time1.split(':')[1])
+          }
+          else{
+            evng.push(i+':'+time1.split(':')[1]+'-'+(i+1)+':'+time1.split(':')[1])
+          }
         }
       }
-    }
-    if(time1.split(':')[1]!='00'){
-      mrng.pop(time2.split(':')[0]+':'+time1.split(':')[1]+'-'+(i+1)+':'+time1.split(':')[1])
-      evng.pop(time2.split(':')[0]+':'+time1.split(':')[1]+'-'+(i+1)+':'+time1.split(':')[1])
-      noon.pop(time2.split(':')[0]+':'+time1.split(':')[1]+'-'+(i+1)+':'+time1.split(':')[1])
-    }
-    console.log('----mrng');
-    console.log(mrng);
-    console.log('------noon');
-    console.log(noon);
-    console.log('----evng');
-    console.log(evng);
-    availabledates=[]
-
-    for (var d=0;d<dates.length;d++){
-
-      if(mrng!=[]){
-        availabledates.push({date:dates[d],slot:'mrng',timeslots:mrng})
+      if(time1.split(':')[1]!='00'){
+        mrng.pop(time2.split(':')[0]+':'+time1.split(':')[1]+'-'+(i+1)+':'+time1.split(':')[1])
+        evng.pop(time2.split(':')[0]+':'+time1.split(':')[1]+'-'+(i+1)+':'+time1.split(':')[1])
+        noon.pop(time2.split(':')[0]+':'+time1.split(':')[1]+'-'+(i+1)+':'+time1.split(':')[1])
       }
-      if(noon!=[]){
-        availabledates.push({date:dates[d],slot:'noon',timeslots:noon})
+      console.log('----mrng');
+      console.log(mrng);
+      console.log('------noon');
+      console.log(noon);
+      console.log('----evng');
+      console.log(evng);
+      availabledates=[]
+
+      for (var d=0;d<dates.length;d++){
+        if(dates[d].length!=0){
+          if(mrng.length!=0){
+            availabledates.push({date:dates[d],slot:'mrng',timeslots:mrng})
+          }
+          if(noon.length!=0){
+            availabledates.push({date:dates[d],slot:'noon',timeslots:noon})
+          }
+          if(evng.length!=0){
+            availabledates.push({date:dates[d],slot:'evng',timeslots:evng})
+          }
+        }
+
+
+
       }
-      if(evng!=[]){
-        availabledates.push({date:dates[d],slot:'evng',timeslots:evng})
-      }
+      console.log('---------------');
+      console.log(availabledates);
 
-    }
-    console.log('---------------');
-    console.log(availabledates);
-
-    console.log(req.user)
-
-    Doctors.updateOne({email:req.user.email},
-                    {$push:{availabledates:availabledates}},function(){})
-
-    // Doctors.find({'email':req.user.email},function(err,doctor){
-    //   if(err){
-    //     console.log(err);
-    //   }else{
-    //       doctor.availabledates=availabledates
-    //   }
-    // })
+      await Doctors.updateOne({email:req.user.email},
+                      {$addToSet:{availabledates:availabledates}},function(){})
 
 
-  // res.redirect('doc/home');
+
+
+
+console.log('redirecting you stupi thing--------------------')
+
+  res.redirect('/doc/home')
 });
-
 module.exports = router;

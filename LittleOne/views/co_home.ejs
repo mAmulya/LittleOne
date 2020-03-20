@@ -253,10 +253,9 @@ nav ul li a {
 
     var days=[]
     var flag=0
-    var bookeddates=['2020/03/11','2020/04/11']
+    var bookeddates=<%-JSON.stringify(b_dates)%>
     var sessiondates=<%-JSON.stringify(s_dates)%>
     var availabledates=<%-JSON.stringify(dates)%>
-
 
     var settings = {
 
@@ -281,83 +280,6 @@ nav ul li a {
     caleandar(element,events,settings);
 
     var divs = document.querySelectorAll('.currMonth');
-
-    // var alldays=[]
-    // console.log(days)
-    // var dd=[]
-
-    // for(var m=0;m<divs.length;m++){
-    //   var a =divs[m].getAttribute('data-date')
-    //   var id=divs[m].getAttribute('id')
-    //   for(var n=0;n<dd.length;n++){
-    //     if(a==dd[n]){
-
-    //       document.getElementById(id).classList.add('booked');
-
-    //     }
-    //   }
-    //   console.log(a)
-    // }
-//
-//     var k = function sel(d) {
-//
-//
-//   var a = d.getAttribute('data-date')
-//   var count=0
-//   s=""
-//   f=0
-//   for(var q = 0; q < days.length; q++){
-//     if(a==days[q]){
-//       f=1
-//       var id=d.getAttribute('id')
-//       document.getElementById(id).classList.remove('disableDay');
-//       days = days.filter(e => e !== a);
-//       count=count+1;
-//     }
-//     else {
-//       console.log('days')
-//       console.log(days)
-//       s=s.concat(days[q],"-");
-//     };
-//     };
-//     if(f==0) {
-//       s=s.concat(a);
-//     }
-//  document.getElementById('finaldays').value=s
-//   console.log(s)
-//
-//
-// if (count==0){
-//   days.push(a)
-//   console.log(days);
-//   var id=d.getAttribute('id')
-//   document.getElementById(id).classList.add('disableDay');
-//   var count=0;
-// }
-//
-// }
-
-
-
-    function send(){
-    console.log('called')
-
-
-
-    console.log($('#finaldays').val())
-      $.ajax({
-        type:'POST',
-        url:'cos/dates',
-        data:{
-          dates:$('#finaldays').val(),
-        },
-        success:function(){
-          console.log(';lkjhv');
-          return false
-        }
-      });
-
-    };
 
     </script>
 
