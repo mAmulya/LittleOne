@@ -305,9 +305,12 @@ p{orphans:3;widows:3;}
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script type="module" src="https://cdn.quilljs.com/1.1.9/quill.js"></script>
+
+<link href="https://cdn.quilljs.com/1.1.9/quill.snow.css" rel="stylesheet">
 
   </head>
-  <body>
+  <body  onload="editorFunc()">
     <nav id="nav" style="z-index:5;border:none;" class="navpic">
     <div class="logo">
       <span id="wander">FIRSTBORNS</span>
@@ -339,7 +342,50 @@ p{orphans:3;widows:3;}
 
 </div>
 
+<div class="">
+  <button class="btn btn-sm btn-info mr-4"  data-toggle="modal" data-target="#myModal">Write Article</button>
 
+</div>
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Write an article</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body" style="padding:2%;">
+        <div class="row" style="width:100%;">
+          <form action="/co/" enctype="multipart/form-data" method="POST" style="width:100%;margin-left:3%;">
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="title">Title</label>
+                  <input class="form-control" type="text" name="title" id="title" value="" placeholder="My Title">
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="exampleFormControlFile1">Main Image</label>
+                  <input type="file" name="userPhoto" class="form-control-file" id="exampleFormControlFile1">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="editor">Content</label>
+              <div  style="width:100%;height:300px" rows="16"   id="editor"></div>
+              <input type="hidden" name="text" id="hiddenfield" value="">
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <input style="float:right" type="submit" id="submit" name="submit" class="btn btn-sm btn-info mr-4" value="Submit">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div style="padding-left:20%;padding-right:20%;padding-top:8%">
 
@@ -363,7 +409,10 @@ p{orphans:3;widows:3;}
                              <div class="entry-title">
                                 	<h4><a href="/co/one/<%=item._id%>" title="Permalink to Changing dietary requirements of children"><%=item.title%></a></h4>
                              </div>
-                             <div class="entry-body"><p><%=item.text%>...</p></div>
+                             <div class="entry-body" ><p id='mico'><%=item.text%></p></div>
+                             <p id="demo"></p>
+                             <div id="_editor"></div>
+
                              <div class="entry-meta-data ">
                           	    <p class="tags "> <i class="pe-icon pe-ticket"> </i><a href="https://mediclinic.wpengine.com/tag/nutrition/" rel="tag">nutrition</a></p>
                             </div>
@@ -421,5 +470,71 @@ p{orphans:3;widows:3;}
 }
 
   </script>
+
+
+
+
+
+
+
+
+
+      <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+      <script>
+
+
+
+
+
+
+    var toolbarOptions = [
+      ['bold', 'italic', 'underline'],
+      ['blockquote'],
+      [{'color' : []}],
+      [{'font' : []}],
+      [{'header': ['1', '2', '3', '4', '5', '6', false]}],
+      [{'list' : 'ordered'}, {'list' : 'bullet'}],
+      [{'script':'sub'},{'script':'super'}],
+      ['link','image','video'],
+
+    ];
+
+    var text_editor = new Quill('#editor', {
+      modules: {
+        toolbar: toolbarOptions,
+      },
+      placeholder : 'Start writing...',
+      theme : 'snow',
+
+    });
+
+
+
+
+    $('#submit').click(function(){
+      document.getElementById("hiddenfield").value=JSON.stringify(text_editor.getContents());
+      console.log(text_editor.getContents());
+      console.log(document.getElementById("hiddenfield").value)
+    });
+    </script>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+<script>
+function editorFunc(){
+
+var delta = document.getElementById('mico').innerHTML
+console.log(delta)
+var text_editor = new Quill('#_editor', {
+  modules: {
+    toolbar: false,
+  },
+});
+
+text_editor.setContents(delta);
+text_editor.enable(false);
+
+};
+</script>
   </body>
 </html>
