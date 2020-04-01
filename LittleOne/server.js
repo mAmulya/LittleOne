@@ -29,7 +29,7 @@ var storage = multer.diskStorage({
     cb(null, __dirname+'/uploads/')
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname + Date.now()+ '.jpeg' )
+    cb(null, file.originalname + Date.now()+ '.jpeg , .mpeg' )
   }
 })
 app.use(multer({ storage: storage }).any());

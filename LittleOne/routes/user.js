@@ -3,10 +3,12 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
+const fs = require('fs');
 
 const nodemailer = require('nodemailer');
 
 const Users=require('../models/Users');
+const Songs=require('../models/Songs');
 
 router.get('/home',function(req,res){
 console.log(req.user);
@@ -22,5 +24,24 @@ router.get('/counselors',function(req,res){
     res.render('counselors');
   });
 
+router.post('/song', urlencodedParser, function(req, res){
+      console.log(req.body);
+      if(req.files){
+        var k = fs.readFileSync(req.files[0].path)
+        song = '/uploads/'+req.files[0].filename
+      }
+
+
+      var songpost = new Songs({
+        name: req.user.name,
+        email:req.user.email,
+        type: req.user.type,
+        img:req.user.img,
+        song: song,
+        likes:0
+      })
+      songpost.save()
+      res.redirect('/user/home');
+    })
 
 module.exports = router;
