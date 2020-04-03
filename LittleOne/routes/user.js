@@ -12,9 +12,26 @@ const Songs=require('../models/Songs');
 const Articles=require('../models/Articles');
 const Counselors=require('../models/Counselors');
 
+
+const Counselors=require('../models/Counselors');
+
 router.get('/home',function(req,res){
 console.log(req.user);
-  res.render('user_home',{user:req.user});
+Counselors.find({})
+.catch(err=>{console.log(err)})
+.then( counselors=>{
+  sessions=[]
+  for(var i=0;i<counselors.length;i++){
+    console.log(counselors[i].email);
+    for(var j=0;j<counselors[i].sessions.length;j++){
+      console.log('-----------------');
+    sessions.push({session:counselors[i].sessions[j],name:counselors[i].name,email:counselors[i].email})}
+  }
+  console.log(sessions);
+  res.render('user_home',{user:req.user,sessions:sessions});
+
+})
+
 });
 
 router.get('/pregnancy_home',function(req,res){
@@ -44,7 +61,7 @@ router.post('/song', urlencodedParser, function(req, res){
         likes:0
       })
       songpost.save()
-      res.redirect('/user/home');
+      res.redirect('/user/babycare_home');
     })
 
 
