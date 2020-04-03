@@ -9,6 +9,7 @@ const nodemailer = require('nodemailer');
 
 const Users=require('../models/Users');
 const Songs=require('../models/Songs');
+const Articles=require('../models/Articles');
 
 router.get('/home',function(req,res){
 console.log(req.user);
