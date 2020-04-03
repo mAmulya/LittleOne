@@ -1,0 +1,532 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/styles/counsellors.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+        <style>
+
+             #wander {
+  line-height: 50px;
+  position: fixed;
+  float: left;
+  margin: 35px 150px;
+  color: #fff;
+  font-weight: 600 !important ;
+  font-size: 14px;
+  letter-spacing: 2px;
+  transition: 1s;
+  font-weight: bold;
+  font-size:20px;
+}
+
+nav {
+  position: fixed;
+  width: 100%;
+  line-height: 60px;
+  z-index: 1000;
+  overflow-y: visible;
+  border-bottom: 1px solid #f2f2f2;
+  border-width: thin;
+  padding: 10px;
+  transition: background 300ms linear;
+}
+
+nav ul {
+  line-height: 50px;
+  list-style: none;
+  background: rgba(0, 0, 0, 0);
+  color: #fff;
+  padding: 0;
+  text-align: right;
+  margin: 0;
+  padding-right: 40px;
+  transition: 1s;
+}
+
+nav ul li {
+  display: inline-block;
+  padding: 10px 20px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 16px;
+}
+.notifimg{
+    color: #fff;
+    background-color: #adb5bd;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    border-radius: 50%;
+    height: 48px;
+    width: 48px
+  }
+  .items{
+    font-size:18px;
+  }
+
+#background {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F38%2F2020%2F01%2FGettyImages-643782350-2000.jpg&q=85");
+  min-height: 900px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </style>
+
+    </head>
+
+    <body>
+
+        <nav id="nav" style="z-index:15;border:none;" class="navpic">
+            <div class="logo">
+              <span id="wander">FIRSTBORNS</span>
+            </div>
+            <div class="menu"  style="overflow:visible!important;">
+              <ul id="ul" style="margin-left:60%;margin-top:1.7%;">
+                <center>
+                 <li><a class="items" href="/co/home"><i class="fas fa-home"></i></a></li>
+                 <li><a class="items" href="/blog"><i class="fas fa-blog"></i></a></li>
+                 <li class="dropdown">
+                   <i style="font-size:18px;" class="fas fa-bell dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                 </li>
+                 <li class="dropdown" style="margin-left:-4%;">
+                     <button style="color:white;font-size:16px;margin-top:-2%;" class="items btn btn-outline-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                       <i style="font-size:18px;" class="items far fa-user-circle"><small><b>name</b></small></i>
+                     </button>
+                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                       <a style="padding-top:2px;" class="dropdown-item" href="/users">Profile</a>
+                       <a style="padding-top:2px;" class="dropdown-item" href="//">SavedArticles</a>
+                       <a style="padding-top:2px;" class="dropdown-item" href="/cos/logout">Logout</a>
+                     </div>
+                 </li>
+               </center>
+              </ul>
+            </div>
+          </nav>
+        
+          <div id="background">
+        
+          </div>
+
+
+
+
+
+
+
+
+
+
+         
+          <div class="content_wrap">
+            <div class="content" >
+
+                <% for(i=0; i < articles.length; i++){%>
+                
+                 <div class="isotope_wrap  inited" data-columns="2" style="float:left;position: relative;margin-top: 70px;margin-bottom: 60px;margin-right: 30px;margin-left:20px;;"> 
+                    <div class="isotope_item isotope_item_masonry isotope_item_masonry_2 isotope_column_2 isotope_item_show" style="top: 0px; opacity: 1;width:420px;margin-right:100px;margin-left:-150px">
+                        <div style="float: left;">
+                        <div class="post_item post_item_masonry post_item_masonry_2 post_format_standard odd">
+                            <div class="post_featured">
+                                <div class="post_thumb">
+                                    <a class="hover_icon hover_icon_link" href="post-standard.html">
+                                        <img style="height: 400px;" alt="<%= articles[i].images %>" src="<%= articles[i].images %>">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="post_content isotope_item_content">
+                                <div class="post_info">
+                                
+                                    <span class="post_info_item post_info_posted" style="font-size: 20px;;"> 
+                                        <a href="post-standard.html" class="post_info_date"><%= articles[i].name %></a>
+                                    </span>
+                                    <span class="post_info_item post_info_counters"> 
+                                        
+                                        <!-- <a class="post_counters_item post_counters_likes icon-heart-empty enabled inited" title="Like" href="#">
+                                            <span class="post_counters_number">0</span>
+                                        </a> -->
+                                        <a onclick="return count()"><img style="height: 20px;width:auto;margin-top:-10px;" src="https://seeklogo.com/images/F/facebook-like-logo-32FAB6926D-seeklogo.com.png" alt=""></a>
+                                        <span id="count" style="margin-left:10px;font-size: 20px;" class="post_counters_number">0</span>
+                                    </span>
+                                </div>
+                                <h5 class="post_title">
+                                    <a href="post-standard.html">
+                                        <%= articles[i].title %>
+                                    </a>
+                                </h5>
+                                <div class="post_descr">
+                                    <p>Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit</p>
+                                    <a href="/user/single_article/<%= articles[i]._id %>" class="post_readmore sc_button sc_button_style_filled " style="color: white;background-color: rgb(96, 191, 220);">
+                                        <span class="post_readmore_label" >Read more</span>
+                                    </a> 
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+
+                    
+                    
+                    </div>
+                    
+                    
+                   
+
+
+
+
+
+                    
+
+                    
+                    
+                </div>
+                <!-- <div class="card" style="width: 20rem;float:left;margin-left: 50px;margin-top:30px;">
+                    <img class="card-img-top" src="<%= articles[i].images %>" alt="<%= articles[i].images %>">
+                    <div class="card-body">
+                      <h5 class="card-title"><%= articles[i].title %></h5>
+                      <div>
+                      <p class="card-text"><%= articles[i].text %>...</p>
+                    </div>
+                      <a href="/user/single_article/<%= articles[i]._id %>" class="btn" style="background-color: rgb(96, 191, 220);color: white;">Read More</a>
+                    </div>
+                  </div> -->
+                <%}%>
+                    
+                    
+                    
+                   
+
+
+
+
+
+                    
+
+                    
+                    
+                </div>
+               
+            <!-- Sidebar -->
+            <div class="sidebar widget_area scheme_dark" style="margin-left:90%;margin-top:30px;">
+                <div class="sidebar_inner widget_area_inner" style="background-color: #117a8b73;">
+                    <!-- widget_categories -->
+                         <aside class="widget widget_categories"> 
+                            <h5 class="widget_title" style="color: white;">Categories</h5>
+                            <ul>
+                                <li class="cat-item">
+                                    <img src="https://cdn3.iconfinder.com/data/icons/ui-glynh-blue-02-of-5/100/UI_Blue_2_of_3_20-512.png" style="height: 20px;width:20px;margin-left:-25px;" alt="">
+                                    <a href="category-featured-articles.html">Child Help</a>
+                                </li>
+                                <li class="cat-item">
+                                    <img src="https://cdn3.iconfinder.com/data/icons/ui-glynh-blue-02-of-5/100/UI_Blue_2_of_3_20-512.png" style="height: 20px;width:20px;margin-left:-25px;" alt="">
+                                    <a href="category-masonry-2-columns.html">Axiety</a>
+                                </li>
+                                <li class="cat-item">
+                                    <img src="https://cdn3.iconfinder.com/data/icons/ui-glynh-blue-02-of-5/100/UI_Blue_2_of_3_20-512.png" style="height: 20px;width:20px;margin-left:-25px;" alt="">
+
+                                    <a href="category-masonry-3-columns.html">Family</a>
+                                </li>
+                                <li class="cat-item">
+                                    <img src="https://cdn3.iconfinder.com/data/icons/ui-glynh-blue-02-of-5/100/UI_Blue_2_of_3_20-512.png" style="height: 20px;width:20px;margin-left:-25px;" alt="">
+
+                                    <a href="category-portfolio-2-columns.html">Relationships</a>
+                                </li>
+                                <li class="cat-item">
+                                    <img src="https://cdn3.iconfinder.com/data/icons/ui-glynh-blue-02-of-5/100/UI_Blue_2_of_3_20-512.png" style="height: 20px;width:20px;margin-left:-25px;" alt="">
+
+                                    <a href="category-portfolio-3-columns.html">Grief and Loss</a>
+                                </li>
+                                
+                            </ul>
+                        </aside> 
+                    <!-- /widget_categories -->
+
+                        <aside class="widget widget_rss">
+                            <h5 class="widget_title">
+                                <a class="rsswidget" href="#">
+                                    <img class="rss-widget-icon" src="images/rss.png" alt="RSS">
+                                </a> 
+                                <a class="rsswidget" href="index.html">
+                                    Trending Articles
+                                </a>
+                            </h5>
+                            <ul>
+                                <li>
+                                    <a class="rsswidget" href="#">
+                                        The Brew House | Brewery / Pub / Restaurant Template (Restaurants &amp; Cafes)
+                                    </a> 
+                                    <span class="rss-date">November 8, 2016</span>
+                                    <div class="rssSummary">
+                                        CURRENT VERSION 1.0 (see Change log at the bottom of this page) Our new stylish design is crafted for brewery, pub, cafe, bistro, bar, restaurant and so on. Keeping in mind that your website must cater for your visitors’ expectations and wishes, we have integrated the Template with Menu functionality (including categorization, recipes, nutrition information
+                                    </div>
+                                </li>
+                                <li>
+                                    <a class="rsswidget" href="#">
+                                        Finance | Tax Consultant, Financial HTML Template (Business)
+                                    </a> 
+                                    <span class="rss-date">November 8, 2016</span>
+                                    <div class="rssSummary">
+                                        Financial template is born to take care of your requirements for running your financial services like financial business and consultancy, financial ,companies, investment agencies or management, mutual funds and other portfolio management services effectively.Financial is easy to customize to suit different segments of the financial world. We have designed various modules for the template which
+                                    </div>
+                                </li>
+                                <li>
+                                    <a class="rsswidget" href="#">
+                                        Finance | Tax Consultant, Financial HTML Template (Business)
+                                    </a> 
+                                    <span class="rss-date">November 8, 2016</span>
+                                    <div class="rssSummary">
+                                        Financial template is born to take care of your requirements for running your financial services like financial business and consultancy, financial ,companies, investment agencies or management, mutual funds and other portfolio management services effectively.Financial is easy to customize to suit different segments of the financial world. We have designed various modules for the template which
+                                    </div>
+                                </li>
+                                
+                            </ul>
+                        </aside>
+                    <!-- /widget_rss -->
+
+                    <!-- widget_search -->
+                        <!-- <aside class="widget widget_search">
+                            <form role="search" method="get" class="search_form" action="#">
+                                <input type="text" class="search_field" placeholder="Search" value="" name="s" title="Search for:">
+                                <button type="submit" class="search_button icon-search-light"></button>
+                            </form>
+                        </aside>     -->
+                    <!-- /widget_search -->
+                    
+                    <!-- widget_recent_comments -->
+                        <!-- <aside class="widget widget_recent_comments">
+                            <h5 class="widget_title">Recent Comments</h5>
+                            <ul id="recentcomments">
+                                <li class="recentcomments">
+                                    <span class="comment-author-link">Mike Newton</span> on 
+                                    <a href="#">A Few Words about Music Therapy</a>
+                                </li>
+                                <li class="recentcomments">
+                                    <span class="comment-author-link">Martha Stewart</span> on 
+                                    <a href="#">What is a Placebo Effect?</a>
+                                </li>
+                                <li class="recentcomments">
+                                    <span class="comment-author-link">John Snow</span> on 
+                                    <a href="#">Dealing with Mental Trauma of Severe Desease</a>
+                                </li>
+                            </ul>
+                        </aside> -->
+                    <!-- /widget_recent_comments -->
+
+                    <!-- Recent Posts -->
+                        <!-- <aside class="widget widget_recent_entries">
+                            <h5 class="widget_title">Recent Posts</h5>
+                            <ul>
+                                <li>
+                                    <a href="post-standard.html">
+                                        Cognitive Behavioral Therapy for Insomnia
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="post-standard.html">
+                                        Family Therapy and Marriage Counseling
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="post-standard.html">
+                                        Six Important Rules for Parenting Teenagers
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="post-standard.html">
+                                        Dealing with Mental Trauma of Severe Desease
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="post-standard.html">
+                                        Dealing with Mental Trauma of Severe Desease
+                                    </a>
+                                </li>
+                            </ul>
+                        </aside> -->
+                    <!-- /Recent Posts -->
+
+                    <!-- widget_calendar -->
+                        <!-- <aside class="widget widget_calendar">
+                            <h5 class="widget_title">Calendar</h5>
+                            <div id="calendar_wrap" class="calendar_wrap">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="month_prev">
+                                                <a href="#" title="View posts for March 2016"></a>
+                                            </th>
+                                            <th class="month_cur" colspan="6">November <span>2016</span></th>    
+                                        </tr>
+                                        <tr>
+                                            <th class="weekday">M</th>
+                                            <th class="weekday">T</th>
+                                            <th class="weekday">W</th>
+                                            <th class="weekday">T</th>
+                                            <th class="weekday">F</th>
+                                            <th class="weekday">S</th>
+                                            <th class="weekday">S</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="1" class="pad"><span class="day_wrap"></span></td>
+                                            <td class="day"><span class="day_wrap">1</span></td>
+                                            <td class="day"><span class="day_wrap">2</span></td>
+                                            <td class="day"><span class="day_wrap">3</span></td>
+                                            <td class="day"><span class="day_wrap">4</span></td>
+                                            <td class="day"><span class="day_wrap">5</span></td>
+                                            <td class="day"><span class="day_wrap">6</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="day"><span class="day_wrap">7</span></td>
+                                            <td class="day"><span class="day_wrap">8</span></td>
+                                            <td class="day"><span class="day_wrap">9</span></td>
+                                            <td class="day"><span class="day_wrap">10</span></td>
+                                            <td class="day"><span class="day_wrap">11</span></td>
+                                            <td class="day"><span class="day_wrap">12</span></td>
+                                            <td class="day"><span class="day_wrap">13</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="today"><span class="day_wrap">14</span></td>
+                                            <td class="day"><span class="day_wrap">15</span></td>
+                                            <td class="day"><span class="day_wrap">16</span></td>
+                                            <td class="day"><span class="day_wrap">17</span></td>
+                                            <td class="day"><span class="day_wrap">18</span></td>
+                                            <td class="day"><span class="day_wrap">19</span></td>
+                                            <td class="day"><span class="day_wrap">20</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="day"><span class="day_wrap">21</span></td>
+                                            <td class="day"><span class="day_wrap">22</span></td>
+                                            <td class="day"><span class="day_wrap">23</span></td>
+                                            <td class="day"><span class="day_wrap">24</span></td>
+                                            <td class="day"><span class="day_wrap">25</span></td>
+                                            <td class="day"><span class="day_wrap">26</span></td>
+                                            <td class="day"><span class="day_wrap">27</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="day"><span class="day_wrap">28</span></td>
+                                            <td class="day"><span class="day_wrap">29</span></td>
+                                            <td class="day"><span class="day_wrap">30</span></td>
+                                            <td class="pad" colspan="4"><span class="day_wrap"></span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </aside> -->
+                    <!-- /widget_calendar -->
+
+                    <!-- Text Widget -->
+                        <!-- <aside class="widget widget_text">
+                            <h5 class="widget_title">Text Widget</h5>
+                            <div class="textwidget">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, magni commodi fugit in quo provident.
+                            </div>
+                        </aside> -->
+                    <!-- /Text Widget -->
+
+                    <!-- widget_tag_cloud -->
+                        <!-- <aside class="widget widget_tag_cloud">
+                            <h5 class="widget_title">Tags</h5>
+                            <div class="tagcloud">
+                                <a href="#">audio</a>
+                                <a href="#">biological</a>
+                                <a href="#">cognitive</a>
+                                <a href="#">Lectures</a>
+                                <a href="#">My Office</a>
+                                <a href="#">portfolio</a>
+                                <a href="#">Presentations</a>
+                            </div>
+                        </aside> -->
+                    <!-- /widget_tag_cloud -->
+                </div>
+            </div>
+            <!-- /Sidebar -->
+        </div>
+
+
+       
+    <script>
+        function count(){
+            var x=document.getElementById('count').innerHTML
+            x=x++
+            console.log(x++)
+            document.getElementById('count').innerHTML=x
+        }
+    </script>
+
+
+
+        
+    <script>
+        window.onscroll = function(){
+      var navbar = document.getElementById('nav')
+      var wander = document.getElementById('wander')
+      var items = document.getElementsByClassName('items')
+      var count = document.getElementById('count')
+      var btn = document.getElementById('dropdownMenuButton')
+      var ul = document.getElementById('ul')
+  
+      if (window.pageYOffset < 250){
+        navbar.style.background = "rgba(0, 0, 0, 0)";
+        navbar.style.boxShadow = 'none';
+        wander.style.color = "#ffffff";
+        wander.style.marginTop = "35px"
+        ul.style.marginTop = "1.7%";
+        btn.style.color = '#ffffff';
+        for(var i=0; i<items.length; i++){
+          items[i].style.color = "#ffffff";
+          items[i].onmouseover = function(){
+            items[i].style.color = "#06b995";
+          }
+        }
+      } else {
+        navbar.style.background = '#fff';
+        navbar.style.boxShadow = "0 4px 4px -2px #495057";
+        wander.style.color = "#60bfdc";
+        btn.style.color = '#60bfdc';
+        wander.style.marginTop = "17px"
+        ul.style.marginTop = "0.4%";
+        for(var i=0; i<items.length; i++){
+          items[i].style.color = "#60bfdc";
+          items[i].onmouseover = function(){
+            items[i].style.color = "black";
+          }
+        }
+      }
+    }
+  
+      </script>
+  
+
+
+
+
+
+        
+    </body>
+
+</html>
