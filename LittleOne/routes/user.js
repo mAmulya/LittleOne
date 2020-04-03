@@ -10,6 +10,7 @@ const nodemailer = require('nodemailer');
 const Users=require('../models/Users');
 const Songs=require('../models/Songs');
 const Articles=require('../models/Articles');
+const Counselors=require('../models/Counselors');
 
 router.get('/home',function(req,res){
 console.log(req.user);
@@ -50,7 +51,15 @@ router.post('/song', urlencodedParser, function(req, res){
 
   router.get('/counselors',function(req,res){
     console.log(req.user);
-    res.render('counselors',{user:req.user});
+    Counselors.find({},function(err,counselors){
+      if(err){
+        console.log(err);
+      }else{
+        console.log('------------------------\n\n------------------------');
+        console.log(counselors);
+        res.render('counselors',{counselors:counselors,user:req.user});
+      }
+    })
   });
 
 

@@ -666,7 +666,7 @@ p{margin-top:23px;}
             <div class="card-header bg-info" style="background-image: url('https://media.istockphoto.com/vectors/abstract-blue-background-with-square-shapes-vector-id1176464845?k=6&m=1176464845&s=170667a&w=0&h=8TK5GUKxUBck665-cmOhQrlAxMZHoTHKdvXSwwn-t60=')">
               <div class="card-avatar">
                 <a href="javascript:;">
-                  <img class="img img-raised rounded-circle" src="https://mzjewel.com/wp-content/uploads/2019/11/2c1d5578da20ceabc4a28343769a5c91.jpg">
+                  <img style="margin-left:13%;width:18vh;height:18vh;" class="img img-raised rounded-circle" src="<%= counselors[0].img.path %>">
                 </a>
               </div>
             </div>
@@ -679,26 +679,26 @@ p{margin-top:23px;}
                 <div class="col">
                   <div class="card-profile-stats d-flex justify-content-center">
                     <div>
-                      <span class="heading">22</span>
-                      <span class="description">Friends</span>
+                      <span class="heading"><%= counselors[0].bookings.length %></span>
+                      <span class="description">Bookings</span>
                     </div>
-                    <div>
+                    <!-- <div>
                       <span class="heading">10</span>
                       <span class="description">Photos</span>
-                    </div>
+                    </div> -->
                     <div>
-                      <span class="heading">89</span>
-                      <span class="description">Comments</span>
+                      <span class="heading"><%= counselors[0].phonenumber %></span>
+                      <span class="description">Phone</span>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="text-center">
                 <h5 class="h4">
-                  Melanie Paisley<span class="font-weight-light">, 31</span>
+                  <%= counselors[0].name %><span class="font-weight-light"></span>
                 </h5>
                 <div class="font-weight-300">
-                  <i class="ni location_pin mr-2"></i>Beijing, China
+                  <i class="ni location_pin mr-2"></i><%= counselors[0].city %>
                 </div>
               </div>
             </div>
@@ -709,7 +709,7 @@ p{margin-top:23px;}
             <div class="card-header bg-info" style="background-image: url('https://media.istockphoto.com/vectors/abstract-blue-background-with-square-shapes-vector-id1176464845?k=6&m=1176464845&s=170667a&w=0&h=8TK5GUKxUBck665-cmOhQrlAxMZHoTHKdvXSwwn-t60=')">
               <div class="card-avatar">
                 <a href="javascript:;">
-                  <img class="img img-raised rounded-circle" src="https://mzjewel.com/wp-content/uploads/2019/11/2c1d5578da20ceabc4a28343769a5c91.jpg">
+                  <img style="margin-left:13%;width:18vh;height:18vh;" class="img img-raised rounded-circle" src="<%= counselors[1].img.path %>">
                 </a>
               </div>
             </div>
@@ -722,26 +722,26 @@ p{margin-top:23px;}
                 <div class="col">
                   <div class="card-profile-stats d-flex justify-content-center">
                     <div>
-                      <span class="heading">22</span>
-                      <span class="description">Friends</span>
+                      <span class="heading"><%= counselors[1].bookings.length %></span>
+                      <span class="description">Bookings</span>
                     </div>
-                    <div>
+                    <!-- <div>
                       <span class="heading">10</span>
                       <span class="description">Photos</span>
-                    </div>
+                    </div> -->
                     <div>
-                      <span class="heading">89</span>
-                      <span class="description">Comments</span>
+                      <span class="heading"><%= counselors[1].phonenumber %></span>
+                      <span class="description">Phone</span>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="text-center">
                 <h5 class="h4">
-                  Johana Doe<span class="font-weight-light">, 29</span>
+                  <%= counselors[1].name %><span class="font-weight-light"></span>
                 </h5>
                 <div class="font-weight-300">
-                  <i class="ni location_pin mr-2"></i>California
+                  <i class="ni location_pin mr-2"></i><%= counselors[1].city %>
                 </div>
               </div>
             </div>
@@ -752,7 +752,7 @@ p{margin-top:23px;}
             <div class="card-header bg-info" style="background-image: url('https://media.istockphoto.com/vectors/abstract-blue-background-with-square-shapes-vector-id1176464845?k=6&m=1176464845&s=170667a&w=0&h=8TK5GUKxUBck665-cmOhQrlAxMZHoTHKdvXSwwn-t60=')">
               <div class="card-avatar">
                 <a href="javascript:;">
-                  <img class="img img-raised rounded-circle" src="https://mzjewel.com/wp-content/uploads/2019/11/2c1d5578da20ceabc4a28343769a5c91.jpg">
+                  <img style="margin-left:13%;width:18vh;height:18vh;" class="img img-raised rounded-circle" src="https://mzjewel.com/wp-content/uploads/2019/11/2c1d5578da20ceabc4a28343769a5c91.jpg">
                 </a>
               </div>
             </div>
@@ -808,7 +808,7 @@ p{margin-top:23px;}
             <div class="grid_8">
               <p class="txt1">Care During Pregnancy</p>
             </div>
-    
+
             <div class="grid_4">
               <a href="#" class="more_btn">get started</a>
             </div>
