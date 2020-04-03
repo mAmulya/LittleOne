@@ -61,13 +61,14 @@ router.post('/', urlencodedParser, function(req, res){
     name: req.user.name,
     email:req.user.email,
     type: req.user.type,
+    topic:req.body.topic,
     title: req.body.title,
     text: req.body.text,
     images: img,
     likes:0
   })
   articlepost.save()
-  res.redirect('/co/home');
+  res.redirect('/co/myarticles');
 })
 
 
