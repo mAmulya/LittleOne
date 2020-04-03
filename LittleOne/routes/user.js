@@ -25,6 +25,25 @@ router.get('/pregnancy_home',function(req,res){
     res.render('babycare_home');
   });
 
+router.post('/song', urlencodedParser, function(req, res){
+      console.log(req.body);
+      if(req.files){
+        var k = fs.readFileSync(req.files[0].path)
+        song = '/uploads/'+req.files[0].filename
+      }
+
+
+      var songpost = new Songs({
+        name: req.user.name,
+        email:req.user.email,
+        type: req.user.type,
+        img:req.user.img,
+        song: song,
+        likes:0
+      })
+      songpost.save()
+      res.redirect('/user/home');
+    })
 
 
 

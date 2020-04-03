@@ -29,7 +29,7 @@ var storage = multer.diskStorage({
     cb(null, __dirname+'/uploads/')
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname + Date.now()+ '.jpeg' )
+    cb(null, file.originalname + Date.now()+ '.jpeg , .mpeg' )
   }
 })
 app.use(multer({ storage: storage }).any());
@@ -71,6 +71,9 @@ app.use('/styles', express.static('styles'))
 
 app.use('/admin',require('./routes/admin'));
 app.use('/',require('./routes/landing'));
+
+
+app.use('/forum',require('./routes/forums'));
 
 app.use('/doc',require('./routes/doc'));
 app.use('/co',require('./routes/co'));

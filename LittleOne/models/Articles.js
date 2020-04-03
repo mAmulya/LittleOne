@@ -21,6 +21,10 @@ const ariclesSchema = new mongoose.Schema({
     type:String,
     required:true
   },
+  topic:{
+    type:String,
+    required:true
+  },
   text:{
     type:String,
     required:true
