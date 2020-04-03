@@ -87,6 +87,7 @@ app.use('/cos',require('./routes/co_signup'));
 app.use('/gynac_booking',require('./routes/gynac_booking'));
 app.use('/pedia_booking',require('./routes/pedia_booking'));
 app.use('/co_booking',require('./routes/co_booking'));
+app.use('/session_booking',require('./routes/session_booking'));
 
 
 server.listen(8000, function(){
