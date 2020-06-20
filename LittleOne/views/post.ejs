@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="/styles/blog/blog.css">
+    <link rel="stylesheet" href="/styles/blog/blog.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script type="module" src="https://cdn.quilljs.com/1.1.9/quill.js"></script>
+    <link href="https://cdn.quilljs.com/1.1.9/quill.snow.css" rel="stylesheet">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/ea0619ce99.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" ></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
+    <style media="screen">
+
+    .notifimg{
+      color: #fff;
+      background-color: #adb5bd;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      border-radius: 50%;
+      height: 48px;
+      width: 48px
+    }
+
+
+      #wander {
+        line-height: 50px;
+        position: fixed;
+        float: left;
+        margin: 35px 220px;
+        color: #fff;
+        font-weight: 700 !important ;
+        font-size: 14px;
+        letter-spacing: 2px;
+        transition: 1s
+      }
+
+      nav {
+        position: fixed;
+        width: 100%;
+        line-height: 60px;
+        z-index: 1000;
+        overflow-y: visible;
+        border-bottom: 1px solid #f2f2f2;
+        border-width: thin;
+        padding: 10px;
+        transition: background 300ms linear;
+      }
+
+      nav ul {
+        line-height: 50px;
+        list-style: none;
+        background: rgba(0, 0, 0, 0);
+        color: #fff;
+        padding: 0;
+        text-align: right;
+        margin: 0;
+        padding-right: 40px;
+        transition: 1s;
+      }
+
+      nav ul li {
+        display: inline-block;
+        padding: 10px 20px;
+      }
+
+      nav ul li a {
+        text-decoration: none;
+        color: #fff;
+        font-size: 16px;
+      }
+
+
+p {
+    font-size: 2rem;
+  }
+    </style>
+  </head>
+  <body style="font-family: 'Muli', 'Helvetica', Arial, sans-serif;" onload="editorFunc(<%= blog[0].text %>)">
+    <nav id="nav" style="z-index:5;padding-top:0.2%;padding-bottom:0.05%;border:none;" class="navpic">
+      <div class="logo">
+        <span id="wander">WANDERMATE</span>
+      </div>
+      <div class="menu"  style="overflow:visible!important;">
+        <ul id="ul" style="margin-left:60%;margin-top:1.7%;">
+          <center>
+            <%if(user.usertype=='user'){%>
+           <li><a class="items" href="/users/dashboard"><i class="fas fa-home"></i></a></li>
+           <%}else{%>
+             <li><a class="items" href="/guides/guideprofile"><i class="fas fa-home"></i></a></li>
+
+             <%}%>
+           <li><a class="items" href="/blog"><i class="fas fa-blog"></i></a></li>
+           <li class="dropdown">
+             <i class="fas fa-bell dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+               <!-- <button style="color:grey;font-size:16px;margin-top:-2%;" class="btn btn-outline-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               </button> -->
+               <div style="min-width:23rem;" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                 <!-- <a style="padding-top:2px;" class="dropdown-item" href="/users">Profile</a>
+                 <a style="padding-top:2px;" class="dropdown-item" href="#">WanderList</a>
+                 <a style="padding-top:2px;" class="dropdown-item" href="/users/logout">Logout</a> -->
+                 <% if(user.notifications) {%>
+                     <div class="px-3 py-3">
+                       <h6 class="text-sm text-muted m-0">You have <strong class="text-primary"><%=user.notifications.length%></strong> notifications.</h6>
+                     </div>
+
+                     <div class="list-group list-group-flush" id="notifications">
+
+                 <% for(i=0;i < user.notifications.length;i++ ){ %>
+                       <a href="#!" onclick="noti('<%=user.notifications[i]._id%>', '<%=user.notifications[i].img %>')" data-toggle="modal" data-target="#myModal" class="list-group-item list-group-item-action">
+                         <div class="row align-items-center">
+                           <div class="col-auto">
+                             <img alt="Image placeholder" src="<%=user.notifications[i].img %>" class="notifimg rounded-circle">
+                           </div>
+                           <div class="col ml--2">
+                             <div class="d-flex justify-content-between align-items-center">
+                               <div>
+                                 <h4 style="font-family: inherit;font-weight: 400;line-height: 1.5;color: #32325d;" class="mb-0 text-sm"><%=user.notifications[i].senderid%></h4>
+                               </div>
+                               <div class="text-right text-muted">
+                                 <small></small>
+                               </div>
+                             </div>
+                             <p style="margin-bottom: 0!important;font-weight: 300;line-height: 1.7;" class="text-sm mb-0">Let's meet at Starbucks at 11:30. Wdyt?</p>
+                           </div>
+                         </div>
+                       </a>
+                         <a href="#!" class="dropdown-item text-center text-primary">View all</a>
+                       <%} %>
+
+                     </div>
+                       <%}else{ %>
+                         <p>No Notifications</p>
+                       <%}%>
+
+               </div>
+           </li>
+           <li class="dropdown" style="margin-left:-4%;">
+               <button style="color:white;font-size:16px;margin-top:-2%;" class="items btn btn-outline-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                 <i class="far fa-user-circle"><small><b><%= user.username %></b></small></i>
+               </button>
+               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                 <%if(user.type=='user'){%>
+                 <a style="padding-top:2px;" class="dropdown-item" href="/users">Profile</a>
+                 <a style="padding-top:2px;" class="dropdown-item" href="/wanderlist/<%= user.username %>">WanderList</a>
+
+                 <a style="padding-top:2px;" class="dropdown-item" href="/users/logout">Logout</a>
+                 <%}else{%>
+                   <a style="padding-top:2px;" class="dropdown-item" href="/guides/logout">Logout</a>
+
+                   <%}%>
+               </div>
+           </li>
+         </center>
+        </ul>
+      </div>
+    </nav>
+    <!-- <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog modal-lg">
+
+        <div class="modal-content" style="background-color: #DDDDDD;background-image:linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4) 75%), url('https://lstore.graphics/paaatterns/images/Waiau-3-p-1080.jpeg');background-size:contain;background-position:150% 100%;background-repeat:no-repeat;">
+          <div class="modal-header">
+            <h4 class="modal-title">Testimonial</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <table style="width:100%;padding:3%;">
+              <tr>
+                <td style="width:38%;padding-top:3%;padding-bottom: 1.5%;text-align:center;">
+                  <img style="width:40vh;height:40vh;border-radius:3px;box-shadow:0 10px 25px 0 rgba(0,0,0,.3);"  id="testmodelimg" alt="Raised Image" class="rounded img-raised">
+                  <a style="float:right;" class="btn btn-link" href="#">Go to Profile..</a>
+                </td>
+                <td style="width:58%;">
+                  <form action="/users/testimonial/" method="POST">
+                    <input style="display:none;" type="text" id="testusername" name="username" value="Roshan">
+                    <input style="display:none;" type="text" id="testguidename" name="guidename" value="guide2">
+                    <h1 style="color:#919293;">Guide2</h1>
+                    <div class="form-group" style="margin-top:5%;">
+                      <label for="exampleFormControlTextarea1">Your Feedback</label>
+                      <textarea name="text" placeholder="Give your feedback please..." class="form-control" id="exampleFormControlTextarea1" rows="6"></textarea>
+                    </div>
+                    <input style="float:right;" class="btn btn-success btn-sm" type="submit" name="submit" value="Submit">
+                  </form>
+                </td>
+              </tr>
+            </table>
+            <div class="modal-footer" style="border-top:none;">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div> -->
+
+
+    <div class="parallax" style="background-image:linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4) 75%), url(<%= blog[0].images %>);">
+    </div>
+    <center>
+       <p style="margin-top:-17%;margin-bottom:15%;color:white;font-size:40px;"><%=blog[0].heading%></p>
+  </center>
+      <div style="width:100%;" id="facilities" >
+      <div>
+        <div style="width:80%;float:left">
+          <div style="padding-left:15%;padding-right:10%;padding-top:3.5%">
+            <section class="blogs-1">
+                  <div id="editor"></div>
+            </section>
+            <hr>
+
+            Likes:<%=blog[0].likes%>
+
+
+            <% if (liked) { %>
+              <span class="dropdown" >
+                  <i class="fa fa-thumbs-up" style="color:blue;font-size:22px;"></i>
+              </span>
+            <% } else { %>
+              <form action="/blog/<%=blog[0]._id%>" method="post">
+                <input type="text" name="name" value="<%=user.name%>" style="display:none">
+                <input type="text" name="type" value="<%=user.type%>" style="display:none">
+                <input type="text" name="email" value="<%=user.email%>" style="display:none">
+                <input type="text" name="id" value="<%=blog[0]._id%>" style="display:none">
+                <button type="submit" class="submit up" style="-webkit-appearance: media-volume-sliderthumb!important;background-color:#fff!important" value=""><i class="fa fa-thumbs-o-up"></i><%=blog[0].likes%></button>
+
+                <!-- <button type="submit">
+                   <span class="">
+                     <i style="color:#007bff;text-transform:none;font-size:18px" class="far fa-thumbs-up">Upvote</i>
+                   </span>
+                </button> -->
+
+              </form>
+            <% } %>
+        </div>
+      </div>
+
+        <div style="width:20%;float:left" >
+          <div style="margin-left:-30%;margin-right:15%;">
+
+
+
+
+              <div class="card card-profile" data-background="cover" style="border:none;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);margin-top:12%">
+                <img style="height:75%" alt="cover" class="img pattern pattern-top" src="/styles/blog/card.jpg">
+                <div class="card-header" >
+                  <div class="card-avatar">
+                  <div >
+                    <img style="width:15vh;height:15vh;margin-top:10%;box-shadow:0 15px 35px rgba(50,50,93,.1),0 5px 15px rgba(0,0,0,.07);" class="img img-raised rounded-circle" src=<%=user.img.path %> >
+                  </div>
+                </div>
+              </div>
+              <div class="card-body pt-0" >
+                <div class="text-center">
+                  <h5 class="h5 mt-3"> <%=blog[0].name%></h5>
+                </div>
+
+
+
+                <div class="card-profile-stats d-flex justify-content-center" style="margin-top:-4%">
+                  <div>
+
+                    <span class="heading" style="font-size:20px;"> <%=likes%> </span>
+                    <span class="description" style="font-size:15px"> Likes </span>
+
+                  </div>
+                  <div>
+
+                    <span class="heading" style="font-size:20px;"> <%=posts%> </span>
+                    <span class="description" style="font-size:15px"> Posts </span>
+                  </div>
+                </div>
+
+
+                    <a href="/blog/<%=blog[0]._id%>/all"  class="btn btn-success btn-block" type="button" style="background-color:#06b995!important;border-color:#06b995!impo"> Check Posts </a>
+
+              </div>
+            </div>
+
+            <h2>Most Liked</h2>
+
+
+
+<div style="padding-bottom:4%">
+
+
+
+<% if(first){ %>
+  <div style="border:none;box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1), 0 6px 15px 0 rgba(0, 0, 0, 0.19);%">
+  <div class="card-body">
+    <h4 class="card-title">
+      <a href="/blog/<%=first._id%>">
+         <%= first.heading %> </a>
+    </h4>
+    <!-- <p id="ml1" class="card-description" >
+
+    </p> -->
+     <div class="card-footer">
+       <div class="author">
+         <img alt="..." style="width:5vh;height:5vh" class="avatar img-raised" src="<%=first.images%>">
+         <span ><%= first.name%>  </span>
+         <!-- <span id="ml1hidden" stlye="display:hidden"><%= first.text %></span> -->
+       </div>
+
+      </div>
+    </div>
+  </div>
+<%}%>
+
+</div>
+
+
+
+<% if(second){ %>
+  <div style="border:none;box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1), 0 6px 15px 0 rgba(0, 0, 0, 0.19);%">
+  <div class="card-body">
+    <h4 class="card-title">
+      <a href="/blog/<%=second._id%>">
+         <%= second.heading%> </a>
+    </h4>
+    <p id=ml2 class="card-description" >
+
+    </p>
+     <div class="card-footer">
+       <div class="author">
+         <img alt="..." style="width:5vh;height:5vh" class="avatar img-raised" src="<%=second.images%>">
+         <span> <%= second.name %> </span>
+
+       </div>
+       <div class="stats stats-right opacity-8">
+         <i class="ni ni-watch-time"></i>
+          5 min read
+        </div>
+      </div>
+    </div>
+  </div>
+  <%}%>
+</div>
+
+
+
+
+
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script type="text/javascript">
+    function noti(x,img){
+      console.log(x)
+      document.getElementById('testusername').value = '<%- user.username %>';
+
+      document.getElementById('testguidename').value =  x;
+      // console.log(x)
+      console.log(img)
+      document.getElementById("testmodelimg").setAttribute('src',img);
+    console.log('called')
+      $.ajax({
+        type:'POST',
+        url:'/users/noti',
+        data:{
+          notiid:x,
+        },
+        sucess:function(){
+          return false
+        }
+      });
+
+    };
+
+    </script>
+
+    <script>
+
+    function ml1(x){
+      var delta = x;
+      var elm = document.getElementById('ml1')
+      if(elm){
+        var text_editor = new Quill('#ml1', {
+          modules: {
+            toolbar: false,
+          },
+        });
+        console.log(x)
+
+        text_editor.setContents(delta);
+        text_editor.enable(false);
+      }
+    }
+      function ml2(x){
+        var delta = x;
+        console.log(x)
+        var elm = document.getElementById('ml2')
+        if(elm){
+          var text_editor = new Quill('#ml2', {
+            modules: {
+              toolbar: false,
+            },
+          });
+
+          text_editor.setContents(delta);
+          text_editor.enable(false);
+        }
+      }
+
+
+      function editorFunc(x){
+        var delta = x;
+        console.log(x)
+        var text_editor = new Quill('#editor', {
+          modules: {
+            toolbar: false,
+          },
+        });
+
+        text_editor.setContents(delta);
+text_editor.enable(false);
+     ml1(document.getElementById('ml1hidden').innerHTML)
+    //  ml2(<%= first.text %>)
+      };
+    </script>
+    <script type="text/javascript">
+    window.onscroll = function(){
+      var navbar = document.getElementById('nav')
+      var wander = document.getElementById('wander')
+      var items = document.getElementsByClassName('items')
+      var count = document.getElementById('count')
+      var btn = document.getElementById('dropdownMenuButton')
+      var ul = document.getElementById('ul')
+
+      if (window.pageYOffset < 250){
+        navbar.style.background = "rgba(0, 0, 0, 0)";
+        navbar.style.boxShadow = 'none';
+        wander.style.color = "#ffffff";
+        wander.style.marginTop = "35px"
+        ul.style.marginTop = "1.7%";
+        btn.style.color = '#ffffff';
+        for(var i=0; i<items.length; i++){
+          items[i].style.color = "#ffffff";
+          items[i].onmouseover = function(){
+            items[i].style.color = "#06b995";
+          }
+        }
+      } else {
+        navbar.style.background = '#fff';
+        navbar.style.boxShadow = "0 4px 4px -2px #495057";
+        wander.style.color = "grey";
+        btn.style.color = 'grey';
+        wander.style.marginTop = "17px"
+        ul.style.marginTop = "0.4%";
+        for(var i=0; i<items.length; i++){
+          items[i].style.color = "grey";
+          items[i].onmouseover = function(){
+            items[i].style.color = "black";
+          }
+        }
+      }
+    }
+    </script>
+  </body>
+</html>

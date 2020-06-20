@@ -8,6 +8,7 @@ const nodemailer = require('nodemailer');
 
 const Counselors=require('../models/Counselors');
 const Users=require('../models/Users');
+const Bookings=require('../models/Bookings');
 
 
 
@@ -27,22 +28,26 @@ router.post('/',urlencodedParser, function(req,res){
                 if (doc.sessions[j]._id==req.body.id && parseInt(doc.sessions[j].limit)-parseInt(doc.sessions[j].bookings)>= req.body.count){
                   doc.sessions[j].bookings=parseInt(doc.sessions[j].bookings)+parseInt(req.body.count)
 
-                  var itemOne = {
-                    user:req.user.email,
-                    user_name:req.user.name,
-                    date_n_time:{date:doc.sessions[j].dates[0],slot:req.body.count,time:doc.sessions[j].num_of_days},
-                    place:doc.city,
-                    current:true,
-                    };
 
-                    itemOne1 = {
-                      doctor:doc.email,
-                      doctor_name:doc.name,
-                      type:doc.type,
-                      date_n_time:{date:doc.sessions[j].dates[0],slot:req.body.count,time:doc.sessions[j].num_of_days},
-                      place:doc.city,
-                      current:true,
-                      };
+
+                      var itemOne = new Bookings({
+                        user:req.user.email,
+                        user_name:req.user.name,
+                        doctor:doc.email,
+                        doc_name:doc.name,
+                        doc_type:doc.type,
+                        booking_type:'session_booking',
+                        date_n_time:{date:doc.sessions[j].dates[0]},
+                        count:req.body.count,
+                        num_of_days:doc.sessions[j].num_of_days,
+                        place:doc.city,
+                        current:true,
+                      });
+
+                      console.log('-----------------------');
+                      console.log(itemOne);
+
+                        itemOne.save()
 
                     if((parseInt(doc.sessions[j].limit)-parseInt(doc.sessions[j].bookings))==0){
                       doc.sessions.splice(j,1)
@@ -54,15 +59,10 @@ router.post('/',urlencodedParser, function(req,res){
              }
           }
 
-          doc.bookings.push(itemOne)
           console.log(doc);
           doc.save()
 
 
-
-
-           Users.updateOne({email:req.user.email},
-                           {$push:{bookings:itemOne1}},function(){})
 
 
 

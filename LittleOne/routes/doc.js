@@ -8,21 +8,74 @@ var ts=require("time-slots-generator");
 const nodemailer = require('nodemailer');
 
 const Doctors=require('../models/Doctors');
+const Users=require('../models/Users');
+const Bookings=require('../models/Bookings');
 
 
 router.get('/home',function(req,res){
   console.log(req.user);
       dates=[]
       b_dates=[]
-      for(var i=0;i<req.user.availabledates.length;i++){
-        dates.push(req.user.availabledates[i].date)
-      }
+      var present =0;
 
-      for(var c=0;c<req.user.bookings;c++){
-        b_dates.push(req.user.bookings[c].date_n_time.date)
-      }
-      console.log(dates);
-      res.render('doc_home',{doctor:req.user,dates:dates,b_dates:b_dates});
+
+        var datetime = new Date();
+        date = datetime.toISOString().slice(0,10);
+          date1 = date.split('-')
+          console.log(date1)
+          var date2 = date1[0]+'/'+date1[1]+'/'+date1[2]
+          var user = req.user;
+          Bookings.find({doctor:req.user.email}).then(booking=>{
+            console.log('-----------------------------------------------');
+            console.log(booking);
+            for(var i=0;i<booking.length;i++){
+              d2 = new Date()
+              console.log(i);
+              if(booking[i].current == true   ){
+                console.log('camehere')
+                d1 = new Date(booking[i].date_n_time.date);
+                console.log(d1)
+                console.log(d2)
+
+                if(d1 <= d2){
+                  console.log('heyy')
+                    console.log('yes');
+                    if(d1==d2){
+                    d2 = new Date().getHours
+                    d1 = booking[i].date_n_time.time
+                    d1 = d1.split(':')
+                    if(Number(d2) >Number(d1[0])){
+                      booking[i].current=false
+                    }
+                  }
+                  else{
+                    booking[i].current=false
+                  }
+                }
+                console.log('hip hip hurray')
+                console.log(booking[i]);
+
+              }
+            }
+            for(var c=0;c<booking.length;c++){
+                b_dates.push(booking[c].date_n_time.date)
+            }
+            for(var i=0;i<req.user.availabledates.length;i++){
+              for(var k=0;k<b_dates.length;k++){
+                if(req.user.availabledates[i].date==b_dates[k]){
+                  present=1
+                }
+              }
+
+              if(present==0){
+                dates.push(req.user.availabledates[i].date)
+              }
+            }
+             // booking.save()
+             res.render('doc_home',{doctor:req.user,dates:dates,b_dates:b_dates,user:req.user,booking:booking});
+
+          })
+
 });
 
 
@@ -105,5 +158,39 @@ router.post('/docs/dates',urlencodedParser,async function(req,res){
 console.log('redirecting you stupi thing--------------------')
 
   res.redirect('/doc/home')
+});
+
+
+
+
+router.post('/testimonial',async (req,res)=>{
+  console.log('hey there')
+console.log(req.body.userid)
+  var test=[]
+await Users.findOne({"email":req.body.userid})
+.then(u=>{
+  console.log(u)
+  var a= req.user.img.path
+  var b=u.name
+test.push({senderid:req.user.email,img:a,username:b,testid:'testimonial',unread:true})
+console.log(test)
+}
+
+)
+console.log(test)
+await Users.updateOne({"email":req.body.userid},{
+    $push:{
+      notifications:{
+        $each:test
+      },
+
+    }
+  })
+  .then(x=>console.log('updated'))
+  .catch(x=>console.log(x))
+
+  res.send('')
+
+
 });
 module.exports = router;

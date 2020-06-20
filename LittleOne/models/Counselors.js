@@ -2,13 +2,13 @@ const mongoose = require('mongoose')
 const MongoClient = require('mongodb').MongoClient;
 
 
-const BookingSchema = new mongoose.Schema({
-  user:String,
-  user_name:String,
-  date_n_time:{'date':String,'slot':String,'time':String},
-  place:String,
-  current:Boolean,
-});
+// const BookingSchema = new mongoose.Schema({
+//   user:String,
+//   user_name:String,
+//   date_n_time:{'date':String,'slot':String,'time':String},
+//   place:String,
+//   current:Boolean,
+// });
 
 const counselorsSchema = new mongoose.Schema({
 
@@ -72,7 +72,12 @@ const counselorsSchema = new mongoose.Schema({
         slot:String,
         timeslots:[String],
         }],default:undefined},
-    bookings:[BookingSchema],
+    // bookings:[BookingSchema],
+    rating:{
+        type:Number,
+        default:0,
+
+    },
 
 
 })

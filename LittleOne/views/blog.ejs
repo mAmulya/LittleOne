@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="/styles/blog/blog.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script type="module" src="https://cdn.quilljs.com/1.1.9/quill.js"></script>
+    <link href="https://cdn.quilljs.com/1.1.9/quill.snow.css" rel="stylesheet">
+    <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script> -->
+
+     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+   <script src="https://kit.fontawesome.com/ea0619ce99.js" crossorigin="anonymous"></script>
+
+   <script src="https://code.jquery.com/jquery-3.2.1.min.js" ></script>
+   <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
+   <style >
+
+   .notifimg{
+     color: #fff;
+     background-color: #adb5bd;
+     display: inline-flex;
+     align-items: center;
+     justify-content: center;
+     font-size: 1rem;
+     border-radius: 50%;
+     height: 48px;
+     width: 48px
+   }
+
+     #wander {
+       line-height: 50px;
+       position: fixed;
+       float: left;
+       margin: 35px 220px;
+       color: #fff;
+       font-weight: 700 !important ;
+       font-size: 14px;
+       letter-spacing: 2px;
+       transition: 1s
+     }
+
+     nav {
+       position: fixed;
+       width: 100%;
+       line-height: 60px;
+       z-index: 1000;
+       overflow-y: visible;
+       border-bottom: 1px solid #f2f2f2;
+       border-width: thin;
+       padding: 10px;
+       transition: background 300ms linear;
+     }
+
+     nav ul {
+       line-height: 50px;
+       list-style: none;
+       background: rgba(0, 0, 0, 0);
+       color: #fff;
+       padding: 0;
+       text-align: right;
+       margin: 0;
+       padding-right: 40px;
+       transition: 1s;
+     }
+
+     nav ul li {
+       display: inline-block;
+       padding: 10px 20px;
+     }
+
+     nav ul li a {
+       text-decoration: none;
+       color: #fff;
+       font-size: 16px;
+     }
+   </style>
+  </head>
+
+  <% if(second){%>
+
+  <body style="font-family: 'Muli', 'Helvetica', Arial, sans-serif;font-size:16px;" onload="displayfunc('<%= first.text %>','<%= second.text %>')">
+  <%}else{%>
+    <body style="font-family: 'Muli', 'Helvetica', Arial, sans-serif;font-size:16px;">
+      <%}%>
+
+    <nav id="nav" style="z-index:5;padding-top:0.2%;padding-bottom:0.05%;border:none;" class="navpic">
+      <div class="logo">
+        <span id="wander">WANDERMATE</span>
+      </div>
+      <div class="menu"  style="overflow:visible!important;">
+        <ul id="ul" style="margin-left:60%;margin-top:1.7%;">
+          <center>
+            <%if(user.usertype=='user'){%>
+           <li><a class="items" href="/users/dashboard"><i class="fas fa-home"></i></a></li>
+           <%}else{%>
+             <li><a class="items" href="/guides/guideprofile"><i class="fas fa-home"></i></a></li>
+
+             <%}%>
+           <li><a class="items" href="/blog"><i class="fas fa-blog"></i></a></li>
+           <li class="dropdown">
+             <i class="fas fa-bell dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+               <!-- <button style="color:grey;font-size:16px;margin-top:-2%;" class="btn btn-outline-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               </button> -->
+               <div style="min-width:23rem;" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                 <% if(user.notifications) {%>
+                     <div class="px-3 py-3">
+                       <h6 class="text-sm text-muted m-0">You have <strong class="text-primary"><%=user.notifications.length%></strong> notifications.</h6>
+                     </div>
+
+                     <div class="list-group list-group-flush" id="notifications">
+
+                 <% for(i=0;i < user.notifications.length;i++ ){ %>
+                       <a href="#!" onclick="noti('<%=user.notifications[i]._id%>')" class="list-group-item list-group-item-action">
+                         <div class="row align-items-center">
+                           <div class="col-auto">
+                             <img alt="Image placeholder" src="<%=user.notifications[i].img %>" class="notifimg rounded-circle">
+                           </div>
+                           <div class="col ml--2">
+                             <div class="d-flex justify-content-between align-items-center">
+                               <div>
+                                 <h4 style="font-family: inherit;font-weight: 400;line-height: 1.5;color: #32325d;" class="mb-0 text-sm"><%=user.notifications[i].senderid%></h4>
+                               </div>
+                               <div class="text-right text-muted">
+                                 <small></small>
+                               </div>
+                             </div>
+                             <p style="margin-bottom: 0!important;font-weight: 300;line-height: 1.7;" class="text-sm mb-0">Let's meet at Starbucks at 11:30. Wdyt?</p>
+                           </div>
+                         </div>
+                       </a>
+                         <a href="#!" class="dropdown-item text-center text-primary">View all</a>
+                       <%} %>
+
+                     </div>
+                       <%}else{ %>
+                         <p>No Notifications</p>
+                       <%}%>
+
+               </div>
+           </li>
+           <li class="dropdown" style="margin-left:-4%;">
+               <button style="color:white;font-size:16px;margin-top:-2%;" class="items btn btn-outline-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                 <i class="items far fa-user-circle"><small><b><%= user.name %></b></small></i>
+               </button>
+               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                 <%if(user.type=='user'){%>
+                 <a style="padding-top:2px;" class="dropdown-item" href="/users">Profile</a>
+                 <a style="padding-top:2px;" class="dropdown-item" href="#">WanderList</a>
+
+                 <a style="padding-top:2px;" class="dropdown-item" href="/users/logout">Logout</a>
+<%}else{%>
+  <a style="padding-top:2px;" class="dropdown-item" href="/guides/logout">Logout</a>
+
+  <%}%>
+               </div>
+           </li>
+         </center>
+        </ul>
+      </div>
+    </nav>
+    <div class="parallax">      </div>
+    <% if(url=='posts'){ %>
+      <center>
+        <%if(blog.length!=0){%>
+          <p style="margin-top:-17%;margin-bottom:15%;color:white;font-size:40px;"><%=blog[0].name %>'s posts</p>
+          <%}%>
+    </center>
+    <%}else{%>
+    <center>
+       <p style="margin-top:-17%;margin-bottom:15%;color:white;font-size:40px;">MomsCare Blog</p>
+  </center>
+  <%}%>
+
+    <!-- <div style="background-image: url('https://demos.creative-tim.com/argon-design-system-pro-angular/assets/img/ill/testimonial_bg.svg')"> -->
+
+    <div style="width:100%;" id="facilities" >
+      <div>
+        <div style="width:80%;float:left;margin-bottom:3%;">
+          <div class="cd-section" id="blogs">
+            <section class="blogs-1">
+              <div class="container">
+                <div class="row mb-5">
+          </div>
+          <% if (blog){ %>
+
+          <div class="row align-items-center" style="width:95%;">
+            <% if (blog[0]){ %>
+
+              <a href="/blog/<%=blog[0]._id%>">
+
+            <div class="col-lg-3">
+              <div class="card card-blog card-background" data-animation="zooming">
+                <div class="full-background" style="background-image: url(<%= blog[0].images %>)"></div>
+                  <div class="card-body">
+                    <div class="content-bottom">
+                      <h5 class="card-title"><%=blog[0].heading%></h5>
+                      <h6 class="card-category text-white opacity-7" ><%=blog[0].name%> </h6>
+                      <a style="text-decoration:none;float:right;" href="/blog/<%=blog[0]._id%>">Read more... </a>
+                    </div>
+                  </div>
+
+                </a>
+              </div>
+            </div>
+            <% } %>
+            <% if (blog[1]){ %>
+
+            <div class="col-lg-3">
+              <div class="card card-blog card-background" data-animation="zooming">
+                <div class="full-background" style="background-image: url(<%=blog[1].images%>);">
+                </div>
+
+                  <div class="card-body">
+                  <div class="content-bottom">
+                    <h5 class="card-title"><%=blog[1].heading%></h5>
+                    <h6 class="card-category text-white opacity-7" ><%=blog[1].name%> </h6>
+
+          						<a style="text-decoration:none;float:right;" href="/blog/<%=blog[0]._id%>">Read more... </a>
+                  </div>
+                </div>
+            </div>
+          </div>
+          <% } %>
+          <% if (blog[2]){ %>
+          <div class="col-lg-6">
+            <div class="card card-blog card-background" data-animation="zooming">
+              <div class="full-background" style="background-image: url(<%=blog[2].images%>);">
+              </div>
+              <a href="/blog/<%=blog[2]._id%>">
+                <div class="card-body">
+                  <div class="content-bottom">
+                    <h5 class="card-title"><%=blog[2].heading%></h5>
+                    <h6 class="card-category text-white opacity-7" ><%=blog[2].name%> </h6>
+                    <a style="text-decoration:none;float:right;" href="/blog/<%=blog[2]._id%>">Read more... </a>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="row align-items-center" style="width:95%;">
+          <% } %>
+          <% if (blog[3]){ %>
+                    <div class="col-lg-6"><div class="card card-blog card-background" data-animation="zooming">
+                      <div class="full-background" style="background-image: url(<%=blog[3].images%>);">
+                      </div><a href="javascript:;"><div class="card-body">
+                        <div class="content-bottom">
+                                                <h5 class="card-title"><%=blog[3].heading%></h5>
+                                              <h6 class="card-category text-white opacity-7" ><%=blog[3].name%> </h6>
+                                              <a style="text-decoration:none;float:right;" href="/blog/<%=blog[3]._id%>">Read more... </a>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <% } %>
+                <% if (blog[4]){ %>
+                <div class="col-lg-3">
+                  <div class="card card-blog card-background" data-animation="zooming">
+                    <div class="full-background" style="background-image: url(<%=blog[4].images%>);">
+                    </div><a href="javascript:;">
+                      <div class="card-body">
+                        <div class="content-bottom">
+                          <h5 class="card-title"><%=blog[4].heading%></h5>
+                          <h6 class="card-category text-white opacity-7" ><%=blog[4].name%> </h6>
+                          <a style="text-decoration:none;float:right;" href="/blog/<%=blog[4]._id%>">Read more... </a>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <% } %>
+                <% if (blog[5]){ %>
+                <div class="col-lg-3">
+                  <div class="card card-blog card-background" data-animation="zooming">
+                    <div class="full-background" style="background-image: url(<%=blog[5].images%>);">
+                    </div>
+                    <a href="javascript:;"><div class="card-body">
+                      <div class="content-bottom">
+                        <h5 class="card-title"><%=blog[5].heading%></h5>
+                        <h6 class="card-category text-white opacity-7" ><%=blog[5].name%> </h6>
+                        <a style="text-decoration:none;float:right;" href="/blog/<%=blog[5]._id%>">Read more... </a>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="row align-items-center" style="width:95%;">
+              <% } %>
+              <% if (blog[6]){ %>
+              <div class="col-lg-3">
+                <div class="card card-blog card-background" data-animation="zooming">
+                  <div class="full-background" style="background-image: url(<%=blog[6].images%>)"></div>
+                  <a href="javascript:;">
+                    <div class="card-body">
+                      <div class="content-bottom">
+                        <h5 class="card-title"><%=blog[6].heading%></h5>
+                        <h6 class="card-category text-white opacity-7" ><%=blog[6].name%> </h6>
+                        <a style="text-decoration:none;float:right;" href="/blog/<%=blog[6]._id%>">Read more... </a>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <% } %>
+              <% if (blog[7]){ %>
+              <div class="col-lg-6">
+                <div class="card card-blog card-background" data-animation="zooming">
+                  <div class="full-background" style="background-image: url(<%=blog[7].images%>);">
+                  </div><a href="javascript:;">
+                    <div class="card-body">
+                      <div class="content-bottom">
+                        <h5 class="card-title"><%=blog[7].heading%></h5>
+                        <h6 class="card-category text-white opacity-7" ><%=blog[7].name%> </h6>
+                        <a style="text-decoration:none;float:right;" href="/blog/<%=blog[7]._id%>">Read more... </a>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <% } %>
+              <% if (blog[8]){ %>
+              <div class="col-lg-3">
+                <div class="card card-blog card-background" data-animation="zooming">
+                  <div class="full-background" style="background-image: url(<%=blog[8].images%>);">
+                  </div><a href="javascript:;"><div class="card-body">
+                    <div class="content-bottom">
+                      <h5 class="card-title"><%=blog[8].heading%></h5>
+                      <h6 class="card-category text-white opacity-7" ><%=blog[8].name%> </h6>
+                      <a style="text-decoration:none;float:right;" href="/blog/<%=blog[8]._id%>">Read more... </a>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <% } %>
+
+            <% } %>
+
+          </div>
+          </div>
+        </section>
+
+        <%if(blog.length!=0){%>
+          <% if (url=='blog'){ %>
+            <a href="/blog?pg=<%=i%>#facilities" class="btn btn-success" style="float:right;margin-right:14%;background-color:#06b995!important"> Show More </a>
+            <% } %>
+            <% if (url=='myposts'){ %>
+            <a href="/blog/myposts?pg=<%=i%>#facilities" class="btn btn-success" style="float:right;margin-right:14%;background-color:#06b995!important"> Show MOre </a>
+            <% } %>
+            <% if (url=='posts'){ %>
+            <a href="/blog/<%=id%>/all?pg=<%=i%>#facilities" class="btn btn-success" style="float:right;margin-right:14%;background-color:#06b995!important"> Show MOre </a>
+            <% } %>
+        <%}else{%>
+          <center>
+            <h3>no more posts</h3>
+          </center>
+
+          <!-- <a href="/blog" class="btn btn-success" style="float:right;margin-right:14%;">< Go back </a> -->
+        <%}%>
+        <a href="/blog" class="btn btn-success" style="float:left;margin-left:7%;background-color:#06b995!important">< Go back </a>
+
+
+        </div>
+      </div>
+
+        <div style="width:20%;float:left" >
+          <div style="margin-left:-30%;margin-right:15%;">
+
+              <div class="card card-profile" data-background="cover" style="border:none;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);margin-top:12%">
+                <img style="height:75%" alt="cover" class="img pattern pattern-top" src="/styles/blog/card.jpg">
+                <div class="card-header" >
+                  <div class="card-avatar">
+                  <div >
+                    <img style="width:15vh;height:15vh;margin-top:10%;box-shadow:0 15px 35px rgba(50,50,93,.1),0 5px 15px rgba(0,0,0,.07);" class="img img-raised rounded-circle" src=<%=user.img.path %> >
+                  </div>
+                </div>
+              </div>
+              <div class="card-body pt-0" >
+                <div class="text-center">
+                  <h5 class="h5 mt-3"><%=user.name%><span class="font-weight-light"> , 29 </span></h5>
+                </div>
+                <div class="row" style="margin-top:8%;margin-left:4%;">
+                  <div class="col-6">
+                    <button style="width:100%;background-color:#06b995!important" class="btn btn-sm btn-success" type="button" data-toggle="modal" data-target="#myModal"> Upload post </button>
+                    <div class="modal fade" id="myModal" role="dialog">
+                      <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h4 class="modal-title">Share Your Experience</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          </div>
+                          <div class="modal-body" style="padding:6%;">
+                            <div class="row" style="width:100%;">
+                              <form action="/blog/" enctype="multipart/form-data" method="POST" style="width:100%;margin-left:3%;">
+                                <div class="row">
+                                  <div class="col-6">
+                                    <div class="form-group">
+                                      <label for="title">Title</label>
+                                      <input class="form-control" type="text" name="title" id="title" value="" placeholder="My Title">
+                                    </div>
+                                  </div>
+                                  <div class="col-6">
+                                    <div class="form-group">
+                                      <label for="exampleFormControlFile1">Main Image</label>
+                                      <input type="file" name="userPhoto" class="form-control-file" id="exampleFormControlFile1">
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="form-group">
+                                  <label for="editor">Content</label>
+                                  <div  style="width:100%;height:300px" rows="16"   id="editor"></div>
+                                  <input type="hidden" name="text" id="hiddenfield" value="">
+                                </div>
+                                <div class="row">
+                                  <div class="col-12">
+                                    <input style="float:right" type="submit" id="submit" name="submit" class="btn btn-success" value="Submit">
+                                  </div>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-6">
+                    <a style="text-decoration: none;color:white;width:100%;" href="/blog/myposts#facilities"><button class="btn btn-sm btn-success" type="button" style="background-color:#06b995!important"> My Posts </buton> </a>
+
+                  </div>
+                </div>
+
+
+                <div class="card-profile-stats d-flex justify-content-center">
+                  <div>
+
+                    <span class="heading" style="font-size:20px;"> <%=likes%> </span>
+                    <span class="description" style="font-size:15px"> Likes </span>
+
+                  </div>
+                  <div>
+
+                    <span class="heading" style="font-size:20px;"> <%=posts%> </span>
+                    <span class="description" style="font-size:15px"> Posts </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <h2>Most Liked</h2>
+
+
+
+<div style="padding-bottom:4%">
+
+
+
+<% if(first){ %>
+  <div style="border:none;box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1), 0 6px 15px 0 rgba(0, 0, 0, 0.19);%">
+  <div class="card-body">
+    <h4 class="card-title">
+      <a href="/blog/<%=first._id%>">
+        <%= first.heading %> </a>
+    </h4>
+    <p class="card-description" >
+      <!-- <div id="display1"></div> -->
+
+    </p>
+
+     <div class="card-footer">
+       <div class="author">
+         <img alt="..." style="width:5vh;height:5vh;" class="avatar img-raised" src="<%= first.images%>">
+         <span style="font-color:#d1d2d3"><%= first.name%>  </span>
+       </div>
+       <div class="stats stats-right opacity-8">
+         <i class="ni ni-watch-time"></i>
+          5 min read
+        </div>
+      </div>
+    </div>
+  </div>
+<%}%>
+
+</div>
+
+
+
+<% if(second){ %>
+  <div style="border:none;box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1), 0 6px 15px 0 rgba(0, 0, 0, 0.19);%">
+  <div class="card-body">
+    <h4 class="card-title">
+      <a href="/blog/<%=second._id%>">
+
+         <%= second.heading%> </a>
+    </h4>
+    <p class="card-description" >
+      <div id="display2"></div>
+
+    </p>
+     <div class="card-footer">
+       <div class="author">
+         <img alt="..." style="width:5vh;height:5vh" class="avatar img-raised" src="<%= first.images%>">
+         <span style="font-color:#d1d2d3"> <%= second.name %> </span>
+       </div>
+       <div class="stats stats-right opacity-8">
+         <i class="ni ni-watch-time"></i>
+          5 min read
+        </div>
+      </div>
+    </div>
+  </div>
+<% } %>
+</div>
+
+
+
+
+
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+    window.onscroll = function(){
+      var navbar = document.getElementById('nav')
+      var wander = document.getElementById('wander')
+      var items = document.getElementsByClassName('items')
+      var count = document.getElementById('count')
+      var btn = document.getElementById('dropdownMenuButton')
+      var ul = document.getElementById('ul')
+
+      if (window.pageYOffset < 250){
+        navbar.style.background = "rgba(0, 0, 0, 0)";
+        navbar.style.boxShadow = 'none';
+        wander.style.color = "#ffffff";
+        wander.style.marginTop = "35px"
+        ul.style.marginTop = "1.7%";
+        btn.style.color = '#ffffff';
+        for(var i=0; i<items.length; i++){
+          items[i].style.color = "#ffffff";
+          items[i].onmouseover = function(){
+            items[i].style.color = "#06b995";
+          }
+        }
+      } else {
+        navbar.style.background = '#fff';
+        navbar.style.boxShadow = "0 4px 4px -2px #495057";
+        wander.style.color = "grey";
+        btn.style.color = 'grey';
+        wander.style.marginTop = "17px"
+        ul.style.marginTop = "0.4%";
+        for(var i=0; i<items.length; i++){
+          items[i].style.color = "grey";
+          items[i].onmouseover = function(){
+            items[i].style.color = "black";
+          }
+        }
+      }
+    }
+    </script>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+    function displayfunc(x,y){
+      console.log("in func1")
+      console.log(x)
+      var quill = new Quill('#display1', {
+        modules : {
+          toolbar : false,
+        }
+      });
+
+      console.log('before set')
+      console.log(delta)
+      quill.setContents(delta);
+      console.log('here');
+      content(y);
+    };
+
+    function content(y){
+      console.log("in func2")
+      var editor = new Quill('#display2', {
+        modules : {
+          toolbar : false,
+        }
+      });
+
+      var delta = y
+      editor.setContents(delta);
+    };
+    </script>
+    <script>
+
+      var toolbarOptions = [
+        ['bold', 'italic', 'underline'],
+        [{'header': ['1', '2', '3', '4', '5', '6', false]}],
+        [{'list' : 'ordered'}, {'list' : 'bullet'}],
+        ['link', 'image'],
+        [{'color' : []}],
+        [{'font' : []}],
+        [{'align' : []}],
+      ];
+
+      var text_editor = new Quill('#editor', {
+        modules: {
+          toolbar: toolbarOptions,
+        },
+        placeholder : 'I want to share an experience...',
+        theme : 'snow'
+      });
+      $('#submit').click(function(){
+        document.getElementById("hiddenfield").value=JSON.stringify(text_editor.getContents());
+        console.log(text_editor.getContents());
+        console.log(document.getElementById("hiddenfield").value)
+      });
+      </script>
+
+
+
+
+  </body>
+
+</html>
