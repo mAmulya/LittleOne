@@ -10,6 +10,10 @@ var ts=require("time-slots-generator");
 const nodemailer = require('nodemailer');
 const Counselors=require('../models/Counselors');
 const Articles=require('../models/Articles');
+const Bookings=require('../models/Bookings');
+
+
+
 
 
 router.get('/home',function(req,res){
@@ -17,19 +21,33 @@ router.get('/home',function(req,res){
       dates=[]
       s_dates=[]
       b_dates=[]
-      for(var i=0;i<req.user.availabledates.length;i++){
-        dates.push(req.user.availabledates[i].date)
-      }
+
       for(var j=0;j<req.user.sessions.length;j++){
         for(var k=0;k< req.user.sessions[j].dates.length;k++){
             s_dates.push(req.user.sessions[j].dates[k])
         }
       }
-      for(var c=0;c<req.user.bookings;c++){
-        b_dates.push(req.user.bookings[c].date_n_time.date)
+      var present =0;
+      Bookings.find({doctor:req.user.email},function(err,bookings){
+        console.log('------------------------------------------------------------------');
+        console.log(bookings);
+        for(var c=0;c<bookings.length;c++){
+          b_dates.push(bookings[c].date_n_time.date)
+        }
+        for(var i=0;i<req.user.availabledates.length;i++){
+          for(var k=0;k<b_dates.length;k++){
+          if(req.user.availabledates[i].date==b_dates[k]){
+            present=1
+          }
+        }
+      if(present==0){
+        dates.push(req.user.availabledates[i].date)
       }
-      console.log(dates);
-      res.render('co_home',{counselor:req.user,dates:dates,s_dates:s_dates,b_dates:b_dates});
+    }
+        console.log(dates);
+        console.log(b_dates);
+        res.render('co_home',{counselor:req.user,dates:dates,s_dates:s_dates,b_dates:b_dates});
+      })
 });
 
 router.get('/myarticles',function(req,res){

@@ -89,6 +89,8 @@ app.use('/pedia_booking',require('./routes/pedia_booking'));
 app.use('/co_booking',require('./routes/co_booking'));
 app.use('/session_booking',require('./routes/session_booking'));
 
+app.use('/blog',require('./routes/blog'));
+
 
 server.listen(8000, function(){
   console.log("Connected to server")

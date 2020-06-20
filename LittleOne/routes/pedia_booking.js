@@ -8,6 +8,7 @@ const nodemailer = require('nodemailer');
 
 const Doctors=require('../models/Doctors');
 const Users=require('../models/Users');
+const Bookings=require('../models/Bookings');
 
 
 var data;
@@ -103,37 +104,30 @@ router.post('/done',urlencodedParser, function(req,res){
                    }
                 }
 
-                var itemOne = {
+
+
+                var itemOne = new Bookings({
                   user:req.user.email,
                   user_name:req.user.name,
+                  doctor:doc.email,
+                  doc_name:doc.name,
+                  doc_type:doc.doc_type,
+                  booking_type:'pedia_booking',
                   date_n_time:{date:value_form.date,slot:value_form.slot,time:req.body.time},
+                  count:'1',
+                  num_of_days:'1',
                   place:value_form.location,
                   current:true,
-                  };
+                });
 
+                console.log('-----------------------');
+                console.log(itemOne);
 
+                  itemOne.save()
 
-
-                doc.bookings.push(itemOne)
                 console.log(doc);
                 doc.save()
-
-
-                itemOne = {
-                  doctor:doc.email,
-                  doctor_name:doc.name,
-                  type:doc.doc_type,
-                  date_n_time:{date:value_form.date,slot:value_form.slot,time:req.body.time},
-                  place:value_form.location,
-                  current:true,
-                  };
-
-                 Users.updateOne({email:req.user.email},
-                                 {$push:{bookings:itemOne}},function(){})
-
-
-
-           }
+}
          })
 
 

@@ -2,13 +2,13 @@ const mongoose = require('mongoose')
 const MongoClient = require('mongodb').MongoClient;
 
 
-const BookingSchema = new mongoose.Schema({
-  user:String,
-  user_name:String,
-  date_n_time:{'date':String,'slot':String,'time':String},
-  place:String,
-  current:Boolean,
-});
+// const BookingSchema = new mongoose.Schema({
+//   user:String,
+//   user_name:String,
+//   date_n_time:{'date':String,'slot':String,'time':String},
+//   place:String,
+//   current:Boolean,
+// });
 
 const guidesSchema = new mongoose.Schema({
 
@@ -65,9 +65,19 @@ const guidesSchema = new mongoose.Schema({
             slot:String,
             timeslots:[String],
         }],default:undefined},
-        bookings:[BookingSchema],
+        // bookings:[BookingSchema],
         resetPasswordToken: String,
-        resetPasswordExpires: Date
+        resetPasswordExpires: Date,
+
+        rating:{
+            type:Number,
+            default:0,
+
+        },
+        testimonials:{type:[{username:{type:String,lowercase:true,},text:{type:String}}]},
+        notifications:{type:[{senderid:{type:String},typeid:{type:String},img:{type:String},username:{type:String},unread:{type:Boolean,default:false}}],default:void 0},
+
+
 })
 
 const Doctors = mongoose.model('Doctors',guidesSchema)

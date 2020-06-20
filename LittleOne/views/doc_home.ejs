@@ -189,6 +189,166 @@ nav ul li a {
 
 <button type="button" style="margin-bottom:3%;margin-left:5%;margin-right:5%;" class="btn btn-success" style="background-color:#06b995 !important;border-color: #06b995 !important" onclick="send()">Save</button> -->
 
+  <%=booking%>
+  <br><br>
+        <div class="col mx-auto text-center" style="width:70%">
+                  <div class="card"  >
+                    <div class="card-header border-0">
+                      <h3 class="mb-0">Current Bookings</h3>
+                    </div>
+                    <div class="table-responsive">
+                      <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                          <tr>
+                            <th scope="col" class="sort" data-sort="name">Customer Name</th>
+                            <th scope="col" class="sort" data-sort="budget">time</th>
+                            <th scope="col" class="sort" data-sort="status">Date</th>
+                            <th scope="col">Phone Number</th>
+                            <th scope="col" class="sort" data-sort="completion">Tourists</th>
+                            <th scope="col">type</th>
+                            <th scope="col">location</th>
+                          </tr>
+                        </thead>
+                        <tbody class="list">
+                            <%if(booking){ %>
+                              <% for(i=0;i < booking.length;i++ ){ %>
+                                <% if(booking[i].current){ %>
+                          <tr>
+                            <th scope="row">
+                              <div class="media align-items-center">
+                                <a href="#" class="avatar rounded-circle mr-3">
+                                  <img style="height:9vh;width:9vh" alt="Image placeholder" src="<%=booking[i].img%>">
+                                </a>
+                                <div class="media-body">
+                                  <span class="name mb-0 text-sm"><%=booking[i].user%></span>
+                                </div>
+                              </div>
+                            </th>
+                            <td class="budget">
+                              <%if(booking[i].date_n_time.time){%>
+                                  <%=booking[i].date_n_time.time%>
+                              <%}else{%>
+                                09:00
+                                <%}%>
+
+                            </td>
+                            <td>
+                              <span class="badge badge-dot mr-4">
+                                <i class="bg-warning"></i>
+                                <span class="status"><%=booking[i].date_n_time.date%></span>
+                              </span>
+                            </td>
+                            <td>
+                              <%=booking[i].num_of_days%>
+                            </td>
+                            <td>
+                              <%if(booking[i].current){%>
+                                  <%=booking[i].tot_no_of_tourits%>
+                              <%}else{%>
+                                1
+                                <%}%>
+
+                            </td>
+                            <td >
+                              <%=booking[i].current%>
+                            </td>
+                            <td >
+                              <%=booking[i].current%>
+                            </td>
+
+                          </tr>
+                          <%}%>
+                          <%}%>
+                          <%}%>
+                        </tbody>
+                      </table>
+                    </div>
+                    <!-- <div class="card-footer py-4">
+                      <nav aria-label="...">
+                        <ul class="pagination justify-content-end mb-0">
+                          <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1">
+                              <i class="fa fa-angle-left"></i>
+                              <span class="sr-only">Previous</span>
+                            </a>
+                          </li>
+                          <li class="page-item active">
+                            <a class="page-link" href="#">1</a>
+                          </li>
+                          <li class="page-item">
+                            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                          </li>
+                          <li class="page-item"><a class="page-link" href="#">3</a></li>
+                          <li class="page-item">
+                            <a class="page-link" href="#">
+                              <i class="fa fa-angle-right"></i>
+                              <span class="sr-only">Next</span>
+                            </a>
+                          </li>
+                        </ul>
+                      </nav>
+                    </div> -->
+                  </div>
+                </div>
+
+  <br><br>
+
+  <br><br>
+  <div style="padding:3%;background-size: cover;background-repeat: no-repeat;background-image:linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7) 75%), url('https://lstore.graphics/paaatterns/images/033-p-1080.png');">
+  <div class="wrapper" id="wrapper">
+            <div class="container" style="margin:50px auto !important">
+              <div class="row">
+                <%if(booking){ %>
+                    <% for(i=0;i < booking.length;i++ ){ %>
+                      <% if(booking[i].current == false){ %>
+
+                <div class="col-lg-4 col-md-6">
+
+                  <div class="card card-profile" data-background="cover">
+                    <img class="img pattern pattern-top" src="https://demos.creative-tim.com/argon-design-system-pro/assets/img/ill/linth3.svg" alt="cover">
+                    <div class="card-header">
+                      <div class="card-avatar">
+                        <a href="javascript:;">
+                          <img style="width:15vh;height:15vh;margin-left:13%;" class="img img-raised rounded-circle" src="<%=booking[i].img%>">
+                        </a>
+                      </div>
+                    </div>
+                    <div class="card-body pt-0">
+                      <div class="text-center">
+                        <h5 class="h5 mt-3">
+                          <%=booking[i].user%>
+                        </h5>
+                        <div class="font-weight-300">
+                          <i class="ni location_pin mr-2"><%=booking[i].place%></i>
+                        </div>
+                      </div>
+                      <div class="card-profile-stats d-flex justify-content-center">
+                        <div>
+                          <span class="heading"><%=booking[i].num_of_days%></span>
+                          <span class="description">Tourists</span>
+                        </div>
+                        <div>
+                          <span class="heading"><%=booking[i].booking_type%></span>
+                          <span class="description">Type</span>
+                        </div>
+                      </div>
+                      <button type="button" class="btn btn-lg btn-success btn-block" onclick="testimonial('<%=booking[i].user%>')">Request Testimonial</button>
+                    </div>
+                  </div>
+                </div>
+                <%}%>
+                <%}%>
+                <%}%>
+
+              </div>
+            </div>
+            <a href="/guides/guideprofile?pg=<%=1%>#wrapper" class="btn btn-success" style="margin-top:-2%;float:right;margin-right:14%;background-color:#06b995!important"> more.. </a>
+            <a href="/guides/guideprofile#wrapper" class="btn btn-success" style="margin-top:-2%;float:left;margin-left:14%;background-color:#06b995!important"> back  .. </a>
+  </div>
+  </div>
+
+  <br>
+  <br>
 
 
     <script type="text/javascript" src="/styles/doc/calendar.js"></script>
@@ -268,6 +428,21 @@ nav ul li a {
   }
 
     </script>
+<script>
+function testimonial(x){
+console.log('called')
+$.ajax({
+  type:'POST',
+  url:'testimonial',
+  data:{
+    userid:x,
+  },
+  sucess:function(){
+    return false
+  }
+});
 
+};
+</script>
   </body>
 </html>

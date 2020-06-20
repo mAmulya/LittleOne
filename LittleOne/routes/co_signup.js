@@ -96,7 +96,6 @@ router.post('/signup',                   [check('name').not().isEmpty().withMess
                                           reg_no:req.body.reg_no,
                                           year:req.body.year,
                                           council:req.body.council,
-                                          bookings:new Array(),
                                           availabledates:new Array(),
                                           sessions:new Array(),
                                   });
