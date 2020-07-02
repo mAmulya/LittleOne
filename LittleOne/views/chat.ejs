@@ -574,8 +574,8 @@
 
           <div class="wrapper">
             <p id="usertype" style="display:none;"><%= usertype %></p>
-            <p id="user" style="display:none"><%= data.username %></p>
-            <p id="guide" style="display:none"><%= data.guidename %></p>
+            <p id="user" style="display:none"><%= user %></p>
+            <p id="guide" style="display:none"><%= doctor %></p>
             <div class="section-shaped my-0 skew-separator skew-mini">
               <div class="page-header page-header-small header-filter">
                 <div class="page-header-image" style="background-image: url('https://demos.creative-tim.com/argon-design-system-pro-angular/assets/img/sections/broofoac.jpg');">
@@ -594,51 +594,7 @@
             <section style="background-image:url('https://demos.creative-tim.com/argon-design-system-pro-angular/assets/img/ill/1.svg')">
               <div class="container pt-5 mb-5 upper">
                 <div class="row flex-row chat">
-                  <div class="col-lg-4">
-                    <div class="card bg-secondary">
-                      <div class="list-group list-group-chat list-group-flush">
-                        <% otherchats.forEach(function(otherchat){ %>
-                          <% if(data.guidename === otherchat.guidename){ %>
-                            <a class="list-group-item active bg-gradient-primary" href="/chat/<%= otherchat.username %>/<%= otherchat.guidename %>">
-                              <div class="media">
-                                <img alt="Image" class="avatar" src="">
-                                <div class="media-body ml-2">
-                                  <div class="justify-content-between align-items-center">
-                                    <h6 class="mb-0 text-white neno">
-                                      <% if(usertype === 'user'){ %>
-                                        <%= otherchat.guidename %>
-                                      <% } else { %>
-                                        <%= otherchat.username %>
-                                      <% } %>
-                                    </h6>
-                                    <span class="text-small col-10 p-0 text-truncate d-block"><%= otherchat.messages[otherchat.messages.length-1].text.substring(0,15) %></span>
-                                  </div>
-                                </div>
-                              </div>
-                            </a>
-                          <% } else { %>
-                            <a class="list-group-item" href="/chat/<%= otherchat.username %>/<%= otherchat.guidename %>">
-                              <div class="media">
-                                <img alt="Image" class="avatar" src="">
-                                <div class="media-body ml-2">
-                                  <div class="justify-content-between align-items-center">
-                                    <h6 class="mb-0 text-muted neno">
-                                      <% if(usertype === 'user'){ %>
-                                        <%= otherchat.guidename %>
-                                      <% } else { %>
-                                        <%= otherchat.username %>
-                                      <% } %>
-                                    </h6>
-                                    <span class="text-muted text-small col-10 p-0 text-truncate d-block"><%= otherchat.messages[otherchat.messages.length-1].text.substring(0,15) %></span>
-                                  </div>
-                                </div>
-                              </div>
-                            </a>
-                          <% } %>
-                        <% }) %>
-                      </div>
-                    </div>
-                  </div>
+                  
                   <div class="col-lg-8">
                     <div class="card-header d-inline-block" style="z-index:10;width:100%;">
                       <div class="row">
@@ -647,10 +603,10 @@
                             <img alt="Image" class="avatar shadow" src="">
                             <div class="media-body">
                               <h6 id="name" class="mb-0 d-block">
-                                <% if(usertype === 'user'){ %>
-                                  <%= data.guidename %>
+                                <% if(usertype === user){ %>
+                                  <%= doctor %>
                                 <% } else { %>
-                                  <%= data.username %>
+                                  <%= user %>
                                 <% } %>
                               </h6>
                             </div>
@@ -743,7 +699,7 @@
   var textarea = document.getElementById('textarea');
   var user = document.getElementById('user').innerHTML;
   var guide = document.getElementById('guide').innerHTML;
-  var links = document.getElementsByClassName('list-group-item');
+  //var links = document.getElementsByClassName('list-group-item');
   var mbs = document.getElementsByClassName('neno');
 
   var statusDefault = status.textContent;
@@ -858,19 +814,19 @@ var socket = io.connect('http://127.0.0.1:8000',{ transports: ['websocket'], rej
     console.log(room);
     socket.emit('join', room);
 
-    for(var i=0;i<links.length;i++){
-      links[i].onclick = function(i){
-        var vals = this.href.split('/');
-        if(usertype === 'user'){
-          var uname = user;
-          var gname = vals[5];
-        }else{
-          var uname = vals[4];
-          var gname = guide;
-        }
-        socket.emit('dis', {uname:uname, gname:gname});
-      }
-    }
+    // for(var i=0;i<links.length;i++){
+    //   links[i].onclick = function(i){
+    //     var vals = this.href.split('/');
+    //     if(usertype === 'user'){
+    //       var uname = user;
+    //       var gname = vals[5];
+    //     }else{
+    //       var uname = vals[4];
+    //       var gname = guide;
+    //     }
+    //     socket.emit('dis', {uname:uname, gname:gname});
+    //   }
+    // }
 
   } else {
     console.log('Error!');

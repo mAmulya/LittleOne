@@ -5,15 +5,18 @@ const morgan=require("morgan");
 const bodyparser=require("body-parser");
 const http = require('http');
 var multer =require('multer');
+const socketio = require('socket.io');
 
 const session = require('express-session');
 const flash = require('connect-flash');
 var passport=require('passport');
+let Chatdata = require('./models/Bookings');
 
 
 //EJS
 const server = http.createServer(app);
-
+const io = socketio(server);
+io.origins('*:*');
 
 app.set('view engine','ejs');
 
@@ -90,6 +93,104 @@ app.use('/co_booking',require('./routes/co_booking'));
 app.use('/session_booking',require('./routes/session_booking'));
 
 app.use('/blog',require('./routes/blog'));
+
+
+ var count=0;
+
+ app.get('/chat/:id', function(req, res){
+   var id = req.params.id;
+   var uname = req.user.name
+   var username, guidename
+   count=count+1;
+
+   Chatdata.find({_id:id, }, function(err, data){
+     if(err){
+       console.log(err);
+     } else {
+       console.log(data[0])
+       username = data[0].user_name
+       guidename = data[0].doc_name
+       res.render('chat', {data:data[0], usertype:uname, user:data[0].user_name, doctor:data[0].doc_name});
+     }
+   });
+console.log('heyy')
+   io.on('connection', function(socket){
+     //console.log(count);
+
+ if(count==1){
+
+         console.log(count);
+
+             sendStatus = function(s){
+               io.emit('status', s);
+             }
+             socket.on('join', function(room){
+                 socket.join(room);
+                 console.log(room);
+                   // socket.broadcast.to(username+'-'+guidename).emit('output', res);
+             });
+
+             // socket.on('sendlocation', (coords)=>{
+             //   var type = coords.type;
+             //   var time = coords.time;
+             //   var msg = 'https://www.google.com/maps/place/'+coords.lat+','+coords.lng;
+             //   Chatdata.updateOne(
+             //     { username: username, guidename:guidename},
+             //     { $push: {messages: {text: msg, time: time, sentby: type}} },
+             //     function(){
+             //       io.to(username+'-'+guidename).emit('output', { username: username, guidename:guidename, messages: [{text: msg, sentby: type, time: time}]});
+             //       sendStatus({
+             //         message: 'Message sent',
+             //         clear: true
+             //       });
+             //     }
+             //   );
+             // });
+
+             socket.on('input', function(data){
+
+               let type = data.type;
+               let msg = data.msg;
+               let time = data.time;
+               console.log(type);
+               console.log(msg);
+               console.log(time);
+
+               if (msg == ''){
+                 sendStatus("Please enter a message.");
+               } else {
+
+
+
+                 Chatdata.updateOne(
+                   {_id:id},
+                   { $push: {messages: {text: msg, time: time, sentby: type}} },
+                   function(){
+                     io.to(username+'-'+guidename).emit('output', { username: username, guidename:guidename, messages: [{text: msg, sentby: type, time: time}]});
+                     console.log(username+'-'+guidename);
+                     sendStatus({
+                       message: 'Message sent',
+                       clear: true
+                     });
+                   }
+                 );
+               }
+             });
+
+             socket.on('dis', function(users){
+               console.log('socket');
+               console.log(users);
+               username = users.uname;
+               guidename = users.gname;
+               socket.disconnect();
+             });
+             count=0
+ }
+
+
+   });
+
+ });
 
 
 server.listen(8000, function(){

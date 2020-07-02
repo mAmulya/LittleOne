@@ -19,6 +19,13 @@ const bookingsSchema = new mongoose.Schema({
       type:Number,
       default:0,
   },
+  messages:{type:[
+    {
+      text:{type:String},
+      sentby:{type:String},
+      time:{type:String}
+    }
+  ]}
 })
 
 const Bookings = mongoose.model('Bookings',bookingsSchema)
