@@ -74,7 +74,7 @@ const guidesSchema = new mongoose.Schema({
             default:0,
 
         },
-        testimonials:{type:[{username:{type:String,lowercase:true,},text:{type:String}}]},
+        testimonials:{type:[{useremail:{type:String,lowercase:true,},text:{type:String}}]},
         notifications:{type:[{senderid:{type:String},typeid:{type:String},img:{type:String},username:{type:String},unread:{type:Boolean,default:false}}],default:void 0},
 
 

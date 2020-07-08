@@ -5,22 +5,25 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 
 const nodemailer = require('nodemailer');
+const flash = require('connect-flash');
 
 const Counselors=require('../models/Counselors');
 const Users=require('../models/Users');
 const Bookings=require('../models/Bookings');
 
+const { check, validationResult } = require('express-validator');
 
-
+var present=0
 router.post('/',urlencodedParser, function(req,res){
   console.log('-------------------------------------123456789067----------------------');
 
   console.log(req.body);
-
-  Counselors.findOne({email:req.body.email,type:'counselor'},function(err,doc){
+  var present=0
+  Counselors.findOne({email:req.body.email,type:'counselor'},async function(err,doc){
      if(err){
          console.log(err);
      }else{
+       console.log('-------------------------------------found the doc');
        console.log(doc);
          var check
          var j;
@@ -28,6 +31,7 @@ router.post('/',urlencodedParser, function(req,res){
                 if (doc.sessions[j]._id==req.body.id && parseInt(doc.sessions[j].limit)-parseInt(doc.sessions[j].bookings)>= req.body.count){
                   doc.sessions[j].bookings=parseInt(doc.sessions[j].bookings)+parseInt(req.body.count)
 
+                  console.log('=============================adding to bookings ans setting present=1');
 
 
                       var itemOne = new Bookings({
@@ -47,7 +51,10 @@ router.post('/',urlencodedParser, function(req,res){
                       console.log('-----------------------');
                       console.log(itemOne);
 
-                        itemOne.save()
+                        await itemOne.save()
+
+                        present=1
+
 
                     if((parseInt(doc.sessions[j].limit)-parseInt(doc.sessions[j].bookings))==0){
                       doc.sessions.splice(j,1)
@@ -57,20 +64,43 @@ router.post('/',urlencodedParser, function(req,res){
 
 
              }
+
           }
 
           console.log(doc);
-          doc.save()
-
+          await doc.save()
 
 
 
 
      }
+     Counselors.find({})
+     .catch(err=>{console.log(err)})
+     .then( counselors=>{
+       sessions=[]
+       for(var i=0;i<counselors.length;i++){
+         console.log(counselors[i].email);
+         for(var j=0;j<counselors[i].sessions.length;j++){
+           console.log('-----------------');
+         sessions.push({session:counselors[i].sessions[j],name:counselors[i].name,email:counselors[i].email})}
+       }
+       console.log(sessions);
+       if(present==1){
+         req.flash('error', 'Your session is booked..')
+       }
+       else{
+         req.flash('error', 'please check the limit of the booking')
+       }
+       res.render('user_home',{user:req.user,sessions:sessions,error:req.flash("error")});
+
+     })
    })
 
 
-  res.redirect('/user/home')
+
+
+
+
 });
 
 

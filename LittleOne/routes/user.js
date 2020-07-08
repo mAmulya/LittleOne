@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 const fs = require('fs');
+const flash = require('connect-flash');
 
 const nodemailer = require('nodemailer');
 
@@ -11,6 +12,7 @@ const Users=require('../models/Users');
 const Songs=require('../models/Songs');
 const Articles=require('../models/Articles');
 const Counselors=require('../models/Counselors');
+const Doctors=require('../models/Doctors');
 const Bookings=require('../models/Bookings');
 
 
@@ -28,7 +30,7 @@ Counselors.find({})
     sessions.push({session:counselors[i].sessions[j],name:counselors[i].name,email:counselors[i].email})}
   }
   console.log(sessions);
-  res.render('user_home',{user:req.user,sessions:sessions});
+  res.render('user_home',{user:req.user,sessions:sessions,error:req.flash("error")});
 
 })
 
@@ -244,6 +246,44 @@ router.post('/st',async (req,res) => {
 
 })
 
+router.post('/noti',urlencodedParser,async function(req,res){
+  console.log('hey there')
+console.log(req.body.notiid)
+  var test=[]
+  Users.findById(req.user._id, (err, user) =>{
+    console.log('user----------------------');
+    console.log(user);
+    for(var i=0;i<user.notifications.length;i++){
+      if(user.notifications[i]._id==req.body.notiid){
+        user.notifications.splice(i,1)
+        console.log('notification deleteddd');
+        break;
+      }
+    }
+    user.save()
+  })
 
+
+});
+
+router.post('/testimonial/', urlencodedParser, function(req, res){
+  console.log(req.body);
+  if(req.body.sender_type=='doctor'){
+     Doctors.updateOne({email: req.body.senderid}, {$push: {testimonials: {useremail: req.body.usermail, text: req.body.text }}}, function(err){
+      console.log(err);
+    });
+    console.log('------------------updated');
+  }
+  else{
+    if(req.body.sender_type=='counselor'){
+       Counselors.updateOne({email: req.body.senderid}, {$push: {testimonials: {usermail: req.body.usermail, text: req.body.text }}}, function(err){
+        console.log(err);
+      });
+    }
+  }
+
+  res.redirect('/user/profile')
+
+});
 
 module.exports = router;

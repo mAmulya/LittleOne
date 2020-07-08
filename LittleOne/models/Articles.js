@@ -17,6 +17,10 @@ const ariclesSchema = new mongoose.Schema({
     type:String,
     required:true
   },
+  pic:{
+    type:String,
+    required:false
+  },
   title:{
     type:String,
     required:true

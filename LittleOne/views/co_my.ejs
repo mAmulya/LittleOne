@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title>Home</title>
+    <link rel="stylesheet" href="/styles/doc/doc_home.css">
+
     <style>
       #wander {
   line-height: 50px;
@@ -371,7 +373,7 @@ h3{page-break-after:avoid;}
 }
 
 
-.ql-editor p, .ql-editor ol, .ql-editor ul, .ql-editor pre, .ql-editor blockquote, .ql-editor h1, .ql-editor h2, .ql-editor h3, .ql-editor h4, .ql-editor h5, .ql-editor h6{
+/* .ql-editor p, .ql-editor ol, .ql-editor ul, .ql-editor pre, .ql-editor blockquote, .ql-editor h1, .ql-editor h2, .ql-editor h3, .ql-editor h4, .ql-editor h5, .ql-editor h6{
   overflow: hidden!important;
   max-width: 150ch!important;
   white-space: nowrap!important;
@@ -383,6 +385,11 @@ text-overflow: ellipsis!important;
 text-overflow: ellipsis!important;
 width: 100px!important;
 
+} */
+
+.card-profile[data-background=cover] .pattern {
+    position: absolute;
+    top: -2%!important;
 }
 
 </style>
@@ -397,7 +404,7 @@ width: 100px!important;
 <link href="https://cdn.quilljs.com/1.1.9/quill.snow.css" rel="stylesheet">
 
   </head>
-  <body onload="editorFunc(<%=JSON.stringify(articles)%>)">
+  <body>
     <nav id="nav" style="z-index:5;border:none;" class="navpic">
     <div class="logo">
       <span id="wander">FIRSTBORNS</span>
@@ -436,12 +443,12 @@ width: 100px!important;
           <div class="divline"></div>
                                     <div class="blocktxt">
                                         <ul class="cats">
-                                            <li><a href="/forum">All <span class="badge pull-right">8</span></a></li>
-                                            <li><a href="/forum/pregnancy">Pregnancy <span class="badge pull-right">4</span></a></li>
-                                            <li><a href="/forum/baby">Baby (0-12 months) <span class="badge pull-right">2</span></a></li>
-                                            <li><a href="/forum/toddler">Toddler (12-36 months) <span class="badge pull-right">0</span></a></li>
-                                            <li><a href="/forum/babynames">Baby names <span class="badge pull-right">1</span></a></li>
-                                            <li><a href="/forum/parenting">Parenting <span class="badge pull-right">1</span></a></li>
+                                            <li><a href="/co/myarticles">All <span class="badge pull-right"><%=articles.length%></span></a></li>
+                                            <li><a href="/co/myarticles/anxiety">Anxiety <span class="badge pull-right"><%=anxiety%></span></a></li>
+                                            <li><a href="/co/myarticles/depression">Depression <span class="badge pull-right"><%=depression%></span></a></li>
+                                            <li><a href="/co/myarticles/abuse">Abuse <span class="badge pull-right"><%=abuse%></span></a></li>
+                                            <li><a href="/co/myarticles/family">Family <span class="badge pull-right"><%=family%></span></a></li>
+                                            <li><a href="/co/myarticles/adjustments">Adjustments <span class="badge pull-right"><%=adjustments%></span></a></li>
                                         </ul>
                                     </div>
                                   </div>
@@ -457,197 +464,52 @@ width: 100px!important;
                                                               </div>
 
     </div>
-    <div style="width:49%;display:inline-block;padding-left:5%;padding-top:5%">
-      <% if(articles[0]){%>
-      <div class="column dt-sc-one-column blog-fullwidth first">
-        <article id="post-8588" class="blog-entry blog-medium-style dt-blog-medium-highlight format-standard post-8588 post type-post status-publish has-post-thumbnail hentry category-dietary-deficiency tag-nutrition">
-                  <div class="entry-thumb">
-                      <img style="height:350px;width:500px "src="<%= articles[0].images %>" class="attachment-full size-full wp-post-image" alt=""  >
+    <div style="width:79%;display:inline-block;padding-left:5%;padding-top:5%">
+      <% articles.forEach(function(item,index){ %>
 
-                      <!-- <div class="entry-format ">
-                          <a class="ico-format" href=""></a>
-                      </div> -->
+
+              <div class="col-lg-4 col-md-6" style="width:30%!important;float:left!important">
+
+                <div class="card card-profile" data-background="cover" style="width:">
+                  <img class="img pattern pattern-top" style="height:50%" src="<%=item.images%>" alt="cover">
+                  <div class="card-header">
+                    <!-- <div class="card-avatar">
+                      <a href="javascript:;">
+                        <img style="width:15vh;height:15vh;margin-left:13%;" class="img img-raised rounded-circle" src="<%=articles[0].images%>">
+                      </a>
+                    </div> -->
                   </div>
-                  <div class="entry-details">
-                           <!-- <div class="entry-meta ">
-                              <div class="date ">Posted on 18 Jun 2015</div>
-                           </div> -->
-                           <div class="entry-title">
-                                <h4><a href="/co/one/<%=articles[0]._id%>" title="Permalink to Changing dietary requirements of children"><%=articles[0].title%></a></h4>
-                           </div>
-                           <div class="entry-body" ><p id='_0'></p></div>
+                  <div class="card-body pt-0" style="margin-top:-7%">
+                    <div class="text-center">
+                      <h5 class="h5 mt-3" >
+                        <%=item.title%>
+                      </h5>
+                      <!-- <div class="font-weight-300">
+                        <i class="ni location_pin mr-2">s</i>
+                      </div> -->
+                    </div>
+                    <div class="card-profile-stats d-flex justify-content-center" style="margin-top:-7%">
 
+                      <div>
+                        <span class="heading"><%=item.topic%></span>
+                        <span class="description">topic</span>
+                      </div>
+                      <div>
+                        <span class="heading"><%=item.likes%></span>
+                        <span class="description">Likes</span>
+                      </div>
+                    </div>
+                    <div class="" style="margin-top:-6%">
+                      <button style="margin-top:-11%" type="button" class="btn btn-sm btn-info mr-4" onclick="testimonial('')">delete</button>
+                      <a href="/co/one/<%=item._id%>" target="_self" title="" class="dt-sc-button   small icon-right with-icon  filled  type1"> Read More <span class="fa fa-long-arrow-right"> </span></a>
 
-                           <div class="entry-meta-data ">
-                              <p class="tags "> <i class="pe-icon pe-ticket"> </i><a href="https://mediclinic.wpengine.com/tag/nutrition/" rel="tag"><%=articles[0].topic%></a></p>
-                          </div>
-                    <a href="/co/one/<%=articles[0]._id%>" target="_self" title="" class="dt-sc-button   small icon-right with-icon  filled  type1"> Read More <span class="fa fa-long-arrow-right"> </span></a>
+                    </div>
+                  </div>
                 </div>
-          </article>
-      </div>
-      <%}%>
-    </div>
-</div>
-
-
-
-<div style="padding-left:35.1%;padding-right:21%">
-  <% if(articles[1]){%>
-  <div class="column dt-sc-one-column blog-fullwidth first">
-    <article id="post-8588" class="blog-entry blog-medium-style dt-blog-medium-highlight format-standard post-8588 post type-post status-publish has-post-thumbnail hentry category-dietary-deficiency tag-nutrition">
-              <div class="entry-thumb">
-                  <img style="height:350px;width:500px "src="<%= articles[1].images %>" class="attachment-full size-full wp-post-image" alt=""  >
-
-                  <!-- <div class="entry-format ">
-                      <a class="ico-format" href=""></a>
-                  </div> -->
               </div>
-              <div class="entry-details">
-                       <!-- <div class="entry-meta ">
-                          <div class="date ">Posted on 18 Jun 2015</div>
-                       </div> -->
-                       <div class="entry-title">
-                            <h4><a href="/co/one/<%=articles[1]._id%>" title="Permalink to Changing dietary requirements of children"><%=articles[1].title%></a></h4>
-                       </div>
-                       <div class="entry-body" ><p style="  max-width: 200px;" id='_1'></p></div>
 
+<%})%>
 
-                       <div class="entry-meta-data ">
-                          <p class="tags "> <i class="pe-icon pe-ticket"> </i><a href="https://mediclinic.wpengine.com/tag/nutrition/" rel="tag"><%=articles[1].topic%></a></p>
-                      </div>
-                <a href="/co/one/<%=articles[1]._id%>" target="_self" title="" class="dt-sc-button   small icon-right with-icon  filled  type1"> Read More <span class="fa fa-long-arrow-right"> </span></a>
-            </div>
-      </article>
-  </div>
-  <%}%>
-</div>
-
-
-<div style="padding-left:35.1%;padding-right:21%">
-  <% if(articles[2]){%>
-  <div class="column dt-sc-one-column blog-fullwidth first">
-    <article id="post-8588" class="blog-entry blog-medium-style dt-blog-medium-highlight format-standard post-8588 post type-post status-publish has-post-thumbnail hentry category-dietary-deficiency tag-nutrition">
-              <div class="entry-thumb">
-                  <img style="height:350px;width:500px "src="<%= articles[2].images %>" class="attachment-full size-full wp-post-image" alt=""  >
-
-                  <!-- <div class="entry-format ">
-                      <a class="ico-format" href=""></a>
-                  </div> -->
-              </div>
-              <div class="entry-details">
-                       <!-- <div class="entry-meta ">
-                          <div class="date ">Posted on 18 Jun 2015</div>
-                       </div> -->
-                       <div class="entry-title">
-                            <h4><a href="/co/one/<%=articles[2]._id%>" title="Permalink to Changing dietary requirements of children"><%=articles[2].title%></a></h4>
-                       </div>
-                       <div class="entry-body" ><p id='_2'></p></div>
-
-
-                       <div class="entry-meta-data ">
-                          <p class="tags "> <i class="pe-icon pe-ticket"> </i><a href="https://mediclinic.wpengine.com/tag/nutrition/" rel="tag"><%=articles[2].topic%></a></p>
-                      </div>
-                <a href="/co/one/<%=articles[2]._id%>" target="_self" title="" class="dt-sc-button   small icon-right with-icon  filled  type1"> Read More <span class="fa fa-long-arrow-right"> </span></a>
-            </div>
-      </article>
-  </div>
-  <%}%>
-</div>
-
-
-<div style="padding-left:35.1%;padding-right:21%">
-  <% if(articles[3]){%>
-  <div class="column dt-sc-one-column blog-fullwidth first">
-    <article id="post-8588" class="blog-entry blog-medium-style dt-blog-medium-highlight format-standard post-8588 post type-post status-publish has-post-thumbnail hentry category-dietary-deficiency tag-nutrition">
-              <div class="entry-thumb">
-                  <img style="height:350px;width:500px "src="<%= articles[3].images %>" class="attachment-full size-full wp-post-image" alt=""  >
-
-                  <!-- <div class="entry-format ">
-                      <a class="ico-format" href=""></a>
-                  </div> -->
-              </div>
-              <div class="entry-details">
-                       <!-- <div class="entry-meta ">
-                          <div class="date ">Posted on 18 Jun 2015</div>
-                       </div> -->
-                       <div class="entry-title">
-                            <h4><a href="/co/one/<%=articles[3]._id%>" title="Permalink to Changing dietary requirements of children"><%=articles[3].title%></a></h4>
-                       </div>
-                       <div class="entry-body" ><p id='_3'></p></div>
-
-
-                       <div class="entry-meta-data ">
-                          <p class="tags "> <i class="pe-icon pe-ticket"> </i><a href="https://mediclinic.wpengine.com/tag/nutrition/" rel="tag"><%=articles[3].topic%></a></p>
-                      </div>
-                <a href="/co/one/<%=articles[3]._id%>" target="_self" title="" class="dt-sc-button   small icon-right with-icon  filled  type1"> Read More <span class="fa fa-long-arrow-right"> </span></a>
-            </div>
-      </article>
-  </div>
-  <%}%>
-</div>
-
-<div style="padding-left:35.1%;padding-right:21%">
-  <% if(articles[4]){%>
-  <div class="column dt-sc-one-column blog-fullwidth first">
-    <article id="post-8588" class="blog-entry blog-medium-style dt-blog-medium-highlight format-standard post-8588 post type-post status-publish has-post-thumbnail hentry category-dietary-deficiency tag-nutrition">
-              <div class="entry-thumb">
-                  <img style="height:350px;width:500px "src="<%= articles[4].images %>" class="attachment-full size-full wp-post-image" alt=""  >
-
-                  <!-- <div class="entry-format ">
-                      <a class="ico-format" href=""></a>
-                  </div> -->
-              </div>
-              <div class="entry-details">
-                       <!-- <div class="entry-meta ">
-                          <div class="date ">Posted on 18 Jun 2015</div>
-                       </div> -->
-                       <div class="entry-title">
-                            <h4><a href="/co/one/<%=articles[4]._id%>" title="Permalink to Changing dietary requirements of children"><%=articles[4].title%></a></h4>
-                       </div>
-                       <div class="entry-body" ><p id='_4'></p></div>
-
-
-                       <div class="entry-meta-data ">
-                          <p class="tags "> <i class="pe-icon pe-ticket"> </i><a href="https://mediclinic.wpengine.com/tag/nutrition/" rel="tag"><%=articles[4].topic%></a></p>
-                      </div>
-                <a href="/co/one/<%=articles[4]._id%>" target="_self" title="" class="dt-sc-button   small icon-right with-icon  filled  type1"> Read More <span class="fa fa-long-arrow-right"> </span></a>
-            </div>
-      </article>
-  </div>
-  <%}%>
-</div>
-
-
-<div style="padding-left:35.1%;padding-right:21%">
-  <% if(articles[5]){%>
-  <div class="column dt-sc-one-column blog-fullwidth first">
-    <article id="post-8588" class="blog-entry blog-medium-style dt-blog-medium-highlight format-standard post-8588 post type-post status-publish has-post-thumbnail hentry category-dietary-deficiency tag-nutrition">
-              <div class="entry-thumb">
-                  <img style="height:350px;width:500px "src="<%= articles[5].images %>" class="attachment-full size-full wp-post-image" alt=""  >
-
-                  <!-- <div class="entry-format ">
-                      <a class="ico-format" href=""></a>
-                  </div> -->
-              </div>
-              <div class="entry-details">
-                       <!-- <div class="entry-meta ">
-                          <div class="date ">Posted on 18 Jun 2015</div>
-                       </div> -->
-                       <div class="entry-title">
-                            <h4><a href="/co/one/<%=articles[5]._id%>" title="Permalink to Changing dietary requirements of children"><%=articles[5].title%></a></h4>
-                       </div>
-                       <div class="entry-body" ><p id='_5'></p></div>
-
-
-                       <div class="entry-meta-data ">
-                          <p class="tags "> <i class="pe-icon pe-ticket"> </i><a href="https://mediclinic.wpengine.com/tag/nutrition/" rel="tag"><%=articles[5].topic%></a></p>
-                      </div>
-                <a href="/co/one/<%=articles[5]._id%>" target="_self" title="" class="dt-sc-button   small icon-right with-icon  filled  type1"> Read More <span class="fa fa-long-arrow-right"> </span></a>
-            </div>
-      </article>
-  </div>
-  <%}%>
-</div>
 
 
 
@@ -670,11 +532,11 @@ width: 100px!important;
                     <div class="form-group">
                       <label for="title">Topic</label><br>
                       <select name="topic">
-                        <option value="pregnancy">Pregnancy</option>
-                        <option value="baby">Baby</option>
-                        <option value="parenting">Parenting</option>
-                        <option value="toddler">Toddler</option>
-                        <option value="babynames">Baby Names</option>
+                        <option value="anxiety">Anxiety</option>
+                        <option value="depression">Depression</option>
+                        <option value="abuse">Abuse</option>
+                        <option value="family">Family</option>
+                        <option value="adjustments">Adjustments</option>
                       </select>
                     </div>
 
@@ -707,8 +569,8 @@ width: 100px!important;
 
 
 
-<!--
 
+<!--
 
     <% articles.forEach(function(item,index){ %>
 
@@ -834,87 +696,5 @@ width: 100px!important;
     });
     </script>
 
-<script>
-function editorFunc(x){
-  console.log('------------');
-
-      if(x[0]){
-        var delta = JSON.parse(x[0].text)
-        console.log(delta)
-        var text_editor = new Quill('#_0', {
-          modules: {
-            toolbar: false,
-          },
-        });
-
-        text_editor.setContents(delta);
-        text_editor.enable(false);
-      }
-
-      if(x[1]){
-        var delta = JSON.parse(x[1].text)
-        console.log(delta)
-        var text_editor = new Quill('#_1', {
-          modules: {
-            toolbar: false,
-          },
-        });
-
-        text_editor.setContents(delta);
-        text_editor.enable(false);
-      }
-      if(x[2]){
-        var delta = JSON.parse(x[2].text)
-        console.log(delta)
-        var text_editor = new Quill('#_2', {
-          modules: {
-            toolbar: false,
-          },
-        });
-
-        text_editor.setContents(delta);
-        text_editor.enable(false);
-      }
-      if(x[3]){
-        var delta = JSON.parse(x[3].text)
-        console.log(delta)
-        var text_editor = new Quill('#_3', {
-          modules: {
-            toolbar: false,
-          },
-        });
-
-        text_editor.setContents(delta);
-        text_editor.enable(false);
-      }
-      if(x[4]){
-        var delta = JSON.parse(x[4].text)
-        console.log(delta)
-        var text_editor = new Quill('#_4', {
-          modules: {
-            toolbar: false,
-          },
-        });
-
-        text_editor.setContents(delta);
-        text_editor.enable(false);
-      }
-      if(x[5]){
-        var delta = JSON.parse(x[5].text)
-        console.log(delta)
-        var text_editor = new Quill('#_5', {
-          modules: {
-            toolbar: false,
-          },
-        });
-
-        text_editor.setContents(delta);
-        text_editor.enable(false);
-      }
-
-
-
-};
-</script>
   </body>
 </html>

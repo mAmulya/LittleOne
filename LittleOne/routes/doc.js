@@ -2,6 +2,7 @@ const express=require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
+const fs = require('fs');
 
 var ts=require("time-slots-generator");
 
@@ -17,7 +18,7 @@ router.get('/home',function(req,res){
       dates=[]
       b_dates=[]
       var present =0;
-
+        console.log(req.user.availabledates);
 
         var datetime = new Date();
         date = datetime.toISOString().slice(0,10);
@@ -32,14 +33,11 @@ router.get('/home',function(req,res){
               d2 = new Date()
               console.log(i);
               if(booking[i].current == true   ){
-                console.log('camehere')
                 d1 = new Date(booking[i].date_n_time.date);
                 console.log(d1)
                 console.log(d2)
 
                 if(d1 <= d2){
-                  console.log('heyy')
-                    console.log('yes');
                     if(d1==d2){
                     d2 = new Date().getHours
                     d1 = booking[i].date_n_time.time
@@ -52,25 +50,26 @@ router.get('/home',function(req,res){
                     booking[i].current=false
                   }
                 }
-                console.log('hip hip hurray')
-                console.log(booking[i]);
-
               }
             }
             for(var c=0;c<booking.length;c++){
                 b_dates.push(booking[c].date_n_time.date)
             }
             for(var i=0;i<req.user.availabledates.length;i++){
-              for(var k=0;k<b_dates.length;k++){
-                if(req.user.availabledates[i].date==b_dates[k]){
-                  present=1
-                }
-              }
+              dates.push(req.user.availabledates[i].date)
 
-              if(present==0){
-                dates.push(req.user.availabledates[i].date)
-              }
+                for(var k=0;k<b_dates.length;k++){
+                  if(req.user.availabledates[i].date==b_dates[k]){
+                    dates.pop()
+                    break
+                  }
+                }
+
             }
+
+            console.log('--------------------------------------------------------------------------------------------homeeeeeeeeeee');
+            console.log(b_dates);
+            console.log(dates);
              // booking.save()
              res.render('doc_home',{doctor:req.user,dates:dates,b_dates:b_dates,user:req.user,booking:booking});
 
@@ -172,7 +171,7 @@ await Users.findOne({"email":req.body.userid})
   console.log(u)
   var a= req.user.img.path
   var b=u.name
-test.push({senderid:req.user.email,img:a,username:b,testid:'testimonial',unread:true})
+test.push({senderid:req.user.email,sender_type:'doctor',img:a,username:b,testid:'testimonial',unread:true,msg:'please help me by testifying'})
 console.log(test)
 }
 
@@ -190,7 +189,52 @@ await Users.updateOne({"email":req.body.userid},{
   .catch(x=>console.log(x))
 
   res.send('')
-
-
 });
+
+router.post('/profile', (req, res, next) =>{
+  console.log('post data');
+  console.log(req.body);
+  console.log(req.files);
+
+        Doctors.findById(req.user.id, (err, user) =>{
+
+            // todo: don't forget to handle err
+
+            if (!user) {
+                req.flash('error', 'No account found');
+                return res.redirect('/users/login');
+            }
+
+            // good idea to trim
+            var name = req.body.name.trim();
+            var email = req.body.email.trim();
+            var number = req.body.phone.trim();
+            var city = req.body.city.trim();
+
+
+            if (!name || !email || !number || !city) {
+                req.flash('error', 'One or more fields are empty');
+                return res.redirect('/user/profile');
+            }
+
+
+            user.name = name;
+            user.email = email;
+            user.phonenumber = number;
+            user.city = city;
+            if(req.files[0]){
+
+              var k = fs.readFileSync(req.files[0].path)
+              user.img.path = '/uploads/'+req.files[0].filename
+              user.img.contentType = 'image/png';
+            }
+            user.save(function (err) {
+
+                // todo: don't forget to handle err
+
+                res.redirect('/doc/home#edit');
+            });
+        });
+    });
+
 module.exports = router;

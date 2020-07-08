@@ -6,6 +6,8 @@
     <!-- <link rel="stylesheet" href="/styles/home_style.css"> -->
     <link rel="stylesheet" href="/styles/user_home.css">
     <link rel="stylesheet" href="/styles/users_home.css">
+    <link rel="stylesheet" href="/styles/doc/doc_home.css">
+
     <style>
 
 
@@ -339,7 +341,7 @@ h2{font-size:30px;font-weight:normal;letter-spacing:0px;}
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://images.pexels.com/photos/415824/pexels-photo-415824.jpeg?cs=srgb&dl=affection-baby-barefoot-blur-415824.jpg&fm=jpg");;
 
   /* Set a specific height */
-  min-height: 530px;
+  min-height: 330px;
 
   /* Create the parallax scrolling effect */
   background-attachment: fixed;
@@ -349,6 +351,18 @@ h2{font-size:30px;font-weight:normal;letter-spacing:0px;}
 }
 
 
+
+.alert {
+    margin-top: 20%;
+    width: 39%;
+    float: right;
+}
+
+
+
+.sessions::-webkit-scrollbar{
+  display : none;
+}
 
     </style>
     <script src="https://kit.fontawesome.com/ea0619ce99.js" crossorigin="anonymous"></script>
@@ -360,6 +374,7 @@ h2{font-size:30px;font-weight:normal;letter-spacing:0px;}
 
   </head>
   <body style="width:100%">
+
     <nav id="nav" style="z-index:5;border:none;" class="navpic">
     <div class="logo">
       <span id="wander">FIRSTBORNS</span>
@@ -426,7 +441,7 @@ h2{font-size:30px;font-weight:normal;letter-spacing:0px;}
   </nav>
 
 <div id="background">
-
+  <%- include ('partials/messages.ejs') %>
 </div>
 
 
@@ -490,7 +505,7 @@ h2{font-size:30px;font-weight:normal;letter-spacing:0px;}
 
       </div>
     </div>
-  <a href="#" target=" _blank" title="" class="dt-sc-button   medium icon-right with-icon  fully-rounded-border  ">Todo <span class="fa fa-comments-o"> </span></a><a href="#" target=" _blank" title="" class="dt-sc-button   medium icon-right with-icon  fully-rounded-border  dt-sc-left-margin">Remaiders <span class="fa fa-user-md"> </span></a><div class="vc_empty_space" style="height: 50px"><span class="vc_empty_space_inner"></span></div>
+  <a href="#" target=" _blank" title="" class="dt-sc-button   medium icon-right with-icon  fully-rounded-border  ">Todo <span class="fa fa-comments-o"> </span></a><a href="#" target=" _blank" title="" class="dt-sc-button   medium icon-right with-icon  fully-rounded-border  dt-sc-left-margin">Reminders <span class="fa fa-user-md"> </span></a><div class="vc_empty_space" style="height: 50px"><span class="vc_empty_space_inner"></span></div>
 
     <div class="wpb_text_column wpb_content_element ">
       <div class="wpb_wrapper">
@@ -523,18 +538,15 @@ h2{font-size:30px;font-weight:normal;letter-spacing:0px;}
     <section id="primary" class="content-full-width">
 <div id="post-6149" class="post-6149 page type-page status-publish hentry" >
 
-<div style="background-color:transparent"data-vc-full-width="true" data-vc-full-width-init="true" class="vc_row1 wpb_row vc_row1-fluid dt-sc-skin-highlight-tertiary-bg wpb_animate_when_almost_visible wpb_fadeInUp fadeInUp wpb_start_animation animated" style="position: relative;  box-sizing: border-box;  padding-left: 92.5px; padding-right: 92.5px;"><div class="wpb_column vc_column_container vc_col-sm-12"><div class="vc_column-inner "><div class="wpb_wrapper"><div class="ult-spacer spacer-5e678c036209e" data-id="5e678c036209e" data-height="90" data-height-mobile="60" data-height-tab="60" data-height-tab-portrait="60" data-height-mobile-landscape="60" style="clear:both;display:block;"></div><div class="vc_row wpb_row vc_inner vc_row-fluid"><div class="wpb_column vc_column_container vc_col-sm-3 vc_hidden-sm"><div class="vc_column-inner "><div class="wpb_wrapper"></div></div></div><div class="rs_col-sm-8 wpb_column vc_column_container vc_col-sm-6 vc_col-lg-offset-0 vc_col-lg-6 vc_col-md-offset-0 vc_col-sm-offset-2" style=" text-align:center; "><div class="vc_column-inner "><div class="wpb_wrapper"><div class="ult-animation  ult-animate-viewport  ult-no-mobile " data-animate="fadeInDown" data-animation-delay="0.8" data-animation-duration="1" data-animation-iteration="1" style="opacity:1;-webkit-transition-delay: 0.8s; -moz-transition-delay: 0.8s; transition-delay: 0.8s;" data-opacity_start_effect=""><h5 class="dt-sc-sub-heading aligncenter animated fadeInDown" style="opacity:1;-webkit-animation-delay:0.8s;-webkit-animation-duration:1s;-webkit-animation-iteration-count:1; -moz-animation-delay:0.8s;-moz-animation-duration:1s;-moz-animation-iteration-count:1; animation-delay:0.8s;animation-duration:1s;animation-iteration-count:1;color:white" >Want to Meet the Doctor?</h5><h2 class="dt-sc-skin-highlight-color aligncenter animated fadeInDown" style="opacity:1;-webkit-animation-delay:0.8s;-webkit-animation-duration:1s;-webkit-animation-iteration-count:1; -moz-animation-delay:0.8s;-moz-animation-duration:1s;-moz-animation-iteration-count:1; animation-delay:0.8s;animation-duration:1s;animation-iteration-count:1;test">Schedule Consultation</h2></div><div class="ult-spacer spacer-5e678c036249b" data-id="5e678c036249b" data-height="64" data-height-mobile="32" data-height-tab="48" data-height-tab-portrait="48" data-height-mobile-landscape="32" style="clear:both;display:block;"></div><div class="ult-animation  ult-animate-viewport  ult-no-mobile " data-animate="zoomIn" data-animation-delay="1.4" data-animation-duration="1" data-animation-iteration="1" style="opacity:1;-webkit-transition-delay: 1.4s; -moz-transition-delay: 1.4s; transition-delay: 1.4s;" data-opacity_start_effect=""><div class="ult-just-icon-wrapper dt-icon-trigger-map-overlay  custom-ult-modal overlay-show animated zoomIn" data-class-id="content-5e678c03627186-46030188" data-overlay-class="overlay-cornerbottomleft" style="opacity:1;-webkit-animation-delay:1.4s;-webkit-animation-duration:1s;-webkit-animation-iteration-count:1; -moz-animation-delay:1.4s;-moz-animation-duration:1s;-moz-animation-iteration-count:1; animation-delay:1.4s;animation-duration:1s;animation-iteration-count:1;test"><div class="align-icon" style="text-align:center;">
-<div class="aio-icon none " style="display:inline-block;">
-<i style="color:white" class="Defaults-map-marker"></i>
-</div></div></div><div class="ult-spacer spacer-5e678c036254d animated zoomIn" data-id="5e678c036254d" data-height="20" data-height-mobile="20" data-height-tab="20" data-height-tab-portrait="" data-height-mobile-landscape="" style="opacity:1;-webkit-animation-delay:1.4s;-webkit-animation-duration:1s;-webkit-animation-iteration-count:1; -moz-animation-delay:1.4s;-moz-animation-duration:1s;-moz-animation-iteration-count:1; animation-delay:1.4s;animation-duration:1s;animation-iteration-count:1;clear:both;display:block;"></div>
-<div class="wpb_text_column wpb_content_element  animated zoomIn" style="opacity:1;-webkit-animation-delay:1.4s;-webkit-animation-duration:1s;-webkit-animation-iteration-count:1; -moz-animation-delay:1.4s;-moz-animation-duration:1s;-moz-animation-iteration-count:1; animation-delay:1.4s;animation-duration:1s;animation-iteration-count:1;test">
-<!-- <div class="wpb_wrapper">
-  <h6 class="dt-sc-skin-highlight-color" style="margin-bottom: 10px; text-align: center;">Pediatric Care</h6>
-<p style="text-align: center;color:white">124, Park Avene, New Jersey</p>
+<div style="background-color:transparent"data-vc-full-width="true" data-vc-full-width-init="true" class="vc_row1 wpb_row vc_row1-fluid dt-sc-skin-highlight-tertiary-bg wpb_animate_when_almost_visible wpb_fadeInUp fadeInUp wpb_start_animation animated" style="position: relative;  box-sizing: border-box;  padding-left: 92.5px; padding-right: 92.5px;"><div class="wpb_column vc_column_container vc_col-sm-12"><div class="vc_column-inner "><div class="wpb_wrapper"><div class="ult-spacer spacer-5e678c036209e" data-id="5e678c036209e" data-height="90" data-height-mobile="60" data-height-tab="60" data-height-tab-portrait="60" data-height-mobile-landscape="60" style="clear:both;display:block;"></div><div class="vc_row wpb_row vc_inner vc_row-fluid"><div class="wpb_column vc_column_container vc_col-sm-3 vc_hidden-sm"><div class="vc_column-inner "><div class="wpb_wrapper"></div></div></div><div class="rs_col-sm-8 wpb_column vc_column_container vc_col-sm-6 vc_col-lg-offset-0 vc_col-lg-6 vc_col-md-offset-0 vc_col-sm-offset-2" style=" text-align:center; ">
+  <div class="vc_column-inner ">
+    <div class="wpb_wrapper">
+      <div class="ult-animation  ult-animate-viewport  ult-no-mobile " data-animate="fadeInDown" data-animation-delay="0.8" data-animation-duration="1" data-animation-iteration="1" style="opacity:1;-webkit-transition-delay: 0.8s; -moz-transition-delay: 0.8s; transition-delay: 0.8s;" data-opacity_start_effect="">
+        <h5 class="dt-sc-sub-heading aligncenter animated fadeInDown" style="margin-top:-2%;opacity:1;-webkit-animation-delay:0.8s;-webkit-animation-duration:1s;-webkit-animation-iteration-count:1; -moz-animation-delay:0.8s;-moz-animation-duration:1s;-moz-animation-iteration-count:1; animation-delay:0.8s;animation-duration:1s;animation-iteration-count:1;color:white" >
+          Want to Meet the Doctor?</h5>
+          <h2 class="dt-sc-skin-highlight-color aligncenter animated fadeInDown" style="opacity:1;-webkit-animation-delay:0.8s;-webkit-animation-duration:1s;-webkit-animation-iteration-count:1; -moz-animation-delay:0.8s;-moz-animation-duration:1s;-moz-animation-iteration-count:1; animation-delay:0.8s;animation-duration:1s;animation-iteration-count:1;test">Schedule Consultation</h2>
+        </div>
 
-</div> -->
-</div>
-</div>
 
 <div class="ult-spacer spacer-5e678c0362636" data-id="5e678c0362636" data-height="20" data-height-mobile="20" data-height-tab="20" data-height-tab-portrait="" data-height-mobile-landscape="" style="clear:both;display:block;"></div>
 
@@ -603,158 +615,82 @@ h2{font-size:30px;font-weight:normal;letter-spacing:0px;}
 
 
 
-<div id="main1" style="background-color:#e9ecefa1">
-  <div class="container1">
 
-     <section id="primary" class="content-full-width">
+  <div style="padding:3%;background-size: cover;background-repeat: no-repeat;background-image:linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7) 75%);">
+  <div class="wrapper" id="wrapper">
+    <center><h2 style="color:#17a2b8">SESSIONS</h2></center>
+<div class="sessions" style="margin-top:3%;margin-left:5%;margin-right:5%;display:flex!important;overflow-x:auto">
 
+                <%if(sessions){ %>
+                    <% for(i=0;i < sessions.length;i++ ){ %>
 
-<div id="post-6149" class="post-6149 page type-page status-publish hentry">
-  <div style="margin-top:15px;margin-bottom:-65px;"><h1 style="text-align: center;color:teal">Sessions</h1></div>
+  <div class="col-lg-4 col-md-6" style="float:left!important;max-width:25%!important">
 
-
-
-
-  <div class="vc_row1 wpb_row vc_row1-fluid">
-    <div class="wpb_column vc_column_container vc_col-sm-12">
-      <div class="vc_column-inner ">
-        <div class="wpb_wrapper">
-          <div class="ult-spacer spacer-5e678c03607a8" data-id="5e678c03607a8" data-height="100" data-height-mobile="50" data-height-tab="75" data-height-tab-portrait="75" data-height-mobile-landscape="50" style="clear:both;display:block;"></div>
+    <div class="card card-profile" data-background="cover">
+      <!-- <img class="img pattern pattern-top" src="https://demos.creative-tim.com/argon-design-system-pro/assets/img/ill/linth3.svg" alt="cover"> -->
+      <!-- <div class="card-header">
+        <div class="card-avatar">
+          <a href="javascript:;">
+            <img style="width:15vh;height:15vh;margin-left:13%;" class="img img-raised rounded-circle" src="<%=sessions[i].img%>">
+          </a>
         </div>
-      </div>
-    </div>
+      </div> -->
+      <div class="card-body pt-0" style="margin-top:4%">
+        <div class="text-center">
+          <h5 class="h5 mt-3">
+            <%=sessions[i].name%>
+          </h5>
+          <div class="font-weight-300">
+            <i class="ni location_pin mr-2"><%=sessions[i].session.dates%></i>
+          </div>
+          <div class="font-weight-300">
+            <i class="ni location_pin mr-2">email:  <%=sessions[i].email%></i>
+          </div>
+          <h6 style="margin-top:3%"> TOPIC : <%=sessions[i].session.topic%></h6>
 
+        </div>
+        <div class="card-profile-stats d-flex justify-content-center">
+          <div>
+            <span class="heading"><%=sessions[i].session.limit%></span>
+            <span class="description">Limit</span>
+          </div>
+          <div>
+            <span class="heading"><%=sessions[i].session.bookings%></span>
+            <span class="description">Bookings</span>
+          </div>
+          <div>
+            <span class="heading"><%=sessions[i].session.num_of_days%></span>
+            <span class="description">Days</span>
+          </div>
 
-
-
-
-    <div class="rs_col-sm-6 wpb_column vc_column_container vc_col-sm-4 vc_col-lg-offset-0 vc_col-lg-4 vc_col-md-offset-3 vc_col-md-6 vc_col-sm-offset-3"><div class="vc_column-inner "><div class="wpb_wrapper"><div class="ult-animation  ult-animate-viewport  ult-no-mobile " data-animate="zoomInUp" data-animation-delay="1.6" data-animation-duration="1" data-animation-iteration="1" style="opacity:1;-webkit-transition-delay: 1.6s; -moz-transition-delay: 1.6s; transition-delay: 1.6s;" data-opacity_start_effect=""><div class="dt-sc-pr-tb-col type3  animated zoomInUp" style="opacity:1;-webkit-animation-delay:1.6s;-webkit-animation-duration:1s;-webkit-animation-iteration-count:1; -moz-animation-delay:1.6s;-moz-animation-duration:1s;-moz-animation-iteration-count:1; animation-delay:1.6s;animation-duration:1s;animation-iteration-count:1;test"><div class="dt-sc-tb-thumb"><img width="1230" height="1284" src="https://1n45h6492x0o2siloqczsz91-wpengine.netdna-ssl.com/wp-content/uploads/2017/05/pricing-box-image3.jpg" class="attachment-full" alt="pricing-box-image3" srcset="https://1n45h6492x0o2siloqczsz91-wpengine.netdna-ssl.com/wp-content/uploads/2017/05/pricing-box-image3.jpg 1230w, https://1n45h6492x0o2siloqczsz91-wpengine.netdna-ssl.com/wp-content/uploads/2017/05/pricing-box-image3-287x300.jpg 287w, https://1n45h6492x0o2siloqczsz91-wpengine.netdna-ssl.com/wp-content/uploads/2017/05/pricing-box-image3-768x802.jpg 768w, https://1n45h6492x0o2siloqczsz91-wpengine.netdna-ssl.com/wp-content/uploads/2017/05/pricing-box-image3-981x1024.jpg 981w" sizes="(max-width: 1230px) 100vw, 1230px"></div><div class="dt-sc-tb-header"><div class="dt-sc-price"><h6> <%=sessions[0].name%> <span> /<%=sessions[0].email%> </span></h6></div><h5> Mental <strong>Care</strong> </h5><p>There are many variations of passages of lorem ipsum but the majority have suffered.</p></div><div class="dt-sc-tb-content-overlay">	<h3> Mental <strong>Care</strong> </h3><ul class="dt-sc-tb-content">
-      <form class="" action="/session_booking" method="post">
-
-    <li>dates:<%=sessions[0].session.dates%></li>
-    <li>num of days:<%=sessions[0].session.num_of_days%></li>
-    <li>Topic:<%=sessions[0].session.topic%></li>
-    <li>Limit:<%=sessions[0].session.limit%></li>
-    <input type="number" name="count" value="" placeholder="num of ppl">
-    <input type="hidden" name="email" value="<%=sessions[0].email%>">
-    <input type="hidden" name="id" value="<%=sessions[0].session._id%>">
-    </ul></div><div class="dt-sc-buy-now">
-      <a type="submit" class="dt-sc-button" >appt Session</a>
-
-      </form>
-      </div></div></div></div></div></div>
-
-
-    <div class="rs_col-sm-6 wpb_column vc_column_container vc_col-sm-4 vc_col-lg-offset-0 vc_col-lg-4 vc_col-md-offset-3 vc_col-md-6 vc_col-sm-offset-3">
-      <div class="vc_column-inner ">
-        <div class="wpb_wrapper">
-          <div class="ult-animation  ult-animate-viewport  ult-no-mobile " data-animate="zoomInUp" data-animation-delay="1" data-animation-duration="1" data-animation-iteration="1" style="opacity:1;-webkit-transition-delay: 1s; -moz-transition-delay: 1s; transition-delay: 1s;" data-opacity_start_effect="">
-            <div class="dt-sc-pr-tb-col type3  animated zoomInUp" style="opacity:1;-webkit-animation-delay:1s;-webkit-animation-duration:1s;-webkit-animation-iteration-count:1; -moz-animation-delay:1s;-moz-animation-duration:1s;-moz-animation-iteration-count:1; animation-delay:1s;animation-duration:1s;animation-iteration-count:1;test">
-              <div class="dt-sc-tb-thumb">
-                <img width="1230" height="1284" src="https://1n45h6492x0o2siloqczsz91-wpengine.netdna-ssl.com/wp-content/uploads/2017/05/pricing-box-image1.jpg" class="attachment-full" alt="pricing-box-image1" srcset="https://1n45h6492x0o2siloqczsz91-wpengine.netdna-ssl.com/wp-content/uploads/2017/05/pricing-box-image1.jpg 1230w, https://1n45h6492x0o2siloqczsz91-wpengine.netdna-ssl.com/wp-content/uploads/2017/05/pricing-box-image1-287x300.jpg 287w, https://1n45h6492x0o2siloqczsz91-wpengine.netdna-ssl.com/wp-content/uploads/2017/05/pricing-box-image1-768x802.jpg 768w, https://1n45h6492x0o2siloqczsz91-wpengine.netdna-ssl.com/wp-content/uploads/2017/05/pricing-box-image1-981x1024.jpg 981w" sizes="(max-width: 1230px) 100vw, 1230px">
-              </div>
-              <div class="dt-sc-tb-header">
-                <div class="dt-sc-price">
-                  <h6> <%=sessions[0].name%> <span> /<%=sessions[0].email%> </span></h6>
-                </div>
-                <h5> Mental <strong>Care</strong> </h5>
-                <p>There are many variations of passages of lorem ipsum but the majority have suffered.</p>
-              </div>
-  <div class="dt-sc-tb-content-overlay">
-    	<h3> Mental <strong>Care</strong> </h3>
-      <ul class="dt-sc-tb-content">
+        </div>
         <form class="" action="/session_booking" method="post">
 
+      <input style="margin-left:18%" type="number" name="count" value="" placeholder="enter num of patients">
+      <input type="hidden" name="email" value="<%=sessions[i].email%>">
+      <input type="hidden" name="id" value="<%=sessions[i].session._id%>">
+      </ul></div><div class="dt-sc-buy-now">
+        <!-- <a type="submit" class="dt-sc-button" >appt Session</a> -->
 
+        <button type="submit" style="color:#17a2b8!important" class="btn btn-lg btn-sucess btn-block">Book Session</button>
+        <br>
+      </form>
 
-        <li>dates:<%=sessions[1].session.dates%></li>
-        <li>num of days:<%=sessions[1].session.num_of_days%></li>
-        <li>Topic:<%=sessions[1].session.topic%></li>
-        <li>Limit:<%=sessions[1].session.limit%></li>
-        <input type="number" name="count" value="" placeholder="num of ppl">
-        <input type="hidden" name="email" value="<%=sessions[1].email%>">
-        <input type="hidden" name="id" value="<%=sessions[1].session._id%>">
-
-
-</ul>
-</div>
-<div class="dt-sc-buy-now">
-  <button type="submit" class="dt-sc-button" style="-webkit-transition:all 0.3s linear;-moz-transition:all 0.3s linear;-o-transition:all 0.3s linear;-ms-transition:all 0.3s linear;transition:all 0.3s linear;text-decoration:none" >appt Session</button>
-
-  </form></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-
-
-<div class="rs_col-sm-6 wpb_column vc_column_container vc_col-sm-4 vc_col-lg-offset-0 vc_col-lg-4 vc_col-md-offset-3 vc_col-md-6 vc_col-sm-offset-3">
-  <div class="vc_column-inner ">
-    <div class="wpb_wrapper">
-      <div class="ult-animation  ult-animate-viewport  ult-no-mobile " data-animate="zoomInUp" data-animation-delay="1" data-animation-duration="1" data-animation-iteration="1" style="opacity:1;-webkit-transition-delay: 1s; -moz-transition-delay: 1s; transition-delay: 1s;" data-opacity_start_effect="">
-        <div class="dt-sc-pr-tb-col type3  animated zoomInUp" style="opacity:1;-webkit-animation-delay:1s;-webkit-animation-duration:1s;-webkit-animation-iteration-count:1; -moz-animation-delay:1s;-moz-animation-duration:1s;-moz-animation-iteration-count:1; animation-delay:1s;animation-duration:1s;animation-iteration-count:1;test">
-          <div class="dt-sc-tb-thumb">
-            <img width="1230" height="1284" src="https://1n45h6492x0o2siloqczsz91-wpengine.netdna-ssl.com/wp-content/uploads/2017/05/pricing-box-image3.jpg" class="attachment-full" alt="pricing-box-image3" srcset="https://1n45h6492x0o2siloqczsz91-wpengine.netdna-ssl.com/wp-content/uploads/2017/05/pricing-box-image3.jpg 1230w, https://1n45h6492x0o2siloqczsz91-wpengine.netdna-ssl.com/wp-content/uploads/2017/05/pricing-box-image3-287x300.jpg 287w, https://1n45h6492x0o2siloqczsz91-wpengine.netdna-ssl.com/wp-content/uploads/2017/05/pricing-box-image3-768x802.jpg 768w, https://1n45h6492x0o2siloqczsz91-wpengine.netdna-ssl.com/wp-content/uploads/2017/05/pricing-box-image3-981x1024.jpg 981w" sizes="(max-width: 1230px) 100vw, 1230px">
-          </div>
-          <div class="dt-sc-tb-header">
-            <div class="dt-sc-price">
-              <h6> <%=sessions[2].name%> <span> /<%=sessions[2].email%> </span></h6>
-            </div>
-            <h5> Mental <strong>Care</strong> </h5>
-            <p>There are many variations of passages of lorem ipsum but the majority have suffered.</p>
-          </div>
-<div class="dt-sc-tb-content-overlay">
-  <h3> Mental <strong>Care</strong> </h3>
-  <ul class="dt-sc-tb-content">
-    <form class="" action="/session_booking" method="post">
-
-    <li>dates:<%=sessions[2].session.dates%></li>
-    <li>num of days:<%=sessions[2].session.num_of_days%></li>
-    <li>Topic:<%=sessions[2].session.topic%></li>
-    <li>Limit:<%=sessions[2].session.limit%></li>
-    <input type="number" name="count" value="" placeholder="num of ppl">
-    <input type="hidden" name="email" value="<%=sessions[2].email%>">
-    <input type="hidden" name="id" value="<%=sessions[2].session._id%>"></ul>
-</div>
-<div class="dt-sc-buy-now">
-<button type="submit" class="dt-sc-button" >appt Session</button>
-</form>
-
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-
-
-
-
-
-<div class="wpb_column vc_column_container vc_col-sm-12"><div class="vc_column-inner "><div class="wpb_wrapper"><div class="ult-spacer spacer-5e678c0361ce7" data-id="5e678c0361ce7" data-height="90" data-height-mobile="35" data-height-tab="60" data-height-tab-portrait="60" data-height-mobile-landscape="35" style="clear:both;display:block;"></div></div>
-</div></div></div>
+      </div>
+    </div>
+  </div>
+  <%}%>
+  <%}%>
 
 </div>
 
 
-</section>       </div>
-
+<!-- 
+<a href="/user/home?pg=<%=1%>#wrapper" class="btn btn-success" style="margin-top:2%%;float:right;margin-right:14%;background-color:#17a2b8!important"> more.. </a>
+<a href="/user/home#wrapper" class="btn btn-success" style="margin-top:0%;float:left;margin-left:14%;background-color:#17a2b8!important"> back  .. </a> -->
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
+</div>
+<br><br><br>
 
 
 

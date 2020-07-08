@@ -49,6 +49,8 @@ const usersSchema = new mongoose.Schema({
         typeid:{type:String},
         username:{type:String},
         img:{type:String},
+        msg:{type:String},
+        sender_type:{type:String},
         unread:{type:Boolean,default:false}}],default:void 0},
 
 
