@@ -91,9 +91,10 @@ router.post('/',urlencodedParser, function(req,res){
        else{
          req.flash('error', 'please check the limit of the booking')
        }
-       res.render('user_home',{user:req.user,sessions:sessions,error:req.flash("error")});
+       res.render('counselors',{user:req.user,sessions:sessions,error:req.flash("error")});
 
      })
+
    })
 
 

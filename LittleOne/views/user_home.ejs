@@ -333,12 +333,24 @@ h2{font-size:30px;font-weight:normal;letter-spacing:0px;}
 
 
 
-
-
-
 .parallax {
   /* The image used */
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://images.pexels.com/photos/415824/pexels-photo-415824.jpeg?cs=srgb&dl=affection-baby-barefoot-blur-415824.jpg&fm=jpg");;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://www.octalsoftware.co.uk/blog/wp-content/uploads/2019/05/New-Project-1.jpg");;
+
+  /* Set a specific height */
+  min-height: 330px;
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+.parallax1 {
+  /* The image used */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://expressionscounselling.com/wp-content/uploads/2019/05/Web_ExpressionsCounselling_Talk-Therapy-Port-Moody-North-Vancouver-Pitt-Meadows-1024x595.jpg");;
 
   /* Set a specific height */
   min-height: 330px;
@@ -360,9 +372,7 @@ h2{font-size:30px;font-weight:normal;letter-spacing:0px;}
 
 
 
-.sessions::-webkit-scrollbar{
-  display : none;
-}
+
 
     </style>
     <script src="https://kit.fontawesome.com/ea0619ce99.js" crossorigin="anonymous"></script>
@@ -611,86 +621,66 @@ h2{font-size:30px;font-weight:normal;letter-spacing:0px;}
 
 
 
+<div class="parallax1" style="margin-top: 35%;">
+<div id="main1" >
+  <div class="container1">
+    <section id="primary" class="content-full-width">
+<div id="post-6149" class="post-6149 page type-page status-publish hentry" >
 
-
-
-
-
-  <div style="padding:3%;background-size: cover;background-repeat: no-repeat;background-image:linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7) 75%);">
-  <div class="wrapper" id="wrapper">
-    <center><h2 style="color:#17a2b8">SESSIONS</h2></center>
-<div class="sessions" style="margin-top:3%;margin-left:5%;margin-right:5%;display:flex!important;overflow-x:auto">
-
-                <%if(sessions){ %>
-                    <% for(i=0;i < sessions.length;i++ ){ %>
-
-  <div class="col-lg-4 col-md-6" style="float:left!important;max-width:25%!important">
-
-    <div class="card card-profile" data-background="cover">
-      <!-- <img class="img pattern pattern-top" src="https://demos.creative-tim.com/argon-design-system-pro/assets/img/ill/linth3.svg" alt="cover"> -->
-      <!-- <div class="card-header">
-        <div class="card-avatar">
-          <a href="javascript:;">
-            <img style="width:15vh;height:15vh;margin-left:13%;" class="img img-raised rounded-circle" src="<%=sessions[i].img%>">
-          </a>
+<div style="background-color:transparent"data-vc-full-width="true" data-vc-full-width-init="true" class="vc_row1 wpb_row vc_row1-fluid dt-sc-skin-highlight-tertiary-bg wpb_animate_when_almost_visible wpb_fadeInUp fadeInUp wpb_start_animation animated" style="position: relative;  box-sizing: border-box;  padding-left: 92.5px; padding-right: 92.5px;"><div class="wpb_column vc_column_container vc_col-sm-12"><div class="vc_column-inner "><div class="wpb_wrapper"><div class="ult-spacer spacer-5e678c036209e" data-id="5e678c036209e" data-height="90" data-height-mobile="60" data-height-tab="60" data-height-tab-portrait="60" data-height-mobile-landscape="60" style="clear:both;display:block;"></div><div class="vc_row wpb_row vc_inner vc_row-fluid"><div class="wpb_column vc_column_container vc_col-sm-3 vc_hidden-sm"><div class="vc_column-inner "><div class="wpb_wrapper"></div></div></div><div class="rs_col-sm-8 wpb_column vc_column_container vc_col-sm-6 vc_col-lg-offset-0 vc_col-lg-6 vc_col-md-offset-0 vc_col-sm-offset-2" style=" text-align:center; ">
+  <div class="vc_column-inner ">
+    <div class="wpb_wrapper">
+      <div class="ult-animation  ult-animate-viewport  ult-no-mobile " data-animate="fadeInDown" data-animation-delay="0.8" data-animation-duration="1" data-animation-iteration="1" style="opacity:1;-webkit-transition-delay: 0.8s; -moz-transition-delay: 0.8s; transition-delay: 0.8s;" data-opacity_start_effect="">
+        <h5 class="dt-sc-sub-heading aligncenter animated fadeInDown" style="margin-top:-2%;opacity:1;-webkit-animation-delay:0.8s;-webkit-animation-duration:1s;-webkit-animation-iteration-count:1; -moz-animation-delay:0.8s;-moz-animation-duration:1s;-moz-animation-iteration-count:1; animation-delay:0.8s;animation-duration:1s;animation-iteration-count:1;color:white" >
+          Want to Meet the Counselor?</h5>
+          <h2 class="dt-sc-skin-highlight-color aligncenter animated fadeInDown" style="opacity:1;-webkit-animation-delay:0.8s;-webkit-animation-duration:1s;-webkit-animation-iteration-count:1; -moz-animation-delay:0.8s;-moz-animation-duration:1s;-moz-animation-iteration-count:1; animation-delay:0.8s;animation-duration:1s;animation-iteration-count:1;test">Schedule Consultation</h2>
         </div>
-      </div> -->
-      <div class="card-body pt-0" style="margin-top:4%">
-        <div class="text-center">
-          <h5 class="h5 mt-3">
-            <%=sessions[i].name%>
-          </h5>
-          <div class="font-weight-300">
-            <i class="ni location_pin mr-2"><%=sessions[i].session.dates%></i>
-          </div>
-          <div class="font-weight-300">
-            <i class="ni location_pin mr-2">email:  <%=sessions[i].email%></i>
-          </div>
-          <h6 style="margin-top:3%"> TOPIC : <%=sessions[i].session.topic%></h6>
 
-        </div>
-        <div class="card-profile-stats d-flex justify-content-center">
-          <div>
-            <span class="heading"><%=sessions[i].session.limit%></span>
-            <span class="description">Limit</span>
-          </div>
-          <div>
-            <span class="heading"><%=sessions[i].session.bookings%></span>
-            <span class="description">Bookings</span>
-          </div>
-          <div>
-            <span class="heading"><%=sessions[i].session.num_of_days%></span>
-            <span class="description">Days</span>
-          </div>
 
-        </div>
-        <form class="" action="/session_booking" method="post">
+<div class="ult-spacer spacer-5e678c0362636" data-id="5e678c0362636" data-height="20" data-height-mobile="20" data-height-tab="20" data-height-tab-portrait="" data-height-mobile-landscape="" style="clear:both;display:block;"></div>
 
-      <input style="margin-left:18%" type="number" name="count" value="" placeholder="enter num of patients">
-      <input type="hidden" name="email" value="<%=sessions[i].email%>">
-      <input type="hidden" name="id" value="<%=sessions[i].session._id%>">
-      </ul></div><div class="dt-sc-buy-now">
-        <!-- <a type="submit" class="dt-sc-button" >appt Session</a> -->
 
-        <button type="submit" style="color:#17a2b8!important" class="btn btn-lg btn-sucess btn-block">Book Session</button>
-        <br>
-      </form>
+<!-- <a href="/pedia_booking"  title="" class="dt-sc-button   medium icon-right with-icon  fully-rounded-border  dt-sc-left-margin" style="margin-left:-40px;">paediatrician <span class="fa fa-user-md"> </span></a> -->
+<a href="/co_booking"  title="" class="dt-sc-button   medium icon-right with-icon  fully-rounded-border  dt-sc-left-margin">Counselor <span class="fa fa-user-md"> </span></a>
+
+
+</div></div></div><div class="wpb_column vc_column_container vc_col-sm-3 vc_hidden-sm"><div class="vc_column-inner "><div class="wpb_wrapper"></div></div></div></div><div class="ult-spacer spacer-5e678c0362839" data-id="5e678c0362839" data-height="90" data-height-mobile="35" data-height-tab="60" data-height-tab-portrait="60" data-height-mobile-landscape="35" style="clear:both;display:block;">
+</div></div></div></div></div>
+
+
+</div>
+</section>        </div>
+
+</div>
+</div>
+
+
+<div style="padding-left: 10%;width:99%;margin-top:4%">
+
+  <div class="dt-sc-tabs-horizontal-frame-content" style="display: block;"><div class="vc_row wpb_row vc_inner vc_row-fluid"><div class="wpb_column vc_column_container vc_col-sm-6"><div class="vc_column-inner "><div class="wpb_wrapper"><div class="dt-sc-title  title-left  sep-bottom dt-sc-simple-title "><h2>Group Sessions</h2></div>
+    <div class="wpb_text_column wpb_content_element ">
+      <div class="wpb_wrapper">
+        <p style="font-size: 20px;">Pregnancy is the term used to describe the period in which a fetus develops inside a woman's womb or uterus.
+
+          Pregnancy usually lasts about 40 weeks, or just over 9 months, as measured from the last menstrual period to delivery. Health care providers refer to three segments of pregnancy, called trimesters.</p>
 
       </div>
     </div>
+  <a href="#" target=" _blank" title="" class="dt-sc-button   medium icon-right with-icon  fully-rounded-border  ">Sessions <span class="fa fa-comments-o"> </span></a><div class="vc_empty_space" style="height: 50px"><span class="vc_empty_space_inner"></span></div>
+
+    <div class="wpb_text_column wpb_content_element ">
+      <div class="wpb_wrapper">
+        <!-- <p style="font-size: 14px;"><strong>Note:</strong> Going to use a passage of Lorem Ipsum, you need to be sure there isn’t anything embarrassing hidden in the middle of text.</p> -->
+
+      </div>
+    </div>
+  </div></div></div><div class="wpb_column vc_column_container vc_col-sm-6"><div class="vc_column-inner "><div class="wpb_wrapper"><img src="https://scc.sg/e/wp-content/uploads/2020/02/Singapore-Counselling-Centre_Corporate-Group-Counselling-Service.jpg" class="alignnone " alt="Image"></div></div></div></div></div>
   </div>
-  <%}%>
-  <%}%>
-
-</div>
 
 
-<!-- 
-<a href="/user/home?pg=<%=1%>#wrapper" class="btn btn-success" style="margin-top:2%%;float:right;margin-right:14%;background-color:#17a2b8!important"> more.. </a>
-<a href="/user/home#wrapper" class="btn btn-success" style="margin-top:0%;float:left;margin-left:14%;background-color:#17a2b8!important"> back  .. </a> -->
-</div>
-</div>
-<br><br><br>
+
+
+
 
 
 

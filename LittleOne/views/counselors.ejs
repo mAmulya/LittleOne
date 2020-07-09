@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="/styles/counselors.css">
+    <link rel="stylesheet" href="/styles/doc/doc_home.css">
+
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
 
     <script src="https://kit.fontawesome.com/ea0619ce99.js" crossorigin="anonymous"></script>
@@ -80,8 +82,8 @@ nav ul li a {
   }
 
 #background {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F38%2F2020%2F01%2FGettyImages-643782350-2000.jpg&q=85");
-  min-height: 900px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("https://www.hughbaird.ac.uk/user/pages/shared/course/counselling.jpg");
+  min-height: 500px;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -599,6 +601,15 @@ p{margin-top:23px;}
 
 
 
+.sessions::-webkit-scrollbar{
+  display : none;
+}
+
+.alert {
+    margin-top: 20%;
+    width: 39%;
+    float: right;
+}
 
 
 
@@ -609,7 +620,7 @@ p{margin-top:23px;}
   </head>
 
 
-  <body>
+  <body style="overflow-x:hidden">
 
     <nav id="nav" style="z-index:15;border:none;" class="navpic">
     <div class="logo">
@@ -638,8 +649,13 @@ p{margin-top:23px;}
     </div>
   </nav>
 
-  <div id="background">
 
+  <div id="background">
+    <center>
+      <h2 style="color:white;padding-top:13%">Get Best Help From Our Counselors</h2>
+      <!-- <p style="margin-top:-17%;margin-bottom:15%;color:white;font-size:40px;">MomsCare Blog</p> -->
+    </center>
+    <%- include ('partials/messages.ejs') %>
   </div>
 
 
@@ -651,154 +667,83 @@ p{margin-top:23px;}
 
 
 
+<br><br><br>
 
-  <div class="team-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8 mx-auto text-center mb-5">
-          <h3 class="display-3" style="font-size: 3rem;font-weight: 600;">Meet our awesome team</h3>
-          <p class="lead">People are so scared to lose that they don't even try. Like, one thing people can't say is that I'm not trying, and I'm not trying my hardest, and I'm not trying to do the best way I know how.</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-4 col-md-6">
-          <div class="card card-profile">
-            <div class="card-header bg-info" style="background-image: url('https://media.istockphoto.com/vectors/abstract-blue-background-with-square-shapes-vector-id1176464845?k=6&m=1176464845&s=170667a&w=0&h=8TK5GUKxUBck665-cmOhQrlAxMZHoTHKdvXSwwn-t60=')">
-              <div class="card-avatar">
-                <a href="javascript:;">
-                  <img style="margin-left:13%;width:18vh;height:18vh;" class="img img-raised rounded-circle" src="<%= counselors[0].img.path %>">
-                </a>
-              </div>
-            </div>
-            <div class="card-body pt-0">
-              <div class="d-flex justify-content-between">
-                <a href="javascript:;" class="btn btn-sm btn-info mr-4 mt-3" style="color:white;background-color:rgb(96, 191, 220)">Connect</a>
-                <a href="javascript:;" class="btn btn-sm btn-default float-right mt-3" style="color:white;background-color:#212529;">Message</a>
-              </div>
-              <div class="row">
-                <div class="col">
-                  <div class="card-profile-stats d-flex justify-content-center">
-                    <div>
-                      <span class="heading"><%= counselors[0].sessions.length %></span>
-                      <span class="description">Bookings</span>
-                    </div>
-                    <!-- <div>
-                      <span class="heading">10</span>
-                      <span class="description">Photos</span>
-                    </div> -->
-                    <div>
-                      <span class="heading"><%= counselors[0].phonenumber %></span>
-                      <span class="description">Phone</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="text-center">
-                <h5 class="h4">
-                  <%= counselors[0].name %><span class="font-weight-light"></span>
-                </h5>
-                <div class="font-weight-300">
-                  <i class="ni location_pin mr-2"></i><%= counselors[0].city %>
-                </div>
-              </div>
-            </div>
+
+    <div style="padding:3%;background-size: cover;background-repeat: no-repeat;background-image:linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7) 75%),url('https://lstore.graphics/paaatterns/images/033-p-1080.png');">
+    <div class="wrapper" id="wrapper">
+      <center><h2 style="color:#17a2b8">GROUP SESSIONS</h2></center>
+  <div class="sessions" style="margin-top:3%;margin-left:5%;margin-right:5%;display:flex!important;overflow-x:auto">
+
+                  <%if(sessions){ %>
+                      <% for(i=0;i < sessions.length;i++ ){ %>
+
+    <div class="col-lg-4 col-md-6" style="float:left!important;max-width:25%!important">
+
+      <div class="card card-profile" data-background="cover">
+        <!-- <img class="img pattern pattern-top" src="https://demos.creative-tim.com/argon-design-system-pro/assets/img/ill/linth3.svg" alt="cover"> -->
+        <!-- <div class="card-header">
+          <div class="card-avatar">
+            <a href="javascript:;">
+              <img style="width:15vh;height:15vh;margin-left:13%;" class="img img-raised rounded-circle" src="<%=sessions[i].img%>">
+            </a>
           </div>
-        </div>
-        <div class="col-lg-4 col-md-6" style="margin-top: 50px;">
-          <div class="card card-profile">
-            <div class="card-header bg-info" style="background-image: url('https://media.istockphoto.com/vectors/abstract-blue-background-with-square-shapes-vector-id1176464845?k=6&m=1176464845&s=170667a&w=0&h=8TK5GUKxUBck665-cmOhQrlAxMZHoTHKdvXSwwn-t60=')">
-              <div class="card-avatar">
-                <a href="javascript:;">
-                  <img style="margin-left:13%;width:18vh;height:18vh;" class="img img-raised rounded-circle" src="<%= counselors[1].img.path %>">
-                </a>
-              </div>
+        </div> -->
+        <div class="card-body pt-0" style="margin-top:4%">
+          <div class="text-center">
+            <h5 class="h5 mt-3">
+              <%=sessions[i].name%>
+            </h5>
+            <div class="font-weight-300">
+              <i class="ni location_pin mr-2"><%=sessions[i].session.dates%></i>
             </div>
-            <div class="card-body pt-0">
-              <div class="d-flex justify-content-between">
-                <a href="javascript:;" class="btn btn-sm btn-info mr-4 mt-3" style="color:white;background-color:rgb(96, 191, 220)">Connect</a>
-                <a href="javascript:;" class="btn btn-sm btn-default float-right mt-3" style="color:white;background-color:#212529;">Message</a>
-              </div>
-              <div class="row">
-                <div class="col">
-                  <div class="card-profile-stats d-flex justify-content-center">
-                    <div>
-                      <span class="heading"><%= counselors[1].sessions.length %></span>
-                      <span class="description">Bookings</span>
-                    </div>
-                    <!-- <div>
-                      <span class="heading">10</span>
-                      <span class="description">Photos</span>
-                    </div> -->
-                    <div>
-                      <span class="heading"><%= counselors[1].phonenumber %></span>
-                      <span class="description">Phone</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="text-center">
-                <h5 class="h4">
-                  <%= counselors[1].name %><span class="font-weight-light"></span>
-                </h5>
-                <div class="font-weight-300">
-                  <i class="ni location_pin mr-2"></i><%= counselors[1].city %>
-                </div>
-              </div>
+            <div class="font-weight-300">
+              <i class="ni location_pin mr-2">email:  <%=sessions[i].email%></i>
             </div>
+            <h6 style="margin-top:3%"> TOPIC : <%=sessions[i].session.topic%></h6>
+
           </div>
-        </div>
-        <div class="col-lg-4 col-md-6">
-          <div class="card card-profile">
-            <div class="card-header bg-info" style="background-image: url('https://media.istockphoto.com/vectors/abstract-blue-background-with-square-shapes-vector-id1176464845?k=6&m=1176464845&s=170667a&w=0&h=8TK5GUKxUBck665-cmOhQrlAxMZHoTHKdvXSwwn-t60=')">
-              <div class="card-avatar">
-                <a href="javascript:;">
-                  <img style="margin-left:13%;width:18vh;height:18vh;" class="img img-raised rounded-circle" src="https://mzjewel.com/wp-content/uploads/2019/11/2c1d5578da20ceabc4a28343769a5c91.jpg">
-                </a>
-              </div>
+          <div class="card-profile-stats d-flex justify-content-center">
+            <div>
+              <span class="heading"><%=sessions[i].session.limit%></span>
+              <span class="description">Limit</span>
             </div>
-            <div class="card-body pt-0">
-              <div class="d-flex justify-content-between">
-                <a href="javascript:;" class="btn btn-sm btn-info mr-4 mt-3" style="color:white;background-color:rgb(96, 191, 220)">Connect</a>
-                <a href="javascript:;" class="btn btn-sm btn-default float-right mt-3" style="color:white;background-color:#212529;">Message</a>
-              </div>
-              <div class="row">
-                <div class="col">
-                  <div class="card-profile-stats d-flex justify-content-center">
-                    <div>
-                      <span class="heading">22</span>
-                      <span class="description">Friends</span>
-                    </div>
-                    <div>
-                      <span class="heading">10</span>
-                      <span class="description">Photos</span>
-                    </div>
-                    <div>
-                      <span class="heading">89</span>
-                      <span class="description">Comments</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="text-center">
-                <h5 class="h4">
-                  Johana Doe<span class="font-weight-light">, 29</span>
-                </h5>
-                <div class="font-weight-300">
-                  <i class="ni location_pin mr-2"></i>California
-                </div>
-              </div>
+            <div>
+              <span class="heading"><%=sessions[i].session.bookings%></span>
+              <span class="description">Bookings</span>
             </div>
+            <div>
+              <span class="heading"><%=sessions[i].session.num_of_days%></span>
+              <span class="description">Days</span>
+            </div>
+
           </div>
+          <form class="" action="/session_booking" method="post">
+
+        <input style="margin-left:18%" type="number" name="count" value="" placeholder="enter num of patients">
+        <input type="hidden" name="email" value="<%=sessions[i].email%>">
+        <input type="hidden" name="id" value="<%=sessions[i].session._id%>">
+        </ul></div><div class="dt-sc-buy-now">
+          <!-- <a type="submit" class="dt-sc-button" >appt Session</a> -->
+
+          <button type="submit" style="color:#17a2b8!important" class="btn btn-lg btn-sucess btn-block">Book Session</button>
+          <br><br>
+        </form>
+
         </div>
       </div>
     </div>
+    <%}%>
+    <%}%>
+
   </div>
 
 
-
-
-
-
+  <!--
+  <a href="/user/home?pg=<%=1%>#wrapper" class="btn btn-success" style="margin-top:2%%;float:right;margin-right:14%;background-color:#17a2b8!important"> more.. </a>
+  <a href="/user/home#wrapper" class="btn btn-success" style="margin-top:0%;float:left;margin-left:14%;background-color:#17a2b8!important"> back  .. </a> -->
+  </div>
+  </div>
 
 
   <div style="padding-top:10px;">
@@ -806,11 +751,11 @@ p{margin-top:23px;}
       <div class="container1">
         <div class="row">
             <div class="grid_8">
-              <p class="txt1">Care During Pregnancy</p>
+              <p class="txt1">Mental Health Matters</p>
             </div>
 
             <div class="grid_4">
-              <a href="#" class="more_btn">APPOINT A COUNSELLOR</a>
+              <a href="/co_booking" class="more_btn">APPOINT A COUNSELLOR</a>
             </div>
           </div>
         </div>
@@ -834,13 +779,12 @@ p{margin-top:23px;}
 
 
 
-
-<section class="blogs-2" style="margin-top:50px;">
+<br><br>
+<section class="blogs-2" style="margin-top:50px;background-image:linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7) 75%),url('https://demos.creative-tim.com/argon-design-system-pro-angular/assets/img/ill/testimonial_bg.svg')">
         <div class="container-fluid">
           <div class="row mb-md-5">
             <div class="col-md-8 mx-auto">
-              <h3 class="display-3 text-center">Our recent writings</h3>
-              <p class="lead text-center">I always felt like I could do anything. That’s the main thing people are controlled by! Thoughts- their perception of themselves! They're slowed down by their perception of themselves. If you're taught you can’t do anything, you won’t do anything. I was taught I could do everything.</p>
+              <h3 class="display-3 text-center">Articles for each topic</h3>
             </div>
           </div>
           <div class="row">
@@ -850,8 +794,8 @@ p{margin-top:23px;}
                 <a href="javascript:;">
                   <div class="card-body">
                     <div class="content-bottom">
-                      <h6 class="card-category text-white opacity-8">Child Help</h6>
-                      <h5 class="card-title">Research Byte</h5>
+                      <h6 class="card-category text-white opacity-8">We need to adapt and adjust to survive</h6>
+                      <h5 class="card-title">Adjustment</h5>
                     </div>
                   </div>
                 </a>
@@ -863,8 +807,8 @@ p{margin-top:23px;}
                 <a href="javascript:;">
                   <div class="card-body">
                     <div class="content-bottom">
-                      <h6 class="card-category text-white opacity-8">Family</h6>
-                      <h5 class="card-title">Data Virtualization</h5>
+                      <h6 class="card-category text-white opacity-8">If we can control anxiety...</h6>
+                      <h5 class="card-title">Anxiety</h5>
                     </div>
                   </div>
                 </a>
@@ -876,8 +820,8 @@ p{margin-top:23px;}
                 <a href="javascript:;">
                   <div class="card-body">
                     <div class="content-bottom">
-                      <h6 class="card-category text-white opacity-8">Motherhood Axiety</h6>
-                      <h5 class="card-title">New Challenges</h5>
+                      <h6 class="card-category text-white opacity-8">Cant Find any reasons for happiness</h6>
+                      <h5 class="card-title">Depression</h5>
                     </div>
                   </div>
                 </a>
@@ -886,17 +830,22 @@ p{margin-top:23px;}
             <div class="col-lg-3">
               <div class="card card-blog card-background" data-animation="zooming">
                 <div class="full-background" style="background-image: url('https://media.gettyimages.com/photos/family-visiting-a-graveyard-picture-id538115146?s=2048x2048"></div>
-                <a href="javascript:;">
+                <a href="/user/counselors/articles/family">
                   <div class="card-body">
                     <div class="content-bottom">
-                      <h6 class="card-category text-white opacity-8">Grief and Loss</h6>
-                      <h5 class="card-title">Driverless Future</h5>
+                      <h6 class="card-category text-white opacity-8">Loved ones are the cure for all problems</h6>
+                      <h5 class="card-title">Family</h5>
                     </div>
                   </div>
                 </a>
               </div>
             </div>
-            ><button type="button" class="btn btn-primary" style="margin-left:45%;margin-bottom:1%;" onclick="/user/counselors/articles" ><a href="/user/counselors/articles">View more</a></button>
+            <div class="row mb-md-5">
+              <div class="col-md-8 mx-auto">
+                <p class="lead text-center"> like I could do anything. That’s the main thing people are controlled by! Thoughts- their perception of themselves! They're slowed down by their perception of themselves. If you're taught you can’t do anything, you won’t do anything. I was taught I could do everything.</p>
+              </div>
+            </div>
+            ><button type="button" class="btn btn-primary" style="margin-left:45%;margin-bottom:1%;background-color: #17a2b8!important;border-color: #17a2b8!important" onclick="/user/counselors/articles" ><a href="/user/counselors/articles">View more</a></button>
           </div>
         </div>
       </section>

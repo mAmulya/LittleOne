@@ -70,15 +70,20 @@ router.post('/song', urlencodedParser, function(req, res){
 
   router.get('/counselors',function(req,res){
     console.log(req.user);
-    Counselors.find({},function(err,counselors){
-      if(err){
-        console.log(err);
-      }else{
-        console.log('------------------------\n\n------------------------');
-        console.log(counselors);
-        res.render('counselors',{counselors:counselors,user:req.user});
+    Counselors.find({})
+    .catch(err=>{console.log(err)})
+    .then( counselors=>{
+      sessions=[]
+      for(var i=0;i<counselors.length;i++){
+        console.log(counselors[i].email);
+        for(var j=0;j<counselors[i].sessions.length;j++){
+          console.log('-----------------');
+        sessions.push({session:counselors[i].sessions[j],name:counselors[i].name,email:counselors[i].email})}
       }
+      console.log(sessions);
+      res.render('counselors',{user:req.user,sessions:sessions,error:req.flash("error")});
     })
+
   });
 
 

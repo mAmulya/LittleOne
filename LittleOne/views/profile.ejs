@@ -182,7 +182,7 @@
 </style>
 
 </head>
-<body style="overflow-x:hidden;margin-left:0%">
+<body style="overflow-x:hidden;margin-left:0%;background-image:linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7) 75%),url('https://demos.creative-tim.com/argon-design-system-pro-angular/assets/img/ill/testimonial_bg.svg')">
   <div class="row" style="top:0px;position:fixed;z-index:100">
     <nav id="nav" style="z-index:5;padding-top:0.2%;padding-bottom:0.05%;border:none;" class="navpic">
       <div class="logo">
@@ -209,7 +209,13 @@
                      <div class="list-group list-group-flush" id="notifications">
 
                  <% for(i=0;i < user.notifications.length;i++ ){ %>
-                       <a href="#" onclick="noti('<%=user.notifications[i]._id%>','<%=user.notifications[i].img %>','<%=user.notifications[i].senderid %>','<%=user.notifications[i].sender_type %>')" data-toggle="modal" data-target="#myModal" class="list-group-item list-group-item-action">
+                   <%if(user.notifications[i].typeid=='testimonial'){%>
+                     <a href="#" onclick="noti('<%=user.notifications[i]._id%>','<%=user.notifications[i].img %>','<%=user.notifications[i].senderid %>','<%=user.notifications[i].sender_type %>')" data-toggle="modal" data-target="#myModal" class="list-group-item list-group-item-action">
+
+                   <%}else{%>
+                     <a href="#" onclick="noti('<%=user.notifications[i]._id%>','<%=user.notifications[i].img %>','<%=user.notifications[i].senderid %>','<%=user.notifications[i].sender_type %>')"  class="list-group-item list-group-item-action">
+
+                   <%}%>
                          <div class="row align-items-center">
                            <div class="col-auto">
                              <img alt="Image placeholder" src="<%=user.notifications[i].img %>" class="notifimg rounded-circle">
@@ -224,7 +230,7 @@
                                  <small></small>
                                </div>
                              </div>
-                             <p style="margin-bottom: 0!important;font-weight: 300;line-height: 1.7;" class="text-sm mb-0"><%=user.notifications[i].msg%></p>
+                             <p style="margin-bottom: 0!important;font-weight: 300;line-height: 1.7;" class="text-sm mb-0"><%=user.notifications[i].msg%>  </p>
                            </div>
                          </div>
                        </a>
@@ -257,15 +263,17 @@
 
       <div class="modal-content" style="background-color: #DDDDDD;background-image:linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4) 75%), url('https://lstore.graphics/paaatterns/images/Waiau-3-p-1080.jpeg');background-size:contain;background-position:150% 100%;background-repeat:no-repeat;">
         <div class="modal-header">
-          <h4 class="modal-title">Testimonial</h4>
+          <!-- <h4 class="modal-title">Testimonial</h4> -->
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
           <table style="width:100%;padding:3%;">
             <tr>
               <td style="width:38%;padding-top:3%;padding-bottom: 1.5%;text-align:center;">
-                <img style="width:40vh;height:40vh;border-radius:3px;box-shadow:0 10px 25px 0 rgba(0,0,0,.3);"  id="testmodelimg" alt="Raised Image" class="rounded img-raised">
-                <a style="float:right;" class="btn btn-link" href="#">Go to Profile..</a>
+                <img style="width:30vh;height:30vh;border-radius:3px;box-shadow:0 10px 25px 0 rgba(0,0,0,.3);"  id="testmodelimg" alt="Raised Image" class="rounded img-raised">
+                <div id="senderid">
+
+                </div>
               </td>
               <td style="width:58%;">
                 <form action="/user/testimonial/" method="POST">
@@ -282,24 +290,17 @@
               </td>
             </tr>
           </table>
-          <div class="modal-footer" style="border-top:none;">
+          <!-- <div class="modal-footer" style="border-top:none;">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
+          </div> -->
         </div>
       </div>
 
     </div>
   </div>
-  <% var past = 0 %>
   <% var boo = 0 %>
   <% for ( var i = 0; i < booking.length; i++ ) { %>
-  <% if ( booking[i].date_n_time.date < date ) { %>
-    <% past++;
-   } %>
-  <% if ( booking[i].date_n_time.date > date ) { %>
-    <% boo++;
-   } %>
-  <% } %>
+    <% boo++; } %>
       <div class="row" style="margin-top:7%;margin-left:7%;">
       <div class="myedit" id = "first" style="width:23%;">
             <div class="card card-profile" data-image="profile-image">
@@ -315,14 +316,14 @@
                   </a>
                   <div class="form-wrapper" style="border:none;">
                                 <!-- <input type="file" name="img" onchange="readURL(this);" class="form-control" style="border:none;" required> -->
-                             <input type="file" id="my_file" class="form-control"  onchange="readURL(this);" style="border: none;" name="img" >
                              <i class="zmdi zmdi-image"></i>
                   </div>
                 </div>
               </div>
               <div class="card-body pt-0">
                 <h4 class="display-4 mb-0"><%=user.name%></h4>
-                <p class="lead"><%=user.city%></p>
+                --Change profile Pic<input type="file" id="my_file" class="form-control"  onchange="readURL(this);" style="border: none;" name="img" >
+
                 <div class="table-responsive">
                   <ul class="list-unstyled ">
                     <li class="py-1">
@@ -337,18 +338,7 @@
                         </div>
                       </div>
                     </li>
-                    <li class="py-1">
-                      <div class="d-flex align-items-center">
-                        <div>
-                          <div class="badge badge-circle badge-success mr-3">
-                            <i class="ni ni-user-run"></i>
-                          </div>
-                        </div>
-                        <div>
-                          <h6 class="mb-1">places visited  <%= past %></h6>
-                        </div>
-                      </div>
-                    </li>
+
                     <li class="py-1">
                       <div class="d-flex align-items-center">
                         <div>
@@ -393,11 +383,12 @@
 
                 <input class="btn btn-icon btn-primary mt-0" type="submit">
               </div>
-            </form></div></div>
+            </form>
+          </div></div>
           </div>
 
           <!-- <hr id="line3" noshade> -->
-          <div class="section features-7 bg-secondary">
+          <div class="section features-7 bg-secondary" style="background-image:linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7) 75%),url('https://lstore.graphics/paaatterns/images/018-p-1080.png')">
             <center>
             <h2 id="currentbookings" style="margin-bottom:2%;margin-top:-1%;">Current Bookings</h2>
           </center>
@@ -407,16 +398,9 @@
                 <% if ( booking[i].current == true ) { %>
 
 
-    <div class="col-lg-4 col-md-6" style="float:left!important;max-width:25%!important">
+    <div class="col-lg-4 col-md-6" style="float:left!important;max-width:25%!important;">
 
       <div class="card card-profile" data-background="cover">
-        <!-- <img class="img pattern pattern-top" src="https://demos.creative-tim.com/argon-design-system-pro/assets/img/ill/linth3.svg" alt="cover"> -->
-        <!-- <div class="card-header">
-          <div class="card-avatar">
-            <a href="javascript:;">
-            </a>
-          </div>
-        </div> -->
         <div class="card-body pt-0" style="margin-top:4%">
           <div class="text-center">
             <h4 class="mt-3" style="color:#17a2b8!important;">
@@ -464,41 +448,70 @@
           </div></div>
 
 
-          <h2 id="currentbookings">Previous Bookings</h2>
           <!-- <hr id="line3" noshade> -->
-          <div class="section features-7 bg-secondary">
+          <div class="section features-7 bg-secondary" >
+            <center>
+            <h2 id="currentbookings" style="margin-bottom:2%;margin-top:-1%;">Previous Bookings</h2>
+          </center>
           <div class="bookings">
             <% for ( var i = 0; i < booking.length; i++ ) { %>
                 <% if ( booking[i].current == false ) { %>
-                        <div class="new">
-                          <div class="col">
-                            <div class="card card-lift--hover shadow border-0">
-                              <div class="card-body py-5">
-                                <div class="icon icon-shape icon-shape-primary rounded-circle mb-4">
-                                  <i class="ni ni-istanbul"></i>
-                                </div>
-                                <h6 class="text-primary text-uppercase"><%= booking[i].doctor %></h6>
-                                <p class="description mt-3"><%= booking[i].date_n_time.date %></p>
-                                <p class="description mt-3"><%= booking[i].date_n_time.time %></p>
-                                <p class="description mt-3"><%= booking[i].place %></p>
-                                <p class="description mt-3"><%= booking[i].booking_type %></p>
-                                <div class="stars" data-rating="<%= booking[i].rating %>">
-                                  <span class="star"></span>
-                                  <span class="star"></span>
-                                  <span class="star"></span>
-                                  <span class="star"></span>
-                              		<span class="star"></span>
-                              	</div>
-                              	<input type="text" id="st" hidden></input>
-                                <a class="btn btn-primary mt-4" style="color:white" onclick="rating('<%= booking[i].doctor %>', '<%= booking[i].doc_type %>', '<%= booking[i]._id %>')">submit</a>
-                              </div>
-                            </div>
+                  <div class="col-lg-4 col-md-6 card-lift--hover shadow border-0" style="float:left!important;max-width:25%!important;">
+
+                    <div class="card card-profile" data-background="cover">
+                      <div class="card-body pt-0" style="margin-top:4%">
+                        <div class="text-center">
+                          <h4 class="mt-3" style="color:#17a2b8!important;">
+                            <%= booking[i].doctor %>
+                          </h4>
+                          <div class="font-weight-300">
+                            <i class="ni location_pin mr-2"><%=booking[i].date_n_time.date%>, <%=booking[i].date_n_time.slot%>, <%=booking[i].date_n_time.time%></i>
                           </div>
+                          <div class="font-weight-300">
+                            <i class="ni location_pin mr-2">Name: <%= booking[i].doc_name %>, Type: <%=booking[i].doc_type%> </i>
+                          </div>
+                          <h6 style="margin-top:3%"> Place : <%= booking[i].place %></h6>
+
                         </div>
+                        <div class="card-profile-stats d-flex justify-content-center" style="margin-top:-5%">
+                          <div>
+                            <span class="heading"><%=booking[i].count%></span>
+                            <span class="description">patients</span>
+                          </div>
+                          <div>
+                            <span class="heading"><%= booking[i].booking_type %></span>
+                            <span class="description">Type</span>
+                          </div>
+                          <div>
+                            <span class="heading"><%= booking[i].num_of_days%></span>
+                            <span class="description">Days</span>
+                          </div>
+
+
+                        </div>
+                        <div style="margin-left:25%" class="stars" data-rating="<%= booking[i].rating %>">
+                          <span class="star"></span>
+                          <span class="star"></span>
+                          <span class="star"></span>
+                          <span class="star"></span>
+                          <span class="star"></span>
+                        </div>
+                        <input type="text" id="st" hidden></input>
+                        <!-- <a class="btn btn-primary mt-4" style="color:white" onclick="rating('<%= booking[i].doctor %>', '<%= booking[i].doc_type %>', '<%= booking[i]._id %>')">submit</a> -->
+
+                                <!-- <a type="submit" class="dt-sc-button" >appt Session</a> -->
+                        <a  style="color:#ddad57!important;margin-top:-4%" class="btn btn-lg btn-sucess btn-block" onclick="rating('<%= booking[i].doctor %>', '<%= booking[i].doc_type %>', '<%= booking[i]._id %>')">submit</a>
+
+                        <!-- <button type="submit" style="color:#17a2b8!important" class="btn btn-lg btn-sucess btn-block">Book Session</button> -->
+
+                      </div>
+                    </div>
+                  </div>
                         <% } %>
                     <% } %>
 
           </div></div>
+
 
 
           <script type="text/javascript">
@@ -573,6 +586,9 @@
 
             document.getElementById('senderid').value =  senderid;
             document.getElementById('sender_type').value =  sender_type;
+
+            document.getElementById('senderid').innerHTML =  senderid;
+
             // console.log(x)
             console.log(img)
             document.getElementById("testmodelimg").setAttribute('src',img);

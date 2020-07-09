@@ -304,7 +304,7 @@ await Users.findOne({"email":req.body.userid})
   console.log(u)
   var a= req.user.img.path
   var b=u.name
-test.push({senderid:req.user.email,sender_type:'counselor',img:a,username:b,testid:'testimonial',unread:true,msg:'please help me by testifying'})
+test.push({senderid:req.user.email,sender_type:'counselor',img:a,username:b,typeid:'testimonial',unread:true,msg:'please help me by testifying'})
 console.log(test)
 }
 
