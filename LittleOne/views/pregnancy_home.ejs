@@ -7,9 +7,11 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
 
     <script src="https://kit.fontawesome.com/ea0619ce99.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" ></script>
+
     <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js" ></script> -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
@@ -81,8 +83,8 @@ nav ul li a {
   }
 
 #background {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F38%2F2020%2F01%2FGettyImages-643782350-2000.jpg&q=85");
-  min-height: 900px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("https://www.currae.com/wp-content/uploads/2019/12/care-in-pregnancy-scaled.jpg");
+  min-height: 500px;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -436,6 +438,55 @@ p{margin-top:23px;}
 
 
 
+
+
+
+
+
+/*! CSS Used from: https://fonts.googleapis.com/icon?family=Material+Icons */
+.material-icons{font-family:'Material Icons';font-weight:normal;font-style:normal;font-size:24px;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';-webkit-font-smoothing:antialiased;}
+/*! CSS Used from: Embedded */
+*{margin:0;padding:0;box-sizing:border-box;}
+#todolist{margin:4rem auto;padding:2rem 3rem 3rem;max-width:500px;background:#17a2b8;color:#FFF;box-shadow:-20px -20px 0px 0px rgba(100,100,100,.1);}
+#todolist h1{font-weight:normal;font-size:2.6rem;letter-spacing:0.05em;border-bottom:1px solid rgba(255,255,255,.3);}
+#todolist h1 span{display:block;font-size:0.8rem;margin-bottom:0.7rem;margin-left:3px;margin-top:0.2rem;}
+#todolist ul{margin-top:2.6rem;list-style:none;}
+#todolist li{display:flex;margin:0 -3rem 5px;padding:1.1rem 5rem;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.1);}
+#todolist .actions{flex-shrink:0;padding-left:0.7em;}
+#todolist .label{position:relative;transition:opacity .2s linear;}
+#todolist .done .label{opacity:.6;}
+#todolist .done .label:before{content:'';position:absolute;top:50%;left:-.5rem;display:block;width:0%;height:1px;background:#FFF;animation:strikeitem .3s ease-out 0s forwards;}
+#todolist .btn-picto{border:none;background:none;-webkit-appearance:none;cursor:pointer;color:#FFF;}
+form{margin-top:3rem;display:flex;flex-wrap:wrap;}
+form label{min-width:100%;margin-bottom:.5rem;font-size:1.3rem;}
+form input{flex-grow:1;border:none;background:#f7f1f1;padding:0 1.5em;font-size:initial;}
+form button{padding:0 1.3rem;border:none;background:#17a2b8;color:white;text-transform:uppercase;font-weight:bold;border:1px solid rgba(255,255,255,.3);margin-left:5px;cursor:pointer;transition:background .2s ease-out;}
+form button:hover{background:#FF5E5E;}
+form input,form button{font-family:'Quicksand', sans-serif;height:3rem;}
+.togglebutton-wrapper{margin-top:1em;}
+.togglebutton-wrapper label{display:flex;justify-content:flex-end;align-items:center;}
+.togglebutton-wrapper input{position:absolute;left:-9999px;}
+.togglebutton-wrapper .togglebutton-label{font-size:.8rem;letter-spacing:.1em;}
+.togglebutton-wrapper .tooglebutton-box{position:relative;display:block;margin-left:0.6em;width:38px;height:22px;background:white;border-radius:999px;cursor:pointer;}
+.togglebutton-wrapper .tooglebutton-box:before{content:'';position:absolute;top:2px;left:2px;display:block;width:18px;height:18px;border-radius:50%;background:#17a2b8;opacity:0.7;transition:all .2s ease-in-out;}
+/*! CSS Used keyframes */
+@keyframes strikeitem{to{width:calc(100% + 1rem);}}
+/*! CSS Used fontfaces */
+@font-face{font-family:'Material Icons';font-style:normal;font-weight:400;src:url(https://fonts.gstatic.com/s/materialicons/v53/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');}
+@font-face{font-family:'Quicksand';font-style:normal;font-weight:400;src:url(https://fonts.gstatic.com/s/quicksand/v21/6xK-dSZaM9iE8KbpRA_LJ3z8mH9BOJvgkP8o58m-wi40.woff2) format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;}
+@font-face{font-family:'Quicksand';font-style:normal;font-weight:400;src:url(https://fonts.gstatic.com/s/quicksand/v21/6xK-dSZaM9iE8KbpRA_LJ3z8mH9BOJvgkP8o58i-wi40.woff2) format('woff2');unicode-range:U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;}
+@font-face{font-family:'Quicksand';font-style:normal;font-weight:400;src:url(https://fonts.gstatic.com/s/quicksand/v21/6xK-dSZaM9iE8KbpRA_LJ3z8mH9BOJvgkP8o58a-wg.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+
+
+
+
+.alert {
+    margin-top: 20%;
+    width: 39%;
+    float: right;
+}
+
+
     </style>
 
   </head>
@@ -445,24 +496,92 @@ p{margin-top:23px;}
 
     <nav id="nav" style="z-index:15;border:none;" class="navpic">
     <div class="logo">
-      <span id="wander">FIRSTBORNS</span>
+      <span id="wander">LITTLEONE</span>
     </div>
     <div class="menu"  style="overflow:visible!important;">
       <ul id="ul" style="margin-left:60%;margin-top:1.7%;">
         <center>
          <li><a class="items" href="/user/home"><i class="fas fa-home"></i></a></li>
          <li><a class="items" href="/blog"><i class="fas fa-blog"></i></a></li>
+         <li><a class="items" href="/forum"><i class="fa fa-quora"></i></a></li>
+
          <li class="dropdown">
-           <i style="font-size:18px;" class="fas fa-bell dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+           <i class="fas fa-bell dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+             <!-- <button style="color:grey;font-size:16px;margin-top:-2%;" class="btn btn-outline-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             </button> -->
+             <div style="min-width:23rem;" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+               <!-- <a style="padding-top:2px;" class="dropdown-item" href="/users">Profile</a>
+               <a style="padding-top:2px;" class="dropdown-item" href="#">WanderList</a>
+               <a style="padding-top:2px;" class="dropdown-item" href="/users/logout">Logout</a> -->
+               <% if(user.notifications) {%>
+                   <div class="px-3 py-3">
+                     <h6 class="text-sm text-muted m-0">You have <strong class="text-primary"><%=user.notifications.length%></strong> notifications.</h6>
+                   </div>
+
+                   <div class="list-group list-group-flush" id="notifications" style="overflow-y:auto!important;max-height:400px!important;">
+
+               <% for(i=0;i < user.notifications.length;i++ ){ %>
+                  <% if(user.notifications[i].typeid=='testimonial'){%>
+                    <a href="#" onclick="noti('<%=user.notifications[i]._id%>','<%=user.notifications[i].img %>','<%=user.notifications[i].senderid %>','<%=user.notifications[i].sender_type %>')" data-toggle="modal" data-target="#myModal" class="list-group-item list-group-item-action">
+
+
+                        <div id="<%=user.notifications[i]._id%>"class="row align-items-center">
+                          <div class="col-auto">
+                            <img alt="Image placeholder" src="<%=user.notifications[i].img %>" class="notifimg rounded-circle">
+
+                          </div>
+                          <div class="col" style="width:100%;margin-top:-2%!important;padding-left:!important">
+                                <h6 style="color: #32325d!important;" class=""><strong><%=user.notifications[i].username%></strong></h6>
+                            <p style="text-transform:lowercase!important;line-height:1.1!important;margin-bottom:-3%" class=""><%=user.notifications[i].msg%></p>
+
+                          </div>
+
+
+                        </div>
+                      </a>
+                   <%}%>
+
+                   <% if(user.notifications[i].typeid!='testimonial'){%>
+
+                     <a href="#" onclick="noti('<%=user.notifications[i]._id%>','<%=user.notifications[i].img %>','<%=user.notifications[i].senderid %>','<%=user.notifications[i].sender_type %>')"  class="list-group-item list-group-item-action">
+
+
+                         <div id="<%=user.notifications[i]._id%>"class="row align-items-center">
+                           <div class="col-auto">
+                             <img alt="Image placeholder" src="<%=user.notifications[i].img %>" class="notifimg rounded-circle">
+
+                           </div>
+                           <div class="col" style="width:100%;margin-top:-2%!important;padding-left:!important">
+                                 <h6 style="color: #32325d!important;" class=""><strong><%=user.notifications[i].username%></strong></h6>
+                             <p style="text-transform:lowercase!important;line-height:1.1!important;margin-bottom:-3%" class=""><%=user.notifications[i].msg%>
+
+                                   <i class="fas fa-trash"></i>
+
+  </p>
+
+                           </div>
+
+
+                         </div>
+                       </a>
+                    <%}%>
+
+                     <%} %>
+
+                   </div>
+                     <%}else{ %>
+                       <p>No Notifications</p>
+                     <%}%>
+
+             </div>
          </li>
          <li class="dropdown" style="margin-left:-4%;">
              <button style="color:white;font-size:16px;margin-top:-2%;" class="items btn btn-outline-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               <i style="font-size:18px;" class="items far fa-user-circle"><small><b><%= user.name%></b></small></i>
+               <i style="font-size:18px;" class="items far fa-user-circle"><small><b><%=user.name%></b></small></i>
              </button>
              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-               <a style="padding-top:2px;" class="dropdown-item" href="/users">Profile</a>
-               <a style="padding-top:2px;" class="dropdown-item" href="//">SavedArticles</a>
-               <a style="padding-top:2px;" class="dropdown-item" href="/cos/logout">Logout</a>
+               <a style="padding-top:2px;" class="dropdown-item" href="/user/profile">Profile</a>
+               <a style="padding-top:2px;" class="dropdown-item" href="/users/logout">Logout</a>
              </div>
          </li>
        </center>
@@ -470,7 +589,56 @@ p{margin-top:23px;}
     </div>
   </nav>
 
+
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+      <div class="modal-content" style="background-color: #DDDDDD;background-image:linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4) 75%), url('https://lstore.graphics/paaatterns/images/Waiau-3-p-1080.jpeg');background-size:contain;background-position:150% 100%;background-repeat:no-repeat;">
+        <div class="modal-header">
+          <!-- <h4 class="modal-title">Testimonial</h4> -->
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <table style="width:100%;padding:3%;">
+            <tr>
+              <td style="width:38%;padding-top:3%;padding-bottom: 1.5%;text-align:center;">
+                <img style="width:30vh;height:30vh;border-radius:3px;box-shadow:0 10px 25px 0 rgba(0,0,0,.3);"  id="testmodelimg" alt="Raised Image" class="rounded img-raised">
+                <div id="senderid">
+
+                </div>
+              </td>
+              <td style="width:58%;">
+                <h1 style="color:#919293;">Testimonial</h1>
+
+                <form action="/user/testimonial/" method="POST">
+                  <input style="display: none;" type="text" id="testusername" name="usermail" value="">
+                  <input style="display: none;" type="text" id="sender_type" name="sender_type" value="">
+                  <input style="display: none" type="text" id="sender" name="senderid" value="">
+                  <div class="form-group" style="margin-top:5%;">
+                    <label for="exampleFormControlTextarea1">Your Feedback</label>
+                    <textarea style="width:400px;" name="text" placeholder="Give your feedback please..." class="form-control" id="exampleFormControlTextarea1" rows="6"></textarea>
+                  </div>
+                  <br>
+                  <input style="float:right;margin-top:35%" class="btn btn-success btn-sm" type="submit" name="submit" value="Submit">
+                </form>
+              </td>
+            </tr>
+          </table>
+          <!-- <div class="modal-footer" style="border-top:none;">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div> -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <div id="background">
+    <center>
+      <h2 style="color:white;padding-top:13%">Pregnancy Care</h2>
+      <!-- <p style="margin-top:-17%;margin-bottom:15%;color:white;font-size:40px;">MomsCare Blog</p> -->
+    </center>
+    <%- include ('partials/messages.ejs') %>
 
   </div>
 
@@ -594,22 +762,13 @@ p{margin-top:23px;}
 </div>
 
 
-
-
-
-
-
-
-
-
-
   <div id="main" style="padding-top:50px;">
     <div class="container">
       <section id="primary" class="content-full-width">
         <div id="post-6149" class="post-6149 page type-page status-publish hentry">
 
 
-<div style="color: rgb(97, 114, 125); position: relative;  box-sizing: border-box;  padding-left: 92.5px; padding-right: 92.5px;" data-vc-full-width="true" data-vc-full-width-init="true" class="vc_row wpb_row vc_row-fluid dt-sc-skin-highlight-tertiary-bg dt-custom-merge-bg-on-left-top wpb_animate_when_almost_visible wpb_fadeInUp fadeInUp vc_row-o-equal-height vc_row-o-content-middle vc_row-flex wpb_start_animation animated">
+<div style="color: rgb(97, 114, 125); position: relative;  box-sizing: border-box;  padding-left: 92.5px; padding-right: 92.5px;" data-vc-full-width="true" data-vc-full-width-init="true" class="vc_row wpb_row vc_row-fluid dt-sc-skin-highlight-tertiary-bg  wpb_animate_when_almost_visible wpb_fadeInUp fadeInUp vc_row-o-equal-height vc_row-o-content-middle vc_row-flex wpb_start_animation animated">
   <div class="wpb_column vc_column_container1 vc_col-sm-12">
     <div class="vc_column-inner ">
       <div class="wpb_wrapper">
@@ -624,107 +783,69 @@ p{margin-top:23px;}
         <div class="vc_row wpb_row vc_inner vc_row-fluid">
           <div class="wpb_column vc_column_container vc_col-sm-11">
             <div class="vc_column-inner ">
-              <div class="wpb_wrapper">
+              <div class="wpb_wrapper" style="margin-top:-10%">
                 <div class="ult-animation  ult-animate-viewport  ult-no-mobile " data-animate="fadeInLeft" data-animation-delay="0.8" data-animation-duration="1" data-animation-iteration="1" style="opacity:1;-webkit-transition-delay: 0.8s; -moz-transition-delay: 0.8s; transition-delay: 0.8s;" data-opacity_start_effect="">
-                  <h5 class="dt-sc-sub-heading animated fadeInLeft" style="opacity:1;-webkit-animation-delay:0.8s;-webkit-animation-duration:1s;-webkit-animation-iteration-count:1; -moz-animation-delay:0.8s;-moz-animation-duration:1s;-moz-animation-iteration-count:1; animation-delay:0.8s;animation-duration:1s;animation-iteration-count:1;test">We Care for you &amp; your Children</h5>
-                  <h2 class="dt-sc-skin-highlight-color animated fadeInLeft" style="opacity:1;-webkit-animation-delay:0.8s;-webkit-animation-duration:1s;-webkit-animation-iteration-count:1; -moz-animation-delay:0.8s;-moz-animation-duration:1s;-moz-animation-iteration-count:1; animation-delay:0.8s;animation-duration:1s;animation-iteration-count:1;test">Most Important Precautions</h2>
-                  <div class="ult-spacer spacer-5e67d79925f34 animated fadeInLeft" data-id="5e67d79925f34" data-height="20" data-height-mobile="20" data-height-tab="20" data-height-tab-portrait="" data-height-mobile-landscape="" style="opacity:1;-webkit-animation-delay:0.8s;-webkit-animation-duration:1s;-webkit-animation-iteration-count:1; -moz-animation-delay:0.8s;-moz-animation-duration:1s;-moz-animation-iteration-count:1; animation-delay:0.8s;animation-duration:1s;animation-iteration-count:1;clear:both;display:block;">
-                  </div>
-                  <div class="wpb_text_column wpb_content_element  animated fadeInLeft" style="opacity:1;-webkit-animation-delay:0.8s;-webkit-animation-duration:1s;-webkit-animation-iteration-count:1; -moz-animation-delay:0.8s;-moz-animation-duration:1s;-moz-animation-iteration-count:1; animation-delay:0.8s;animation-duration:1s;animation-iteration-count:1;test">
+                  <h2 class="dt-sc-skin-highlight-color animated fadeInLeft" style="opacity:1;-webkit-animation-delay:0.8s;-webkit-animation-duration:1s;-webkit-animation-iteration-count:1; -moz-animation-delay:0.8s;-moz-animation-duration:1s;-moz-animation-iteration-count:1; animation-delay:0.8s;animation-duration:1s;animation-iteration-count:1;test">
+                    Set Reminders and Todos</h2>
+
                     <div class="wpb_wrapper">
-                      <p>Pregnancy is a magical journey which turns a woman into a mother. When a woman is pregnant, she loves, cares, nurtures and worries about the life that is growing inside of her. In these crucial moments, every woman should know what precautions she must take to protect her baby and keep herself healthy throughout her pregnancy.</p>
-
+                      <p>Pregnancy is pregnant </p>
+                      <form name="newform" action="/user/reminder" method="POST">
+                        <label style="margin-top:-10%;font-size:1rem!important"for="newitem">Set Time</label>
+                        <input type="time" name="time" id="time" style="color:black;flex-grow:0!important;height:2rem!important">
+                        <label style="font-size:1rem!important" for="newitem">Set Date</label>
+                        <input type="date" name="date" id="date" style="color:black;flex-grow:0!important;height:2rem!important">
+                        <label style="font-size:1rem!important" for="newitem">Set Note</label>
+                        <input type="text" name="abt" id="abt" style="color:black;flex-grow:0!important;height:2rem!important" placeholder="remind about..">
+                         <button style="margin-top:5%" type="submit">Set Reminder</button>
+                       </form>
                     </div>
-                  </div>
-                  <div class="text-with-icon dt-sc-custom-link-text type1 animated fadeInLeft" style="opacity:1;-webkit-animation-delay:0.8s;-webkit-animation-duration:1s;-webkit-animation-iteration-count:1; -moz-animation-delay:0.8s;-moz-animation-duration:1s;-moz-animation-iteration-count:1; animation-delay:0.8s;animation-duration:1s;animation-iteration-count:1;test">
-                    <span class=""> </span><a title="READ MORE" target=" _blank" href="#">READ MORE</a>
-                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="wpb_column vc_column_container vc_col-sm-1">
-            <div class="vc_column-inner ">
-              <div class="wpb_wrapper">
-              </div>
-            </div>
-          </div>
+
         </div>
       </div>
     </div>
   </div>
-  <div class="dt-sc-three-fifth rs_col-sm-12 wpb_column vc_column_container vc_col-sm-6 vc_col-lg-6 vc_col-md-12">
-    <div class="vc_column-inner ">
-      <div class="wpb_wrapper">
-        <div class="ult-animation  ult-animate-viewport  ult-no-mobile " data-animate="fadeInRight" data-animation-delay="0.8" data-animation-duration="1" data-animation-iteration="1" style="opacity:1;-webkit-transition-delay: 0.8s; -moz-transition-delay: 0.8s; transition-delay: 0.8s;" data-opacity_start_effect="">
-          <div class="dt-sc-toggle-frame-set type3 alter with-toggle-icons-visible animated fadeInRight" style="opacity:1;-webkit-animation-delay:0.8s;-webkit-animation-duration:1s;-webkit-animation-iteration-count:1; -moz-animation-delay:0.8s;-moz-animation-duration:1s;-moz-animation-iteration-count:1; animation-delay:0.8s;animation-duration:1s;animation-iteration-count:1;test">
-            <div class="dt-sc-toggle-frame">
-              <h5 class="dt-sc-toggle-accordion  active"><a  onclick="return Congenital()">Eating Habits</a></h5>
-              <div class="dt-sc-toggle-content" style="display: block;" id="congenital">
-              <!-- </div> -->
-              <div class="block">
-                <div class="wpb_text_column wpb_content_element  vc_custom_1497363804316">
-                  <div class="wpb_wrapper">
-                    <p>Eat a balanced diet. This includes plenty of fruits and vegetables, protein, fibre and carbohydrates. Avoid unripe papaya. Sweet, ripe papaya is absolutely safe during pregnancy.
-                    <strong>Ensure your diet is rich in iron, and you’re getting plenty of Vitamin C.</strong>
-                    Take folic acid and vitamin supplements if required, for your child’s healthy development and drink plenty of water to keep yourself hydrated.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="dt-sc-toggle-frame">
-            <h5 class="dt-sc-toggle-accordion "><a  onclick="return Infectious()">Mental Health</a></h5>
-            <div class="dt-sc-toggle-content" style="display: none;"id="infectious" >
-              <div class="block">
-                <div class="wpb_text_column wpb_content_element  vc_custom_1497363804316">
-                  <div class="wpb_wrapper">
-                    <p>It’s really important to speak to your partner about what you’re feeling, physically and emotionally. Make him part of the process so he can appreciate and understand what you’re going through. It’s normal to go through mood swings at this time, and it’s important to let your partner be aware of this.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="dt-sc-toggle-frame">
-            <h5 class="dt-sc-toggle-accordion "><a  onclick="return Learning()">Physical Health </a></h5>
-            <div class="dt-sc-toggle-content" style="display: none;" id="learning">
-              <div class="block">
-                <div class="wpb_text_column wpb_content_element  vc_custom_1497363804316">
-                  <div class="wpb_wrapper">
-                    <p>Enrol in a Lamaze class. These classes are specially designed for mummies to be, to take them through the delivery process and what to expect. It’s also an opportunity to bond with other mums to be, and prepare a little playgroup for your impending arrival! It’s always great to share the excitement of being a mom with others experiencing the same thing.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="dt-sc-toggle-frame">
-            <h5 class="dt-sc-toggle-accordion "><a onclick="return Behavior()">Don't do these</a></h5>
-            <div class="dt-sc-toggle-content" style="display: none;" id="behavior">
-              <div class="block">
-                <div class="wpb_text_column wpb_content_element  vc_custom_1497363804316">
-                  <div class="wpb_wrapper">
-                    <p>Avoid smoking or smoke infested places during pregnancy.Avoid alcohol during pregnancy.Avoid Undercooked or Raw Fish or Meat.Avoid soft cheeses and deli meats.Avoid coffee more than 2 cups a day.Sauna bath, Jacuzzis, steam rooms and hot tubs should be avoided as they have high temperatures.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="wpb_column vc_column_container vc_col-sm-12">
-  <div class="vc_column-inner ">
-    <div class="wpb_wrapper">
-      <div class="ult-spacer spacer-5e67d799267da" data-id="5e67d799267da" data-height="100" data-height-mobile="50" data-height-tab="75" data-height-tab-portrait="75" data-height-mobile-landscape="50" style="clear:both;display:block;">
-      </div>
-    </div>
-  </div>
-</div>
 
+  <main id="todolist" style="margin-top:-57%;margin-left:50%;max-height:30%"><h1>
+  Todo List
+  <span>
+    Get things done, one item at a time.</span>
+  </h1>
+  <ul style="overflow-y:auto!important;overflow-x:hidden!important;max-height:200px!important;width:475px;margin-left:-12%">
+    <%if(user.todos!=undefined){%>
+      <% user.todos.reverse().forEach(function(item,index){ %>
+        <%if(item.done==true){ %>
 
+        <li class="done" id="<%=item._id%>" ><span class="label"><%=item.todo%></span>
+           <div class="actions">
+             <button type="button" aria-label="Undone" title="Undone" class="btn-picto change"  onclick="change_todo('<%=item._id%>')"><i aria-hidden="true" class="material-icons" id="check" >check_box</i></button>
+             <button type="button" aria-label="Delete" title="Delete" class="btn-picto" onclick="del_todo('<%=item._id%>')"><i aria-hidden="true" class="material-icons">delete</i></button>
+           </div>
+         </li>
+         <%}%>
+         <%if(item.done==false){ %>
 
+           <li class="" id="<%=item._id%>"><span class="label"><%=item.todo%></span>
+              <div class="actions">
+                <button type="button" aria-label="Done" title="Done" class="btn-picto change"  onclick="change_todo('<%=item._id%>')"><i aria-hidden="true" class="material-icons" id="check">check_box_outline_blank</i></button>
+                <button type="button" aria-label="Delete" title="Delete" class="btn-picto" onclick="del_todo('<%=item._id%>')"><i aria-hidden="true" class="material-icons">delete</i></button>
+              </div>
+            </li>
+          <%}%>
+
+        <%})%>
+
+      <%}%>
+         </ul>
+          <form name="newform" action="/user/todo" method="post"><label for="newitem">Add to the todo list</label>
+            <input type="text" name="newitem" id="newitem" style="color:black">
+             <button type="submit">Add item</button>
+           </form>
+         </main>
 
 </div>
 </section>
@@ -735,7 +856,7 @@ p{margin-top:23px;}
 
 
 <div style="padding-top:60px;">
-<div class="box-1 wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;height:150px;margin-top:1190px;">
+<div class="box-1 wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;height:150px;margin-top:1290px;">
   <div class="container1">
     <div class="row">
         <div class="grid_8">
@@ -943,22 +1064,63 @@ p{margin-top:23px;}
 
 
 
-  <script>
-    //tested on Safari,chrome
-//No Script
-//total time: 2 hours
-//You Can Find Me On Instagram: @akshaycodes
-//if you have questions feel free to ask
-const cards = document.querySelectorAll('.card');
-    function toggleOpen() {
-      this.classList.toggle('open');
-     for (i = 0; i < cards.length; i++) {
-       if ( cards[i] !== this)
-       cards[i].classList.toggle('close')
-     }
-}
- cards.forEach(card => card.addEventListener('click', toggleOpen));
-  </script>
+<script type="text/javascript">
+function del_todo(id){
+
+document.getElementById(id).style.display='none';
+
+console.log('called')
+console.log(id);
+  $.ajax({
+    type:'POST',
+    url:'/user/del_todo',
+    data:{
+      id:id,
+    },
+    success:function(){
+      window.location.reload()
+
+      return false
+    }
+  });
+
+};
+
+function change_todo(id){
+
+
+
+  if(document.getElementById(id).classList.contains('done')){
+    document.getElementById(id).classList.remove('done')
+    document.getElementById('check').innerHTML='check_box_outline_blank';
+
+  }
+  else{
+    document.getElementById(id).className = 'done';
+    document.getElementById('check').innerHTML='check_box';
+
+  }
+
+
+console.log('called')
+console.log(id);
+  $.ajax({
+    type:'POST',
+    url:'/user/change_todo',
+    data:{
+      id:id,
+    },
+    sucess:function(){
+      window.location.reload()
+      return false
+    }
+  });
+
+};
+
+
+
+</script>
 
     <script>
       window.onscroll = function(){
@@ -997,6 +1159,37 @@ const cards = document.querySelectorAll('.card');
       }
     }
   }
+
+    </script>
+
+    <script type="text/javascript">
+    function noti(x,img,senderid,sender_type){
+      console.log('asasssssssssssssssssss');
+      console.log(x)
+      document.getElementById(x).style.display = "none";
+      document.getElementById('testusername').value = '<%= user.email %>';
+
+      document.getElementById('sender').value =  senderid;
+      document.getElementById('sender_type').value =  sender_type;
+
+      document.getElementById('senderid').innerHTML =  senderid;
+
+      // console.log(x)
+      console.log(img)
+      document.getElementById("testmodelimg").setAttribute('src',img);
+    console.log('called')
+      $.ajax({
+        type:'POST',
+        url:'/user/noti',
+        data:{
+          notiid:x,
+        },
+        sucess:function(){
+          return false
+        }
+      });
+
+    };
 
     </script>
 

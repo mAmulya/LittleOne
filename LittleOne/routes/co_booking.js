@@ -10,6 +10,7 @@ const Counselors=require('../models/Counselors');
 const Users=require('../models/Users');
 const Bookings=require('../models/Bookings');
 
+var error=undefined;
 
 var data;
 var form_data;
@@ -76,7 +77,7 @@ router.post('/done',urlencodedParser, function(req,res){
   console.log(req.body);
 
 
-        Counselors.findOne({email:req.body.email,type:'counselor'},function(err,doc){
+        Counselors.findOne({email:req.body.email,type:'counselor'},async (err,doc)=>{
            if(err){
                console.log(err);
            }else{
@@ -129,11 +130,71 @@ router.post('/done',urlencodedParser, function(req,res){
                 doc.save()
 
            }
+
+           test=[]
+           test.push({senderid:req.user.email,sender_type:'user',img:req.user.img.path,username:req.user.name,typeid:'appointmnet',unread:true,msg:'you have a new appointment'})
+           await Counselors.updateOne({"email":req.body.email},{
+               $push:{
+                 notifications:{
+                   $each:test
+                 },
+
+               }
+             })
          })
+         error = 'Your appoitment is confirmed !! check the current Bookings'
 
 
-  res.redirect('/co_booking')
-});
+         var datetime = new Date();
+         date = datetime.toISOString().slice(0,10);
+           date1 = date.split('-')
+           console.log(date1)
+           var date2 = date1[0]+'/'+date1[1]+'/'+date1[2]
+           var user = req.user;
+           Bookings.find({user:req.user.email}).then(booking=>{
+             console.log('-----------------------------------------------');
+             console.log(booking);
+             for(var i=0;i<booking.length;i++){
+               d2 = new Date()
+               console.log(i);
+               if(booking[i].current == true   ){
+                 console.log('camehere')
+                 d1 = new Date(booking[i].date_n_time.date);
+                 console.log(d1)
+                 console.log(d2)
+
+                 if(d1 <= d2){
+                   console.log('heyy')
+                     console.log('yes');
+                     if(d1==d2){
+                     d2 = new Date().getHours
+                     d1 = booking[i].date_n_time.time
+                     d1 = d1.split(':')
+                     if(Number(d2) >Number(d1[0])){
+                       booking[i].current=false
+                     }
+                   }
+                   else{
+                     booking[i].current=false
+                   }
+                 }
+                 console.log('hip hip hurray')
+               }
+             }
+             // booking.save()
+             if(error==undefined){
+               res.render('profile', { user : user, date : date,booking:booking})
+
+             }
+             else{
+               res.render('profile', { user : user, date : date,booking:booking,error:error})
+               error=undefined
+             }
+
+           })
+
+
+       });
 
 
 

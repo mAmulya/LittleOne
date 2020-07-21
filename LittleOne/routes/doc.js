@@ -12,6 +12,7 @@ const Doctors=require('../models/Doctors');
 const Users=require('../models/Users');
 const Bookings=require('../models/Bookings');
 
+var error=undefined;
 
 router.get('/home',function(req,res){
   console.log(req.user);
@@ -71,7 +72,14 @@ router.get('/home',function(req,res){
             console.log(b_dates);
             console.log(dates);
              // booking.save()
-             res.render('doc_home',{doctor:req.user,dates:dates,b_dates:b_dates,user:req.user,booking:booking});
+             console.log(error);
+             if(error==undefined){
+               res.render('doc_home',{doctor:req.user,dates:dates,b_dates:b_dates,user:req.user,booking:booking});
+             }
+             else{
+               res.render('doc_home',{doctor:req.user,dates:dates,b_dates:b_dates,user:req.user,booking:booking,error:error});
+               error=undefined;
+             }
 
           })
 
@@ -155,6 +163,7 @@ router.post('/docs/dates',urlencodedParser,async function(req,res){
 
 
 console.log('redirecting you stupi thing--------------------')
+error="your dates are updated !! you can check in the calendar"
 
   res.redirect('/doc/home')
 });
@@ -171,7 +180,7 @@ await Users.findOne({"email":req.body.userid})
   console.log(u)
   var a= req.user.img.path
   var b=u.name
-test.push({senderid:req.user.email,sender_type:'doctor',img:a,username:b,testid:'testimonial',unread:true,msg:'please help me by testifying'})
+test.push({senderid:req.user.email,sender_type:'doctor',img:a,username:b,typeid:'testimonial',unread:true,msg:'please help me by testifying'})
 console.log(test)
 }
 
@@ -188,7 +197,6 @@ await Users.updateOne({"email":req.body.userid},{
   .then(x=>console.log('updated'))
   .catch(x=>console.log(x))
 
-  res.send('')
 });
 
 router.post('/profile', (req, res, next) =>{
@@ -231,10 +239,33 @@ router.post('/profile', (req, res, next) =>{
             user.save(function (err) {
 
                 // todo: don't forget to handle err
+                error="your profile is updated succesfully"
 
                 res.redirect('/doc/home#edit');
             });
         });
     });
+
+
+    router.post('/noti',urlencodedParser,async function(req,res){
+      console.log('hey there')
+    console.log(req.body.notiid)
+      var test=[]
+      Doctors.findById(req.user._id, (err, user) =>{
+        console.log('user----------------------');
+        console.log(user);
+        for(var i=0;i<user.notifications.length;i++){
+          if(user.notifications[i]._id==req.body.notiid){
+            user.notifications.splice(i,1)
+            console.log('notification deleteddd');
+            break;
+          }
+        }
+        user.save()
+      })
+
+
+    });
+
 
 module.exports = router;

@@ -74,6 +74,17 @@ router.post('/',urlencodedParser, function(req,res){
 
 
      }
+
+     test=[]
+     test.push({senderid:req.user.email,sender_type:'user',img:req.user.img.path,username:req.user.name,typeid:'appointmnet',unread:true,msg:'you have a new appointment'})
+     await Counselors.updateOne({"email":req.body.email},{
+         $push:{
+           notifications:{
+             $each:test
+           },
+
+         }
+       })
      Counselors.find({})
      .catch(err=>{console.log(err)})
      .then( counselors=>{
@@ -86,7 +97,7 @@ router.post('/',urlencodedParser, function(req,res){
        }
        console.log(sessions);
        if(present==1){
-         req.flash('error', 'Your session is booked..')
+         req.flash('error', 'Your session is booked !! check profile for more info')
        }
        else{
          req.flash('error', 'please check the limit of the booking')

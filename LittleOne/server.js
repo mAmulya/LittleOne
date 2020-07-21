@@ -32,7 +32,7 @@ var storage = multer.diskStorage({
     cb(null, __dirname+'/uploads/')
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname + Date.now()+ '.jpeg , .mpeg' )
+    cb(null, file.originalname + Date.now()+ '.jpeg' )
   }
 })
 app.use(multer({ storage: storage }).any());
@@ -48,7 +48,7 @@ app.use(function (req, res, next) {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
   res.locals.error = req.flash('error');
-  next();
+  next()
 });
 app.use(expressLayouts);
 

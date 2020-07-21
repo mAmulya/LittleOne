@@ -207,18 +207,6 @@ router.post('/:id', urlencodedParser, function(req, res){
 
   console.log(req.body);
 
-  if(req.body.type=='user'){
-    Blogs.updateOne({_id:new ObjectId(req.body.id)},
-                  {$push:{userlikes:req.body.email}},function(){});
-  }
-  if(req.body.type=='doctor'){
-    Blogs.updateOne({_id:new ObjectId(req.body.id)},
-                  {$push:{doclikes:req.body.email}},function(){});
-  }
-  if(req.body.type=='counselor'){
-    Blogs.updateOne({_id:new ObjectId(req.body.id)},
-                  {$push:{colikes:req.body.email}},function(){});
-  }
 
   var id=req.body.id
   Blogs.findOne({'_id':id})
@@ -226,6 +214,18 @@ router.post('/:id', urlencodedParser, function(req, res){
   .then( data=>{
       var likes=parseInt(data.likes)+1
       data.likes=likes.toString()
+
+        if(req.body.type=='user'){
+          data.userlikes.push(req.body.email)
+        }
+        if(req.body.type=='doctor'){
+          data.doclikes.push(req.body.email)
+
+        }
+        if(req.body.type=='counselor'){
+          data.colikes.push(req.body.email)
+
+        }
       var newvalues = { $set: data };
       Blogs.updateOne({'_id':id}, newvalues, function(err, res) {
         if (err) throw err;

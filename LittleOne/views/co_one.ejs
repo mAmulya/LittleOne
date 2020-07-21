@@ -77,8 +77,8 @@ nav ul li a {
 
 
 #background {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("https://media.gettyimages.com/photos/women-lying-on-bed-kissing-baby-daughter-on-cheek-picture-id723496711?s=2048x2048");
-  min-height: 400px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("https://www.yourcounselling.ca/wp-content/uploads/2020/02/Therapy-for-Dealing-with-Depression-in-Calgary-Alberta-thegem-blog-default.jpg");
+  min-height: 450px;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -100,35 +100,80 @@ nav ul li a {
 <script type="module" src="https://cdn.quilljs.com/1.1.9/quill.js"></script>
 <link href="https://cdn.quilljs.com/1.1.9/quill.snow.css" rel="stylesheet">
 
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" ></script>
 
     <script src="https://kit.fontawesome.com/ea0619ce99.js" crossorigin="anonymous"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js" ></script> -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
   </head>
   <body onload="editorFunc(<%= article.text %>)">
-    <nav id="nav" style="z-index:5;border:none;" class="navpic">
+    <nav id="nav" style="z-index:15;border:none;" class="navpic">
     <div class="logo">
-      <span id="wander">FIRSTBORNS</span>
+      <span id="wander">LITTLEONE</span>
     </div>
     <div class="menu"  style="overflow:visible!important;">
       <ul id="ul" style="margin-left:60%;margin-top:1.7%;">
         <center>
          <li><a class="items" href="/co/home"><i class="fas fa-home"></i></a></li>
          <li><a class="items" href="/blog"><i class="fas fa-blog"></i></a></li>
+         <li><a class="items" href="/forum"><i class="fa fa-quora"></i></a></li>
+
          <li class="dropdown">
-           <i style="font-size:18px;" class="fas fa-bell dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+           <i class="fas fa-bell dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+             <!-- <button style="color:grey;font-size:16px;margin-top:-2%;" class="btn btn-outline-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             </button> -->
+             <div style="min-width:23rem;" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+               <!-- <a style="padding-top:2px;" class="dropdown-item" href="/users">Profile</a>
+               <a style="padding-top:2px;" class="dropdown-item" href="#">WanderList</a>
+               <a style="padding-top:2px;" class="dropdown-item" href="/users/logout">Logout</a> -->
+               <% if(counselor.notifications) {%>
+                   <div class="px-3 py-3">
+                     <h6 class="text-sm text-muted m-0">You have <strong class="text-primary"><%=counselor.notifications.length%></strong> notifications.</h6>
+                   </div>
+
+                   <div class="list-group list-group-flush" id="notifications" style="overflow-y:auto!important;max-height:400px!important;">
+
+               <% for(i=0;i < counselor.notifications.length;i++ ){ %>
+                   <a href="#" onclick="noti('<%=counselor.notifications[i]._id%>','<%=counselor.notifications[i].img %>','<%=counselor.notifications[i].senderid %>','<%=counselor.notifications[i].sender_type %>')"  class="list-group-item list-group-item-action">
+
+
+                       <div id="<%=counselor.notifications[i]._id%>"class="row align-items-center">
+                         <div class="col-auto">
+                           <img alt="Image placeholder" src="<%=counselor.notifications[i].img %>" class="notifimg rounded-circle">
+
+                         </div>
+                         <div class="col" style="width:100%;margin-top:-2%!important;padding-left:!important;margin-left:-5%">
+                               <h6 style="color: #32325d!important;" class=""><strong><%=counselor.notifications[i].username%></strong></h6>
+                           <p style="text-transform:lowercase!important;line-height:1.1!important;margin-bottom:-3%" class=""><%=counselor.notifications[i].msg%>
+
+                                 <i class="fas fa-trash"></i>
+
+</p>
+
+                         </div>
+
+
+                       </div>
+                     </a>
+                     <%} %>
+
+                   </div>
+                     <%}else{ %>
+                       <p>No Notifications</p>
+                     <%}%>
+
+             </div>
          </li>
          <li class="dropdown" style="margin-left:-4%;">
              <button style="color:white;font-size:16px;margin-top:-2%;" class="items btn btn-outline-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               <i style="font-size:18px;" class="items far fa-user-circle"><small><b><%= counselor.name%></b></small></i>
+               <i style="font-size:18px;" class="items far fa-user-circle"><small><b><%= counselor.name %></b></small></i>
              </button>
              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-               <a style="padding-top:2px;" class="dropdown-item" href="/">Profile</a>
-               <a style="padding-top:2px;" class="dropdown-item" href="//">SavedArticles</a>
+               <a style="padding-top:2px;" class="dropdown-item" href="/co/home#edit">Profile</a>
                <a style="padding-top:2px;" class="dropdown-item" href="/cos/logout">Logout</a>
              </div>
          </li>
@@ -138,20 +183,22 @@ nav ul li a {
   </nav>
 
 <div id="background">
+  <center>
+    <h2 style="color:white;padding-top:13%"><%=article.title%></h2>  <button class="up" style="-webkit-appearance: media-volume-sliderthumb!important;background-color:#fff!important"><i class="fa fa-thumbs-up"></i><%=article.likes%></button>
 
+    <!-- <p style="margin-top:-17%;margin-bottom:15%;color:white;font-size:40px;">MomsCare Blog</p> -->
+  </center>
 </div>
 
 
-<div style="padding-top:8%">
-  <center>
-  <h3><%=article.title%></h3>
-  </center>
+<div style="padding-top:2%">
 </div>
 <div style="padding-left:20%;padding-right:20%;padding-top:2%">
   <section class="blogs-1">
         <div id="_editor"></div>
   </section>
 </div>
+
 
 
 
@@ -221,6 +268,29 @@ nav ul li a {
   text_editor.setContents(delta);
   text_editor.enable(false);
   };
+  </script>
+
+  <script type="text/javascript">
+  function noti(x,img,senderid,sender_type){
+    console.log('asasssssssssssssssssss');
+    console.log(x)
+    document.getElementById(x).style.display = "none";
+
+
+  console.log('called')
+    $.ajax({
+      type:'POST',
+      url:'/co/noti',
+      data:{
+        notiid:x,
+      },
+      sucess:function(){
+        return false
+      }
+    });
+
+  };
+
   </script>
 
   </body>

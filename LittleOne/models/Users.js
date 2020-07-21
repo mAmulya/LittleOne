@@ -38,7 +38,10 @@ const usersSchema = new mongoose.Schema({
         type:String,
         required:false
     },
-    // bookings:[BookingSchema],
+    todos:{type:
+      [{
+        todo:{type:String},
+        done:{type:Boolean,default:false}}],default:void 0},    // bookings:[BookingSchema],
     img:
         { path: String,
          contentType: String },
