@@ -44,10 +44,6 @@ router.get('/pregnancy_home',function(req,res){
 
 
 
-
-
-
-
   router.get('/babycare_home',function(req,res){
     res.render('babycare_home');
   });
