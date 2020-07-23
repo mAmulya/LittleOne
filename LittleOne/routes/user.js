@@ -44,13 +44,13 @@ router.get('/pregnancy_home',function(req,res){
 
 
 
+
+
+
+
   router.get('/babycare_home',function(req,res){
-    res.render('baby_home');
+    res.render('babycare_home');
   });
-
-
-
-
 
 
 
