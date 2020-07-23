@@ -17,6 +17,9 @@
 
   <link rel="stylesheet" href="/styles/doc/doc_home.css">
 
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
 <style>
 
 .notifimg{
@@ -192,6 +195,36 @@
   .alert:not(.alert-secondary) {
     color: #000;
 }
+
+.star-rating__checkbox {
+	 position: absolute;
+	 overflow: hidden;
+	 clip: rect(0 0 0 0);
+	 height: 1px;
+	 width: 1px;
+	 margin: -1px;
+	 padding: 0;
+	 border: 0;
+}
+ .star-rating__star {
+	 display: inline-block;
+	 padding: 3px;
+	 vertical-align: middle;
+	 line-height: 1;
+	 font-size: 1.5em;
+	 color: #ababab;
+	 transition: color 0.2s ease-out;
+}
+ .star-rating__star:hover {
+	 cursor: pointer;
+}
+ .star-rating__star.is-selected {
+	 color: #ffd700;
+}
+ .star-rating__star.is-disabled:hover {
+	 cursor: default;
+}
+
 
 </style>
 
@@ -496,7 +529,13 @@
             <center>
             <h2 id="currentbookings" style="margin-bottom:2%;margin-top:-1%;">Previous Bookings</h2>
           </center>
-          <div class="bookings">
+          <div id="alert" class="alert alert-warning alert-dismissible fade show" role="alert" style="display:;margin-top:-5%;margin-left:60%;margin-right:10%">
+            Rating is updated !!..
+           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+           </button>
+         </div>
+          <div class="bookings" id="app">
             <% for ( var i = 0; i < booking.length; i++ ) { %>
                 <% if ( booking[i].current == false ) { %>
                   <div class="col-lg-4 col-md-6 card-lift--hover shadow border-0" style="float:left!important;max-width:25%!important;">
@@ -532,18 +571,38 @@
 
 
                         </div>
-                        <div style="margin-left:25%" class="stars" data-rating="<%= booking[i].rating %>">
+                        <div style="margin-left:30%" id="<%=booking[i]._id%>">
+
+
+                          <% if(booking[i].rating=='0'){%>
+
+                            <star-rating   value="<%= booking[i].rating %>"></star-rating>
+
+                            <a  style="color:#ddad57!important;margin-left:-25%" class="btn btn-lg btn-block" onclick="rating('<%= booking[i].doctor %>', '<%= booking[i].doc_type %>', '<%= booking[i]._id %>')">submit</a>
+
+
+                            <!-- <star-rating  ></star-rating> -->
+
+                          <%}else{%>
+                            <star-rating  value="<%= booking[i].rating %>" :disabled="true"></star-rating>
+
+                            <%}%>
+
+
+                        </div>
+
+
+                        <!-- <div style="margin-left:25%" class="stars" data-rating="<%= booking[i].rating %>">
                           <span class="star"></span>
                           <span class="star"></span>
                           <span class="star"></span>
                           <span class="star"></span>
                           <span class="star"></span>
                         </div>
-                        <input type="text" id="st" hidden></input>
+                        <input type="text" id="st" hidden></input> -->
                         <!-- <a class="btn btn-primary mt-4" style="color:white" onclick="rating('<%= booking[i].doctor %>', '<%= booking[i].doc_type %>', '<%= booking[i]._id %>')">submit</a> -->
 
                                 <!-- <a type="submit" class="dt-sc-button" >appt Session</a> -->
-                        <a  style="color:#ddad57!important;margin-top:-4%" class="btn btn-lg btn-sucess btn-block" onclick="rating('<%= booking[i].doctor %>', '<%= booking[i].doc_type %>', '<%= booking[i]._id %>')">submit</a>
 
                         <!-- <button type="submit" style="color:#17a2b8!important" class="btn btn-lg btn-sucess btn-block">Book Session</button> -->
 
@@ -559,12 +618,19 @@
 
           <script type="text/javascript">
           function rating(x,y,z){
+
+            doc = document.getElementById(z);
+            stars = doc.getElementsByClassName("is-selected").length
+            console.log(stars);
+
+            document.getElementById("alert").style.display="block"
+
           console.log('called')
             $.ajax({
               type:'POST',
               url:'/user/st',
               data:{
-                st:document.getElementById('st').value,
+                st:stars,
                doctor:x,
                type:y,
                id:z,
@@ -720,6 +786,78 @@
 
           };
 
+          </script>
+
+          <script type="text/javascript">
+          Vue.component('star-rating', {
+
+props: {
+  'name': String,
+  'value': null,
+  'id': String,
+  'disabled': Boolean,
+  'required': Boolean
+},
+
+template: '<div class="star-rating">\
+      <label class="star-rating__star" v-for="rating in ratings" \
+      :class="{\'is-selected\': ((value >= rating) && value != null), \'is-disabled\': disabled}" \
+      v-on:click="set(rating)" v-on:mouseover="star_over(rating)" v-on:mouseout="star_out">\
+      <input class="star-rating star-rating__checkbox" type="radio" :value="rating" :name="name" \
+      v-model="value" :disabled="disabled">★</label></div>',
+
+/*
+ * Initial state of the component's data.
+ */
+data: function() {
+  return {
+    temp_value: null,
+    ratings: [1, 2, 3, 4, 5]
+  };
+},
+
+methods: {
+  /*
+   * Behaviour of the stars on mouseover.
+   */
+  star_over: function(index) {
+    var self = this;
+
+    if (!this.disabled) {
+      this.temp_value = this.value;
+      return this.value = index;
+    }
+
+  },
+
+  /*
+   * Behaviour of the stars on mouseout.
+   */
+  star_out: function() {
+    var self = this;
+
+    if (!this.disabled) {
+      return this.value = this.temp_value;
+    }
+  },
+
+  /*
+   * Set the rating.
+   */
+  set: function(value) {
+    var self = this;
+
+    if (!this.disabled) {
+      this.temp_value = value;
+      return this.value = value;
+    }
+  }
+}
+});
+
+new Vue({
+el: '#app'
+});
           </script>
     </body>
 </html>
