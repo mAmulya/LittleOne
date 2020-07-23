@@ -7,9 +7,9 @@ const fs = require('fs');
 const flash = require('connect-flash');
 
 const nodemailer = require('nodemailer');
+const cron = require('node-cron');
 
 const Users=require('../models/Users');
-const Songs=require('../models/Songs');
 const Articles=require('../models/Articles');
 const Counselors=require('../models/Counselors');
 const Doctors=require('../models/Doctors');
@@ -17,31 +17,113 @@ const Bookings=require('../models/Bookings');
 
 
 
-router.get('/home',function(req,res){
-console.log(req.user);
-Counselors.find({})
-.catch(err=>{console.log(err)})
-.then( counselors=>{
-  sessions=[]
-  for(var i=0;i<counselors.length;i++){
-    console.log(counselors[i].email);
-    for(var j=0;j<counselors[i].sessions.length;j++){
-      console.log('-----------------');
-    sessions.push({session:counselors[i].sessions[j],name:counselors[i].name,email:counselors[i].email})}
-  }
-  console.log(sessions);
-  res.render('user_home',{user:req.user,sessions:sessions,error:req.flash("error")});
+var error =undefined
 
-})
+
+
+router.get('/home',function(req,res){
+
+if(error==undefined){
+  res.render('user_home',{user:req.user});
+}
+else{
+  res.render('user_home',{user:req.user,error:error});
+  error=undefined;
+}
+
 
 });
 
 router.get('/pregnancy_home',function(req,res){
-  console.log(req.user);
+  if(error==undefined){
     res.render('pregnancy_home',{user:req.user});
+  }
+  else{
+    res.render('pregnancy_home',{user:req.user,error:error});
+    error=undefined;
+  }
   });
 
+router.post('/reminder', urlencodedParser, function(req, res){
+  console.log(req.body);
+  var sch = req.body.time.split(":")[1] + ' ' + req.body.time.split(":")[0] + ' ' + req.body.date.split("-")[2] + ' ' +req.body.date.split("-")[1] + ' *'
+  console.log(sch);
+  var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'wandermate.help@gmail.com',
+    pass: 'wandermate123'
+  }
+});
 
+var mailOptions = {
+  from: 'wandermate.help@gmail.com',
+  to: req.user.email,
+  subject: 'Reminder',
+  text: req.body.abt
+};
+
+cron.schedule(sch,() => {
+    transporter.sendMail(mailOptions, function(error, info){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
+});
+error =  'reminder is set on ' + req.body.date + ' at ' + req.body.time
+
+res.redirect('/user/pregnancy_home')
+})
+
+router.post('/todo', urlencodedParser, function(req, res){
+        console.log(req.body);
+          Users.updateOne({email: req.user.email}, {$push: {todos: {todo: req.body.newitem, done: false }}}, function(err){
+           console.log('-------------pushed');
+         });
+
+         res.redirect('/user/pregnancy_home#main')
+})
+
+router.post('/del_todo', urlencodedParser, async function(req, res){
+        console.log(req.body);
+        Users.findById(req.user._id, (err, user) =>{
+          console.log('user----------------------');
+          for(var i=0;i<user.todos.length;i++){
+            if(user.todos[i]._id==req.body.id){
+              user.todos.splice(i,1)
+              console.log('todo deleteddd');
+              break;
+            }
+          }
+          user.save()
+        })
+
+
+})
+
+router.post('/change_todo', urlencodedParser, async function(req, res){
+        console.log(req.body);
+        Users.findById(req.user._id, (err, user) =>{
+          console.log('user----------------------');
+          for(var i=0;i<user.todos.length;i++){
+            if(user.todos[i]._id==req.body.id){
+              user.todos[i].done=!user.todos[i].done
+              console.log('todo changedd');
+              break;
+            }
+          }
+           user.save()
+        })
+
+
+})
+
+
+router.get('/babycare_home',function(req,res){
+    res.render('babycare_home');
+});
 
 
 
@@ -170,25 +252,6 @@ router.get('/counselors/articles',function(req,res){
 
   });
 
-router.post('/song', urlencodedParser, function(req, res){
-      console.log(req.body);
-      if(req.files){
-        var k = fs.readFileSync(req.files[0].path)
-        song = '/uploads/'+req.files[0].filename
-      }
-
-
-      var songpost = new Songs({
-        name: req.user.name,
-        email:req.user.email,
-        type: req.user.type,
-        img:req.user.img,
-        song: song,
-        likes:0
-      })
-      songpost.save()
-      res.redirect('/user/home');
-    })
 
 
 router.get('/profile', async (req,res) => {
@@ -229,7 +292,14 @@ router.get('/profile', async (req,res) => {
             }
           }
           // booking.save()
-          res.render('profile', { user : user, date : date,booking:booking})
+          if(error==undefined){
+            res.render('profile', { user : user, date : date,booking:booking})
+
+          }
+          else{
+            res.render('profile', { user : user, date : date,booking:booking,error:error})
+            error=undefined
+          }
 
         })
     })
@@ -273,6 +343,7 @@ router.post('/profile', (req, res, next) =>{
             }
             user.save(function (err) {
 
+              error = 'succesfully updated profile details!!'
                 // todo: don't forget to handle err
 
                 res.redirect('/user/profile');
@@ -326,7 +397,7 @@ console.log(req.body.notiid)
 
 });
 
-router.post('/testimonial/', urlencodedParser, function(req, res){
+router.post('/testimonial/', urlencodedParser, function(req, res, next){
   console.log(req.body);
   if(req.body.sender_type=='doctor'){
      Doctors.updateOne({email: req.body.senderid}, {$push: {testimonials: {useremail: req.body.usermail, text: req.body.text }}}, function(err){
@@ -335,14 +406,25 @@ router.post('/testimonial/', urlencodedParser, function(req, res){
     console.log('------------------updated');
   }
   else{
+    console.log('counselor ');
     if(req.body.sender_type=='counselor'){
        Counselors.updateOne({email: req.body.senderid}, {$push: {testimonials: {usermail: req.body.usermail, text: req.body.text }}}, function(err){
         console.log(err);
       });
     }
+    console.log('------------------updated');
+
   }
 
+  req.flash('error', 'testimonial is sent')
+
+
+
+  error =  'testimonial is sent'
+
   res.redirect('/user/profile')
+
+  // res.render('user_home',{user:req.user,error:req.flash("error")});
 
 });
 

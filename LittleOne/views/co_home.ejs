@@ -85,7 +85,7 @@ nav ul li a {
   }
 
 #background {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F38%2F2020%2F01%2FGettyImages-643782350-2000.jpg&q=85");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("https://expressionscounselling.com/wp-content/uploads/2019/05/Web_ExpressionsCounselling_Talk-Therapy-Port-Moody-North-Vancouver-Pitt-Meadows-1024x595.jpg");
   min-height: 650px;
   background-attachment: fixed;
   background-position: center;
@@ -100,6 +100,13 @@ nav ul li a {
 .book::-webkit-scrollbar{
   display : none;
 }
+
+.alert {
+    margin-top: 20%;
+    width: 39%;
+    float: right;
+}
+
     </style>
 
   </head>
@@ -114,8 +121,53 @@ nav ul li a {
         <center>
          <li><a class="items" href="/co/home"><i class="fas fa-home"></i></a></li>
          <li><a class="items" href="/blog"><i class="fas fa-blog"></i></a></li>
+         <li><a class="items" href="/forum"><i class="fa fa-quora"></i></a></li>
+
          <li class="dropdown">
-           <i style="font-size:18px;" class="fas fa-bell dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+           <i class="fas fa-bell dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+             <!-- <button style="color:grey;font-size:16px;margin-top:-2%;" class="btn btn-outline-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             </button> -->
+             <div style="min-width:23rem;" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+               <!-- <a style="padding-top:2px;" class="dropdown-item" href="/users">Profile</a>
+               <a style="padding-top:2px;" class="dropdown-item" href="#">WanderList</a>
+               <a style="padding-top:2px;" class="dropdown-item" href="/users/logout">Logout</a> -->
+               <% if(counselor.notifications) {%>
+                   <div class="px-3 py-3">
+                     <h6 class="text-sm text-muted m-0">You have <strong class="text-primary"><%=counselor.notifications.length%></strong> notifications.</h6>
+                   </div>
+
+                   <div class="list-group list-group-flush" id="notifications" style="overflow-y:auto!important;max-height:400px!important;">
+
+               <% for(i=0;i < counselor.notifications.length;i++ ){ %>
+                   <a href="#" onclick="noti('<%=counselor.notifications[i]._id%>','<%=counselor.notifications[i].img %>','<%=counselor.notifications[i].senderid %>','<%=counselor.notifications[i].sender_type %>')"  class="list-group-item list-group-item-action">
+
+
+                       <div id="<%=counselor.notifications[i]._id%>"class="row align-items-center">
+                         <div class="col-auto">
+                           <img alt="Image placeholder" src="<%=counselor.notifications[i].img %>" class="notifimg rounded-circle">
+
+                         </div>
+                         <div class="col" style="width:100%;margin-top:-2%!important;padding-left:!important;margin-left:-5%">
+                               <h6 style="color: #32325d!important;" class=""><strong><%=counselor.notifications[i].username%></strong></h6>
+                           <p style="text-transform:lowercase!important;line-height:1.1!important;margin-bottom:-3%" class=""><%=counselor.notifications[i].msg%>
+
+                                 <i class="fas fa-trash"></i>
+
+</p>
+
+                         </div>
+
+
+                       </div>
+                     </a>
+                     <%} %>
+
+                   </div>
+                     <%}else{ %>
+                       <p>No Notifications</p>
+                     <%}%>
+
+             </div>
          </li>
          <li class="dropdown" style="margin-left:-4%;">
              <button style="color:white;font-size:16px;margin-top:-2%;" class="items btn btn-outline-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -132,6 +184,7 @@ nav ul li a {
   </nav>
 
   <div id="background">
+    <%- include ('partials/messages.ejs') %>
 
   </div>
 
@@ -366,6 +419,12 @@ nav ul li a {
 <br><br>
 
 <br><br>
+<div id="alert" class="alert alert-warning alert-dismissible fade show" role="alert" style="display:none;margin-top:-5%">
+  your request is sent to the particular user
+ <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+   <span aria-hidden="true">&times;</span>
+ </button>
+</div>
 <div style="padding:3%;background-size: cover;background-repeat: no-repeat;background-image:linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7) 75%), url('https://lstore.graphics/paaatterns/images/033-p-1080.png');">
 <div class="wrapper" id="wrapper">
   <center><h2 style="color:#17a2b8">PREVIOUS BOOKINGS</h2></center>
@@ -614,6 +673,8 @@ nav ul li a {
 
     <script>
     function testimonial(x){
+      document.getElementById("alert").style.display="block"
+
     console.log('called')
     $.ajax({
       type:'POST',
@@ -644,7 +705,28 @@ nav ul li a {
      </script>
 
 
+     <script type="text/javascript">
+     function noti(x,img,senderid,sender_type){
+       console.log('asasssssssssssssssssss');
+       console.log(x)
+       document.getElementById(x).style.display = "none";
 
+
+     console.log('called')
+       $.ajax({
+         type:'POST',
+         url:'/co/noti',
+         data:{
+           notiid:x,
+         },
+         sucess:function(){
+           return false
+         }
+       });
+
+     };
+
+     </script>
 
 
   </body>

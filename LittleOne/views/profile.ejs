@@ -179,125 +179,164 @@
       }
 
 
+
+      .alert {
+          margin-top: 2%;
+          margin-left:100%;
+          margin-right:-90%;
+      }
+      .alert-warning {
+    color: #fff3cd;
+    background-color: #fff3cd;
+  }
+  .alert:not(.alert-secondary) {
+    color: #000;
+}
+
 </style>
 
 </head>
 <body style="overflow-x:hidden;margin-left:0%;background-image:linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7) 75%),url('https://demos.creative-tim.com/argon-design-system-pro-angular/assets/img/ill/testimonial_bg.svg')">
   <div class="row" style="top:0px;position:fixed;z-index:100">
-    <nav id="nav" style="z-index:5;padding-top:0.2%;padding-bottom:0.05%;border:none;" class="navpic">
-      <div class="logo">
-        <span id="wander">WANDERMATE</span>
-      </div>
-      <div class="menu"  style="overflow:visible!important;">
-        <ul id="ul" style="margin-left:60%;margin-top:0.4%;">
-          <center>
-           <li><a class="items" href="/user/home"><i class="fas fa-home"></i></a></li>
-           <li><a class="items" href="/blog"><i class="fas fa-blog"></i></a></li>
-           <li class="dropdown">
-             <i class="fas fa-bell dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
-               <!-- <button style="color:grey;font-size:16px;margin-top:-2%;" class="btn btn-outline-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               </button> -->
-               <div style="min-width:23rem;" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                 <!-- <a style="padding-top:2px;" class="dropdown-item" href="/users">Profile</a>
-                 <a style="padding-top:2px;" class="dropdown-item" href="#">WanderList</a>
-                 <a style="padding-top:2px;" class="dropdown-item" href="/users/logout">Logout</a> -->
-                 <% if(user.notifications) {%>
-                     <div class="px-3 py-3">
-                       <h6 class="text-sm text-muted m-0">You have <strong class="text-primary"><%=user.notifications.length%></strong> notifications.</h6>
-                     </div>
 
-                     <div class="list-group list-group-flush" id="notifications">
+        <nav id="nav" style="z-index:15;border:none;" class="navpic">
+        <div class="logo">
+          <span id="wander">LITTLEONE</span>
+        </div>
+        <div class="menu"  style="overflow:visible!important;">
+          <ul id="ul" style="margin-left:60%;margin-top:1.7%;">
+            <center>
+             <li><a class="items" href="/user/home"><i class="fas fa-home"></i></a></li>
+             <li><a class="items" href="/blog"><i class="fas fa-blog"></i></a></li>
+             <li><a class="items" href="/forum"><i class="fa fa-quora"></i></a></li>
 
-                 <% for(i=0;i < user.notifications.length;i++ ){ %>
-                   <%if(user.notifications[i].typeid=='testimonial'){%>
-                     <a href="#" onclick="noti('<%=user.notifications[i]._id%>','<%=user.notifications[i].img %>','<%=user.notifications[i].senderid %>','<%=user.notifications[i].sender_type %>')" data-toggle="modal" data-target="#myModal" class="list-group-item list-group-item-action">
+             <li class="dropdown">
+               <i class="fas fa-bell dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                 <!-- <button style="color:grey;font-size:16px;margin-top:-2%;" class="btn btn-outline-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                 </button> -->
+                 <div style="min-width:23rem;" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                   <!-- <a style="padding-top:2px;" class="dropdown-item" href="/users">Profile</a>
+                   <a style="padding-top:2px;" class="dropdown-item" href="#">WanderList</a>
+                   <a style="padding-top:2px;" class="dropdown-item" href="/users/logout">Logout</a> -->
+                   <% if(user.notifications) {%>
+                       <div class="px-3 py-3">
+                         <h6 class="text-sm text-muted m-0">You have <strong class="text-primary"><%=user.notifications.length%></strong> notifications.</h6>
+                       </div>
 
-                   <%}else{%>
-                     <a href="#" onclick="noti('<%=user.notifications[i]._id%>','<%=user.notifications[i].img %>','<%=user.notifications[i].senderid %>','<%=user.notifications[i].sender_type %>')"  class="list-group-item list-group-item-action">
+                       <div class="list-group list-group-flush" id="notifications" style="overflow-y:auto!important;max-height:400px!important;">
 
-                   <%}%>
-                         <div class="row align-items-center">
-                           <div class="col-auto">
-                             <img alt="Image placeholder" src="<%=user.notifications[i].img %>" class="notifimg rounded-circle">
+                   <% for(i=0;i < user.notifications.length;i++ ){ %>
+                      <% if(user.notifications[i].typeid=='testimonial'){%>
+                        <a href="#" onclick="noti('<%=user.notifications[i]._id%>','<%=user.notifications[i].img %>','<%=user.notifications[i].senderid %>','<%=user.notifications[i].sender_type %>')" data-toggle="modal" data-target="#myModal" class="list-group-item list-group-item-action">
 
-                           </div>
-                           <div class="col ml--2" style="width:100%;padding-left:1px;padding-right:2px;">
-                             <div class="d-flex justify-content-between align-items-center">
-                               <div>
-                                 <h6 style="font-family: inherit;font-weight: 300;line-height: 1.5;color: #32325d;" class="mb-0 text-sm"><%=user.notifications[i].senderid%></h6>
-                               </div>
-                               <div class="text-right text-muted">
-                                 <small></small>
-                               </div>
-                             </div>
-                             <p style="margin-bottom: 0!important;font-weight: 300;line-height: 1.7;" class="text-sm mb-0"><%=user.notifications[i].msg%>  </p>
-                           </div>
-                         </div>
-                       </a>
-                       <%} %>
-                       <a href="#" class="text-center text-primary">View all</a>
 
-                     </div>
-                       <%}else{ %>
-                         <p>No Notifications</p>
+                            <div id="<%=user.notifications[i]._id%>"class="row align-items-center">
+                              <div class="col-auto">
+                                <img alt="Image placeholder" src="<%=user.notifications[i].img %>" class="notifimg rounded-circle">
+
+                              </div>
+                              <div class="col" style="width:100%;margin-top:-2%!important;padding-left:!important;margin-left:-5%">
+                                    <h6 style="color: #32325d!important;" class=""><strong><%=user.notifications[i].username%></strong></h6>
+                                <p style="text-transform:lowercase!important;line-height:1.1!important;margin-bottom:-3%;margin-top:-2%" class=""><%=user.notifications[i].msg%></p>
+
+                              </div>
+
+
+                            </div>
+                          </a>
                        <%}%>
 
-               </div>
-           </li>
-           <li class="dropdown" style="margin-left:-4%;">
-               <button style="color:grey;font-size:16px;margin-top:-2%;" class="btn btn-outline-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                 <i class="far fa-user-circle"><small><b><%= user.name %></b></small></i>
-               </button>
-               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                 <a style="padding-top:2px;" class="dropdown-item" href="/user/profile">Profile</a>
-                 <a style="padding-top:2px;" class="dropdown-item" href="/users/logout">Logout</a>
-               </div>
-           </li>
-         </center>
-        </ul>
-      </div>
-    </nav>
-  </div>
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog modal-lg">
+                       <% if(user.notifications[i].typeid!='testimonial'){%>
 
-      <div class="modal-content" style="background-color: #DDDDDD;background-image:linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4) 75%), url('https://lstore.graphics/paaatterns/images/Waiau-3-p-1080.jpeg');background-size:contain;background-position:150% 100%;background-repeat:no-repeat;">
-        <div class="modal-header">
-          <!-- <h4 class="modal-title">Testimonial</h4> -->
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <div class="modal-body">
-          <table style="width:100%;padding:3%;">
-            <tr>
-              <td style="width:38%;padding-top:3%;padding-bottom: 1.5%;text-align:center;">
-                <img style="width:30vh;height:30vh;border-radius:3px;box-shadow:0 10px 25px 0 rgba(0,0,0,.3);"  id="testmodelimg" alt="Raised Image" class="rounded img-raised">
-                <div id="senderid">
+                         <a href="#" onclick="noti('<%=user.notifications[i]._id%>','<%=user.notifications[i].img %>','<%=user.notifications[i].senderid %>','<%=user.notifications[i].sender_type %>')"  class="list-group-item list-group-item-action">
 
-                </div>
-              </td>
-              <td style="width:58%;">
-                <form action="/user/testimonial/" method="POST">
-                  <input style="display: none;" type="text" id="testusername" name="usermail" value="">
-                  <input style="display: none;" type="text" id="sender_type" name="sender_type" value="">
-                  <input style="display: none;" type="text" id="senderid" name="senderid" value="">
-                  <h1 style="color:#919293;">Testimonial</h1>
-                  <div class="form-group" style="margin-top:5%;">
-                    <label for="exampleFormControlTextarea1">Your Feedback</label>
-                    <textarea name="text" placeholder="Give your feedback please..." class="form-control" id="exampleFormControlTextarea1" rows="6"></textarea>
-                  </div>
-                  <input style="float:right;" class="btn btn-success btn-sm" type="submit" name="submit" value="Submit">
-                </form>
-              </td>
-            </tr>
-          </table>
-          <!-- <div class="modal-footer" style="border-top:none;">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div> -->
+
+                             <div id="<%=user.notifications[i]._id%>"class="row align-items-center">
+                               <div class="col-auto">
+                                 <img alt="Image placeholder" src="<%=user.notifications[i].img %>" class="notifimg rounded-circle">
+
+                               </div>
+                               <div class="col" style="width:100%;margin-top:-2%!important;padding-left:!important;margin-left:-5%">
+                                     <h6 style="color: #32325d!important;" class=""><strong><%=user.notifications[i].username%></strong></h6>
+                                 <p style="text-transform:lowercase!important;line-height:1.1!important;margin-bottom:-3%;margin-top:-2%" class=""><%=user.notifications[i].msg%>
+
+                                       <i class="fas fa-trash"></i>
+
+      </p>
+
+                               </div>
+
+
+                             </div>
+                           </a>
+                        <%}%>
+
+                         <%} %>
+
+                       </div>
+                         <%}else{ %>
+                           <p>No Notifications</p>
+                         <%}%>
+
+                 </div>
+             </li>
+             <li class="dropdown" style="margin-left:-4%;">
+                 <button style="color:white;font-size:16px;margin-top:-2%;" class="items btn btn-outline-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   <i style="font-size:18px;" class="items far fa-user-circle"><small><b><%=user.name%></b></small></i>
+                 </button>
+                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                   <a style="padding-top:2px;" class="dropdown-item" href="/user/profile">Profile</a>
+                   <a style="padding-top:2px;" class="dropdown-item" href="/users/logout">Logout</a>
+                 </div>
+             </li>
+           </center>
+          </ul>
         </div>
-      </div>
+      </nav>
 
     </div>
-  </div>
+
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+          <div class="modal-content" style="background-color: #DDDDDD;background-image:linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4) 75%), url('https://lstore.graphics/paaatterns/images/Waiau-3-p-1080.jpeg');background-size:contain;background-position:150% 100%;background-repeat:no-repeat;">
+            <div class="modal-header">
+              <!-- <h4 class="modal-title">Testimonial</h4> -->
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <table style="width:100%;padding:3%;">
+                <tr>
+                  <td style="width:38%;padding-top:3%;padding-bottom: 1.5%;text-align:center;">
+                    <img style="width:30vh;height:30vh;border-radius:3px;box-shadow:0 10px 25px 0 rgba(0,0,0,.3);"  id="testmodelimg" alt="Raised Image" class="rounded img-raised">
+                    <div id="senderid">
+
+                    </div>
+                  </td>
+                  <td style="width:58%;">
+                    <form action="/user/testimonial/" method="POST">
+                      <input style="display: none;" type="text" id="testusername" name="usermail" value="">
+                      <input style="display: none;" type="text" id="sender_type" name="sender_type" value="">
+                      <input style="display: none" type="text" id="sender" name="senderid" value="">
+                      <h1 style="color:#919293;">Testimonial</h1>
+                      <div class="form-group" style="margin-top:5%;">
+                        <label for="exampleFormControlTextarea1">Your Feedback</label>
+                        <textarea name="text" placeholder="Give your feedback please..." class="form-control" id="exampleFormControlTextarea1" rows="6"></textarea>
+                      </div>
+                      <input style="float:right;" class="btn btn-success btn-sm" type="submit" name="submit" value="Submit">
+                    </form>
+                  </td>
+                </tr>
+              </table>
+              <!-- <div class="modal-footer" style="border-top:none;">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div> -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+
   <% var boo = 0 %>
   <% for ( var i = 0; i < booking.length; i++ ) { %>
     <% boo++; } %>
@@ -315,14 +354,14 @@
                     <!-- <input type="file" id="my_file" style="display: none; " name="img" /> -->
                   </a>
                   <div class="form-wrapper" style="border:none;">
-                                <!-- <input type="file" name="img" onchange="readURL(this);" class="form-control" style="border:none;" required> -->
+
                              <i class="zmdi zmdi-image"></i>
                   </div>
                 </div>
               </div>
               <div class="card-body pt-0">
                 <h4 class="display-4 mb-0"><%=user.name%></h4>
-                --Change profile Pic<input type="file" id="my_file" class="form-control"  onchange="readURL(this);" style="border: none;" name="img" >
+                --Change profile Pic<input type="file" name="img" onchange="readURL(this);" class="form-control" style="border:none;" >
 
                 <div class="table-responsive">
                   <ul class="list-unstyled ">
@@ -357,10 +396,14 @@
             </div>
           </div>
 
+
           <div style="padding-left:5%;">
+            <%- include ('partials/messages.ejs') %>
+
             <h2>Edit Profile</h2>
             <hr id="line1" noshade>
           <div id="form" class="jumbotron shadow-sm p-3 mb-5 bg-white rounded">
+
               <div class="form" style="padding-top  :10px;">
                 <div class="form-group">
                   <label for="name">Name</label>
@@ -422,7 +465,7 @@
             </div>
             <div>
               <span class="heading"><%= booking[i].booking_type %></span>
-              <span class="description">Type</span>
+              <span class="description"> Type</span>
             </div>
             <div>
               <span class="heading"><%= booking[i].num_of_days%></span>
@@ -608,6 +651,75 @@
 
           </script>
 
+          <script>
+            window.onscroll = function(){
+          var navbar = document.getElementById('nav')
+          var wander = document.getElementById('wander')
+          var items = document.getElementsByClassName('items')
+          var count = document.getElementById('count')
+          var btn = document.getElementById('dropdownMenuButton')
+          var ul = document.getElementById('ul')
 
+          if (window.pageYOffset < 0){
+            navbar.style.background = "rgba(0, 0, 0, 0)";
+            navbar.style.boxShadow = 'none';
+            wander.style.color = "#000000";
+            wander.style.marginTop = "35px"
+            ul.style.marginTop = "1.7%";
+            btn.style.color = '#ffffff';
+            for(var i=0; i<items.length; i++){
+              items[i].style.color = "#ffffff";
+              items[i].onmouseover = function(){
+                items[i].style.color = "#17a2b8";
+              }
+            }
+          } else {
+            navbar.style.background = '#fff';
+            navbar.style.boxShadow = "0 4px 4px -2px #495057";
+            wander.style.color = "#60bfdc";
+            btn.style.color = '#60bfdc';
+            wander.style.marginTop = "17px"
+            ul.style.marginTop = "0.4%";
+            for(var i=0; i<items.length; i++){
+              items[i].style.color = "#60bfdc";
+              items[i].onmouseover = function(){
+                items[i].style.color = "black";
+              }
+            }
+          }
+        }
+
+          </script>
+
+          <script type="text/javascript">
+          function noti(x,img,senderid,sender_type){
+            console.log('asasssssssssssssssssss');
+            console.log(x)
+            document.getElementById(x).style.display = "none";
+            document.getElementById('testusername').value = '<%= user.email %>';
+
+            document.getElementById('sender').value =  senderid;
+            document.getElementById('sender_type').value =  sender_type;
+
+            document.getElementById('senderid').innerHTML =  senderid;
+
+            // console.log(x)
+            console.log(img)
+            document.getElementById("testmodelimg").setAttribute('src',img);
+          console.log('called')
+            $.ajax({
+              type:'POST',
+              url:'/user/noti',
+              data:{
+                notiid:x,
+              },
+              sucess:function(){
+                return false
+              }
+            });
+
+          };
+
+          </script>
     </body>
 </html>

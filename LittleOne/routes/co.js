@@ -15,7 +15,7 @@ const Users=require('../models/Users');
 
 
 
-
+var error=undefined;
 
 router.get('/home',function(req,res){
   console.log(req.user);
@@ -101,7 +101,13 @@ router.get('/home',function(req,res){
         console.log('--------------------------------------------------------------------------------------------homeeeeeeeeeee');
         console.log(b_dates);
         console.log(dates);
-        res.render('co_home',{counselor:req.user,dates:dates,s_dates:s_dates,b_dates:b_dates,booking:booking});
+        if(error==undefined){
+          res.render('co_home',{counselor:req.user,dates:dates,s_dates:s_dates,b_dates:b_dates,booking:booking});
+        }
+        else{
+          res.render('co_home',{counselor:req.user,dates:dates,s_dates:s_dates,b_dates:b_dates,booking:booking,error:error});
+          error=undefined;
+        }
       })
 });
 
@@ -114,7 +120,13 @@ router.get('/myarticles',function(req,res){
           Articles.find({'email':req.user.email,'topic':'abuse'},function(err,abuse){
             Articles.find({'email':req.user.email,'topic':'family'},function(err,family){
               Articles.find({'email':req.user.email,'topic':'adjustments'},function(err,adjustments){
-                res.render('co_my',{counselor:req.user,articles:articles,anxiety:anxiety.length,depression:depression.length,abuse:abuse.length,family:family.length,adjustments:adjustments.length});
+                if(error==undefined){
+                  res.render('co_my',{counselor:req.user,articles:articles,anxiety:anxiety.length,depression:depression.length,abuse:abuse.length,family:family.length,adjustments:adjustments.length});
+                }
+                else{
+                  res.render('co_my',{counselor:req.user,articles:articles,anxiety:anxiety.length,depression:depression.length,abuse:abuse.length,family:family.length,adjustments:adjustments.length,error:error});
+                  error=undefined;
+                }
 
               })
             })
@@ -194,6 +206,7 @@ router.post('/', urlencodedParser, function(req, res){
     likes:0
   })
   articlepost.save()
+  error="your article is posted!!"
   res.redirect('/co/myarticles');
 })
 
@@ -288,6 +301,7 @@ else{
 
 
 console.log('redirecting you stupi thing--------------------')
+error="your dates are updated !! check your calendar"
 
   res.redirect('/co/home')
 });
@@ -364,10 +378,42 @@ router.post('/profile', (req, res, next) =>{
             user.save(function (err) {
 
                 // todo: don't forget to handle err
+                error="your profile is succesfully updated"
 
                 res.redirect('/co/home#edit');
             });
         });
     });
 
+    router.post('/noti',urlencodedParser,async function(req,res){
+      console.log('hey there')
+    console.log(req.body.notiid)
+      var test=[]
+      Counselors.findById(req.user._id, (err, user) =>{
+        console.log('user----------------------');
+        console.log(user);
+        for(var i=0;i<user.notifications.length;i++){
+          if(user.notifications[i]._id==req.body.notiid){
+            user.notifications.splice(i,1)
+            console.log('notification deleteddd');
+            break;
+          }
+        }
+        user.save()
+      })
+
+
+    });
+
+    router.post('/del_article',urlencodedParser,async function(req,res){
+      console.log('hey there')
+    console.log(req.body.article_id)
+      var test=[]
+      Articles.deleteOne({"_id":req.body.article_id}, (err) =>{
+        console.log('user----------------------');
+
+      })
+
+
+    });
 module.exports = router;

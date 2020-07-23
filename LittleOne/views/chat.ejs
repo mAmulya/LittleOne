@@ -342,7 +342,7 @@
     .navbar{display:none;}
     .badge{border:.0625rem solid #000;}
     }
-    .bg-gradient-primary{background:linear-gradient(35deg,#06b995 0,#06b995 100%)!important;}
+    .bg-gradient-primary{background:linear-gradient(35deg,#17a2b8 0,#17a2b8 100%)!important;}
     .bg-gradient-warning{background:linear-gradient(35deg,#fb6340 0,#fbb140 100%)!important;}
     .row.row-grid>[class*=col-]+[class*=col-]{margin-top:3rem;}
     [class*=shadow]{transition:all .15s ease;}
@@ -584,7 +584,7 @@
                   <div class="header-body text-center mb-7">
                     <div class="row justify-content-center">
                       <div class="col-xl-5 col-lg-6 col-md-8 px-5">
-                        <h1 class="text-white" style="margin-top:-15%;">Chat / Messages</h1>
+                        <h1 class="text-white" style="margin-top:-28%;">Chat / Messages</h1>
                       </div>
                     </div>
                   </div>
@@ -592,21 +592,92 @@
               </div>
             </div>
             <section style="background-image:url('https://demos.creative-tim.com/argon-design-system-pro-angular/assets/img/ill/1.svg')">
-              <div class="container pt-5 mb-5 upper">
+              <div class="container pt-5 mb-5 upper" style="margin-top:-24%">
                 <div class="row flex-row chat">
-                  
+
+
+
+                  <div class="col-lg-4 col-md-6" style="float:left!important;max-width:70%%!important;">
+
+                    <div class="card card-profile" data-background="cover">
+                      <div class="card-body pt-0" style="margin-top:4%">
+                        <div class="text-center">
+                          <h4 class="mt-3" style="color:#17a2b8!important;font-size:1.2rem">
+                            <%= data.doctor %>
+                          </h4>
+                          <div class="font-weight-300">
+                            <i class="ni location_pin mr-2"><%=data.date_n_time.date%>, <%=data.date_n_time.slot%>, <%=data.date_n_time.time%></i>
+                          </div>
+                          <div class="font-weight-300">
+                            <i class="ni location_pin mr-2">Name: <%= data.doc_name %>, Type: <%=data.doc_type%> </i>
+                          </div>
+                          <h6 style="margin-top:3%"> Place : <%= data.place %></h6>
+
+                        </div>
+                        <div class="card-profile-stats d-flex justify-content-center" style="margin-top:5%">
+                          <div>
+                            <span class="heading"><%=data.count%></span>
+                            <span class="description">patients</span>
+                          </div>
+                          <div>
+                            <span class="heading"><%= data.booking_type %></span>
+                            <span class="description">Type</span>
+                          </div>
+                          <div>
+                            <span class="heading"><%= data.num_of_days%></span>
+                            <span class="description">Days</span>
+                          </div>
+
+
+                        </div>
+                        <br>
+
+                        <% if(usertype === user){ %>
+                          <a href="/user/profile" style="color:#17a2b8!important;margin-top:-4%;margin-left:38%"> Go Back</a>
+                        <% } else { %>
+                          <a href="/doc/home" style="color:#17a2b8!important;margin-top:-4%;margin-left:38%">Go Back</a>
+                        <% } %>
+
+                                <!-- <a type="submit" class="dt-sc-button" >appt Session</a> -->
+
+
+                        <!-- <button type="submit" style="color:#17a2b8!important" class="btn btn-lg btn-sucess btn-block">Book Session</button> -->
+
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                   <div class="col-lg-8">
                     <div class="card-header d-inline-block" style="z-index:10;width:100%;">
                       <div class="row">
                         <div class="col-md-10">
                           <div class="media align-items-center">
-                            <img alt="Image" class="avatar shadow" src="">
+                            <!-- <img alt="Image" class="avatar shadow" src=""> -->
                             <div class="media-body">
                               <h6 id="name" class="mb-0 d-block">
                                 <% if(usertype === user){ %>
-                                  <%= doctor %>
+                                  Doctor: <%= doctor %>
                                 <% } else { %>
-                                  <%= user %>
+                                  Patient:<%= user %>
                                 <% } %>
                               </h6>
                             </div>
@@ -661,7 +732,7 @@
                         </div>
                         <div class="form-group">
                           <div class="row" style="margin-left:0;width:100%;">
-                            <div class="col-9" style="width:75%;">
+                            <div class="col-9" style="width:80%;margin-left:20%">
                               <div class="input-group mb-4">
                                 <input id="textarea" class="form-control" placeholder="Your message" type="text">
                                 <div class="input-group-append">
@@ -671,9 +742,9 @@
                                 </div>
                               </div>
                             </div>
-                            <div class="col-3"  style="width:25%;">
+                            <!-- <div class="col-3"  style="width:25%;">
                               <button id="sendlocation" class="btn text-white" style="width:100%!important;background-color: #17a2b8" type="button" name="button">Send Location</button>
-                            </div>
+                            </div> -->
                           </div>
                         </div>
                       </div>
@@ -852,7 +923,7 @@ var socket = io.connect('http://127.0.0.1:8000',{ transports: ['websocket'], rej
       for(var i=0; i<items.length; i++){
         items[i].style.color = "#ffffff";
         items[i].onmouseover = function(){
-          items[i].style.color = "#06b995";
+          items[i].style.color = "#17a2b8";
         }
       }
     } else {

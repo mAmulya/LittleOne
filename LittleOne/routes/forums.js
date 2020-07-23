@@ -7,7 +7,11 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false })
 const nodemailer = require('nodemailer');
 
 const Users=require('../models/Users');
+const Doctors=require('../models/Doctors');
+const Counselors=require('../models/Counselors');
 const Forums=require('../models/Forums');
+
+var error=undefined;
 
 
 router.get('/',function(req,res){
@@ -38,8 +42,14 @@ router.get('/',function(req,res){
       }
     }
     active=forums.slice(Math.max(forums.length - 5, 0))
+        if(error==undefined){
+          res.render('forum',{user:req.user,forums:forums,all:all,pregnancy:pregnancy,baby:baby,babynames:babynames,toddler:toddler,parenting:parenting,active:active});
+        }
+        else{
+          res.render('forum',{user:req.user,forums:forums,all:all,pregnancy:pregnancy,baby:baby,babynames:babynames,toddler:toddler,parenting:parenting,active:active,error:error});
+          error=undefined;
+        }
 
-        res.render('forum',{user:req.user,forums:forums,all:all,pregnancy:pregnancy,baby:baby,babynames:babynames,toddler:toddler,parenting:parenting,active:active});
 
   })
 
@@ -114,7 +124,7 @@ router.get('/:name',function(req,res){
 
 });
 
-router.post('/', urlencodedParser, function(req, res){
+router.post('/', urlencodedParser, async(req, res)=>{
   console.log(req.body);
 
 
@@ -129,12 +139,68 @@ router.post('/', urlencodedParser, function(req, res){
     question: req.body.question,
   })
   question.save()
+
+
+  test=[]
+  test.push({senderid:req.user.email,sender_type:req.user.type,img:req.user.img.path,username:req.user.name,typeid:'forum',unread:true,msg:'check out the forum question'})
+  await Counselors.updateOne({},{
+      $push:{
+        notifications:{
+          $each:test
+        },
+
+      }
+    })
+    await Doctors.updateOne({},{
+        $push:{
+          notifications:{
+            $each:test
+          },
+
+        }
+      })
+  error='your question is added! we will keep you updated'
   res.redirect('/forum');
 })
 
 router.post('/ans', urlencodedParser, function(req, res){
   console.log(req.body);
-  Forums.findOne({'_id':req.body.forum},function(err,forum){
+  Forums.findOne({'_id':req.body.forum},async(err,forum)=>{
+    console.log(forum);
+    test=[]
+    test.push({senderid:req.user.email,sender_type:req.user.type,img:req.user.img.path,username:req.user.name,typeid:'forum',unread:true,msg:'your queston is answered'})
+    console.log(test);
+    if(forum.type=='user'){
+        await Users.updateOne({"email":forum.email},{
+            $push:{
+              notifications:{
+                $each:test
+              },
+
+            }
+          })
+    }
+    else if(forum.type=='doctor'){
+      await Doctors.updateOne({"email":forum.email},{
+          $push:{
+            notifications:{
+              $each:test
+            },
+
+          }
+        })
+    }
+    else if(forum.type=='counselor'){
+      await Counselors.updateOne({"email":forum.email},{
+          $push:{
+            notifications:{
+              $each:test
+            },
+
+          }
+        })
+    }
+
     forum.answers.push({
       name:req.user.name,
       email:req.user.email,
@@ -147,6 +213,8 @@ router.post('/ans', urlencodedParser, function(req, res){
       colikes:new Array(),
      })
      forum.save()
+
+
 
      var all = 0 ;
      var pregnancy = 0;

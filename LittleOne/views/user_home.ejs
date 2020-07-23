@@ -377,55 +377,88 @@ h2{font-size:30px;font-weight:normal;letter-spacing:0px;}
     </style>
     <script src="https://kit.fontawesome.com/ea0619ce99.js" crossorigin="anonymous"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js" ></script> -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" ></script>
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
   </head>
   <body style="width:100%">
 
-    <nav id="nav" style="z-index:5;border:none;" class="navpic">
+    <nav id="nav" style="z-index:15;border:none;" class="navpic">
     <div class="logo">
-      <span id="wander">FIRSTBORNS</span>
+      <span id="wander">LITTLEONE</span>
     </div>
     <div class="menu"  style="overflow:visible!important;">
       <ul id="ul" style="margin-left:60%;margin-top:1.7%;">
         <center>
-         <li><a class="items" href="/users/dashboard"><i class="fas fa-home"></i></a></li>
+         <li><a class="items" href="/user/home"><i class="fas fa-home"></i></a></li>
          <li><a class="items" href="/blog"><i class="fas fa-blog"></i></a></li>
+         <li><a class="items" href="/forum"><i class="fa fa-quora"></i></a></li>
+
          <li class="dropdown">
            <i class="fas fa-bell dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
              <!-- <button style="color:grey;font-size:16px;margin-top:-2%;" class="btn btn-outline-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
              </button> -->
              <div style="min-width:23rem;" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+               <!-- <a style="padding-top:2px;" class="dropdown-item" href="/users">Profile</a>
+               <a style="padding-top:2px;" class="dropdown-item" href="#">WanderList</a>
+               <a style="padding-top:2px;" class="dropdown-item" href="/users/logout">Logout</a> -->
                <% if(user.notifications) {%>
                    <div class="px-3 py-3">
                      <h6 class="text-sm text-muted m-0">You have <strong class="text-primary"><%=user.notifications.length%></strong> notifications.</h6>
                    </div>
 
-                   <div class="list-group list-group-flush" id="notifications">
+                   <div class="list-group list-group-flush" id="notifications" style="overflow-y:auto!important;max-height:400px!important;">
 
                <% for(i=0;i < user.notifications.length;i++ ){ %>
-                     <a href="#!" onclick="noti('<%=user.notifications[i]._id%>')" class="list-group-item list-group-item-action">
-                       <div class="row align-items-center">
-                         <div class="col-auto">
-                           <img alt="Image placeholder" src="<%=user.notifications[i].img %>" class="notifimg rounded-circle">
-                         </div>
-                         <div class="col ml--2">
-                           <div class="d-flex justify-content-between align-items-center">
-                             <div>
-                               <h4 style="font-family: inherit;font-weight: 400;line-height: 1.5;color: #32325d;" class="mb-0 text-sm"><%=user.notifications[i].senderid%></h4>
-                             </div>
-                             <div class="text-right text-muted">
-                               <small></small>
-                             </div>
+                  <% if(user.notifications[i].typeid=='testimonial'){%>
+                    <a href="#" onclick="noti('<%=user.notifications[i]._id%>','<%=user.notifications[i].img %>','<%=user.notifications[i].senderid %>','<%=user.notifications[i].sender_type %>')" data-toggle="modal" data-target="#myModal" class="list-group-item list-group-item-action">
+
+
+                        <div id="<%=user.notifications[i]._id%>"class="row align-items-center">
+                          <div class="col-auto">
+                            <img alt="Image placeholder" src="<%=user.notifications[i].img %>" class="notifimg rounded-circle">
+
+                          </div>
+                          <div class="col" style="width:100%;margin-top:-21%!important;margin-left:24%;padding-left:!important">
+                                <h6 style="color: #32325d!important;" class=""><strong><%=user.notifications[i].username%></strong></h6>
+                            <p style="text-transform:lowercase!important;line-height:1.1!important;margin-bottom:%" class=""><%=user.notifications[i].msg%></p>
+
+                          </div>
+
+
+                        </div>
+                      </a>
+                   <%}%>
+
+                   <% if(user.notifications[i].typeid!='testimonial'){%>
+
+                     <a href="#" onclick="noti('<%=user.notifications[i]._id%>','<%=user.notifications[i].img %>','<%=user.notifications[i].senderid %>','<%=user.notifications[i].sender_type %>')"  class="list-group-item list-group-item-action">
+
+
+                         <div id="<%=user.notifications[i]._id%>"class="row align-items-center">
+                           <div class="col-auto">
+                             <img alt="Image placeholder" src="<%=user.notifications[i].img %>" class="notifimg rounded-circle">
+
                            </div>
-                           <p style="margin-bottom: 0!important;font-weight: 300;line-height: 1.7;" class="text-sm mb-0">Let's meet at Starbucks at 11:30. Wdyt?</p>
+                           <div class="col" style="width:100%;margin-top:-21%!important;margin-left:24%;padding-left:!important">
+                                 <h6 style="color: #32325d!important;" class=""><strong><%=user.notifications[i].username%></strong></h6>
+                             <p style="text-transform:lowercase!important;line-height:1.1!important;margin-bottom:%" class=""><%=user.notifications[i].msg%>
+
+                                   <i class="fas fa-trash"></i>
+
+  </p>
+
+                           </div>
+
+
                          </div>
-                       </div>
-                     </a>
-                       <a href="#!" class="dropdown-item text-center text-primary">View all</a>
+                       </a>
+                    <%}%>
+
                      <%} %>
 
                    </div>
@@ -437,11 +470,10 @@ h2{font-size:30px;font-weight:normal;letter-spacing:0px;}
          </li>
          <li class="dropdown" style="margin-left:-4%;">
              <button style="color:white;font-size:16px;margin-top:-2%;" class="items btn btn-outline-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               <i style="font-size:18px;" class="items far fa-user-circle"><small><b><%= user.name%></b></small></i>
+               <i style="font-size:18px;" class="items far fa-user-circle"><small><b><%=user.name%></b></small></i>
              </button>
              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-               <a style="padding-top:2px;" class="dropdown-item" href="/users">Profile</a>
-               <a style="padding-top:2px;" class="dropdown-item" href="//">SavedArticles</a>
+               <a style="padding-top:2px;" class="dropdown-item" href="/user/profile">Profile</a>
                <a style="padding-top:2px;" class="dropdown-item" href="/users/logout">Logout</a>
              </div>
          </li>
@@ -449,6 +481,47 @@ h2{font-size:30px;font-weight:normal;letter-spacing:0px;}
       </ul>
     </div>
   </nav>
+
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog modal-lg">
+
+    <div class="modal-content" style="background-color: #DDDDDD;background-image:linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4) 75%), url('https://lstore.graphics/paaatterns/images/Waiau-3-p-1080.jpeg');background-size:contain;background-position:150% 100%;background-repeat:no-repeat;">
+      <div class="modal-header">
+        <!-- <h4 class="modal-title">Testimonial</h4> -->
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <table style="width:100%;padding:3%;">
+          <tr>
+            <td style="width:38%;padding-top:3%;padding-bottom: 1.5%;text-align:center;">
+              <img style="width:30vh;height:30vh;border-radius:3px;box-shadow:0 10px 25px 0 rgba(0,0,0,.3);"  id="testmodelimg" alt="Raised Image" class="rounded img-raised">
+              <div id="senderid">
+
+              </div>
+            </td>
+            <td style="width:58%;">
+              <form action="/user/testimonial/" method="POST">
+                <input style="display: none;" type="text" id="testusername" name="usermail" value="">
+                <input style="display: none;" type="text" id="sender_type" name="sender_type" value="">
+                <input style="display: none" type="text" id="sender" name="senderid" value="">
+                <h1 style="color:#919293;">Testimonial</h1>
+                <div class="form-group" style="margin-top:5%;">
+                  <label for="exampleFormControlTextarea1">Your Feedback</label>
+                  <textarea name="text" placeholder="Give your feedback please..." class="form-control" id="exampleFormControlTextarea1" rows="6"></textarea>
+                </div>
+                <input style="float:right;" class="btn btn-success btn-sm" type="submit" name="submit" value="Submit">
+              </form>
+            </td>
+          </tr>
+        </table>
+        <!-- <div class="modal-footer" style="border-top:none;">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div> -->
+      </div>
+    </div>
+
+  </div>
+</div>
 
 <div id="background">
   <%- include ('partials/messages.ejs') %>
@@ -688,6 +761,36 @@ h2{font-size:30px;font-weight:normal;letter-spacing:0px;}
 
 
 
+  <script type="text/javascript">
+  function noti(x,img,senderid,sender_type){
+    console.log('asasssssssssssssssssss');
+    console.log(x)
+    document.getElementById(x).style.display = "none";
+    document.getElementById('testusername').value = '<%= user.email %>';
+
+    document.getElementById('sender').value =  senderid;
+    document.getElementById('sender_type').value =  sender_type;
+
+    document.getElementById('senderid').innerHTML =  senderid;
+
+    // console.log(x)
+    console.log(img)
+    document.getElementById("testmodelimg").setAttribute('src',img);
+  console.log('called')
+    $.ajax({
+      type:'POST',
+      url:'/user/noti',
+      data:{
+        notiid:x,
+      },
+      sucess:function(){
+        return false
+      }
+    });
+
+  };
+
+  </script>
 
 
 

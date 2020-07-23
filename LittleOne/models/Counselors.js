@@ -80,8 +80,14 @@ const counselorsSchema = new mongoose.Schema({
     },
 
     testimonials:{type:[{useremail:{type:String,lowercase:true,},text:{type:String}}]},
-    notifications:{type:[{senderid:{type:String},typeid:{type:String},img:{type:String},username:{type:String},unread:{type:Boolean,default:false}}],default:void 0},
-
+    notifications:{type:
+      [{senderid:{type:String},
+        typeid:{type:String},
+        username:{type:String},
+        img:{type:String},
+        msg:{type:String},
+        sender_type:{type:String},
+        unread:{type:Boolean,default:false}}],default:void 0},
 
 
 })
