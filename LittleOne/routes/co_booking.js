@@ -55,7 +55,7 @@ router.get('/',function(req,res){
                }
 
                if(time){
-                 docs.push({'name':doctors[i].name,'time':time[0],'email':doctors[i].email});
+                 docs.push({'name':doctors[i].name,'time':time[0],'email':doctors[i].email,doctor:doctors[i]});
                  time=undefined
                }
              }

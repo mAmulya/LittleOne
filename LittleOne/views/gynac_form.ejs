@@ -209,13 +209,13 @@
 	    <div class="col-md-4">
 	      <div class="our-team" id="card">
 	        <div class="picture" style="margin-bottom:-1%;">
-	          <img style="width:17vh;height:17vh;margin-left:-0.5%;margin-top:3%;" class="img-fluid" src="" >
+	          <img style="width:17vh;height:17vh;margin-left:-0.5%;margin-top:3%;" class="img-fluid" src="<%=item.doctor.img.path%>" >
 	        </div>
 					<form class="" action="/gynac_booking/done" method="post" style="margin-bottom:10%">
 
 	        <div class="team-content">
 	          <h3 class="name"><%=item.name%></h3>
-	          <h4 class="title"><%= item.about %></h4>
+						<h4 class="title">Rating : <%= item.doctor.rating %></h4>
 						<div style="width:70%;margin-left:15%;margin-top:5%;" class="col-sm-12">
 								<div class="form-group">
 									<div class="row">
@@ -244,9 +244,11 @@
 
 	        </div>
 	        <ul class="social">
-						<li><a href="<%= item.facebook %>" class="fab fa-facebook" aria-hidden="true"></a></li>
+						<li><%=item.doctor.email%></li>
+						<li><%=item.doctor.phonenumber%></li>
+						<!-- <li><a href="<%= item.facebook %>" class="fab fa-facebook" aria-hidden="true"></a></li>
 	          <li><a href="<%=item.instagram%>" class="fab fa-instagram" aria-hidden="true"></a></li>
-	          <li><a href="#" class="fab fa-google-plus" aria-hidden="true"></a></li>
+	          <li><a href="<%=item.doctor.email%>" class="fab fa-google-plus" aria-hidden="true"></a></li> -->
 	        </ul>
 	      </div>
 	    </div>

@@ -81,8 +81,8 @@ nav ul li a {
   }
 
 #background {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F38%2F2020%2F01%2FGettyImages-643782350-2000.jpg&q=85");
-  min-height: 900px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("https://pigeon.com.sg/wp-content/uploads/2014/07/About-Us.jpg");
+  min-height: 500px;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -443,36 +443,155 @@ p{margin-top:23px;}
 
   <body>
 
-    <nav id="nav" style="z-index:15;border:none;" class="navpic">
-    <div class="logo">
-      <span id="wander">FIRSTBORNS</span>
-    </div>
-    <div class="menu"  style="overflow:visible!important;">
-      <ul id="ul" style="margin-left:60%;margin-top:1.7%;">
+
+        <nav id="nav" style="z-index:15;border:none;" class="navpic">
+        <div class="logo">
+          <span id="wander">LITTLEONE</span>
+        </div>
+        <div class="menu"  style="overflow:visible!important;">
+          <ul id="ul" style="margin-left:60%;margin-top:1.7%;">
+            <center>
+             <li><a class="items" href="/user/home"><i class="fas fa-home"></i></a></li>
+             <li><a class="items" href="/blog"><i class="fas fa-blog"></i></a></li>
+             <li><a class="items" href="/forum"><i class="fa fa-quora"></i></a></li>
+
+             <li class="dropdown">
+               <i class="fas fa-bell dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                 <!-- <button style="color:grey;font-size:16px;margin-top:-2%;" class="btn btn-outline-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                 </button> -->
+                 <div style="min-width:23rem;" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                   <!-- <a style="padding-top:2px;" class="dropdown-item" href="/users">Profile</a>
+                   <a style="padding-top:2px;" class="dropdown-item" href="#">WanderList</a>
+                   <a style="padding-top:2px;" class="dropdown-item" href="/users/logout">Logout</a> -->
+                   <% if(user.notifications) {%>
+                       <div class="px-3 py-3">
+                         <h6 class="text-sm text-muted m-0">You have <strong class="text-primary"><%=user.notifications.length%></strong> notifications.</h6>
+                       </div>
+
+                       <div class="list-group list-group-flush" id="notifications" style="overflow-y:auto!important;max-height:400px!important;">
+
+                   <% for(i=0;i < user.notifications.length;i++ ){ %>
+                      <% if(user.notifications[i].typeid=='testimonial'){%>
+                        <a href="#" onclick="noti('<%=user.notifications[i]._id%>','<%=user.notifications[i].img %>','<%=user.notifications[i].senderid %>','<%=user.notifications[i].sender_type %>')" data-toggle="modal" data-target="#myModal" class="list-group-item list-group-item-action">
+
+
+                            <div id="<%=user.notifications[i]._id%>"class="row align-items-center">
+                              <div class="col-auto">
+                                <img alt="Image placeholder" src="<%=user.notifications[i].img %>" class="notifimg rounded-circle">
+
+                              </div>
+                              <div class="col" style="width:100%;margin-top:-2%!important;padding-left:!important">
+                                    <h6 style="color: #32325d!important;" class=""><strong><%=user.notifications[i].username%></strong></h6>
+                                <p style="text-transform:lowercase!important;line-height:1.1!important;margin-bottom:-3%" class=""><%=user.notifications[i].msg%></p>
+
+                              </div>
+
+
+                            </div>
+                          </a>
+                       <%}%>
+
+                       <% if(user.notifications[i].typeid!='testimonial'){%>
+
+                         <a href="#" onclick="noti('<%=user.notifications[i]._id%>','<%=user.notifications[i].img %>','<%=user.notifications[i].senderid %>','<%=user.notifications[i].sender_type %>')"  class="list-group-item list-group-item-action">
+
+
+                             <div id="<%=user.notifications[i]._id%>"class="row align-items-center">
+                               <div class="col-auto">
+                                 <img alt="Image placeholder" src="<%=user.notifications[i].img %>" class="notifimg rounded-circle">
+
+                               </div>
+                               <div class="col" style="width:100%;margin-top:-2%!important;padding-left:!important">
+                                     <h6 style="color: #32325d!important;" class=""><strong><%=user.notifications[i].username%></strong></h6>
+                                 <p style="text-transform:lowercase!important;line-height:1.1!important;margin-bottom:-3%" class=""><%=user.notifications[i].msg%>
+
+                                       <i class="fas fa-trash"></i>
+
+      </p>
+
+                               </div>
+
+
+                             </div>
+                           </a>
+                        <%}%>
+
+                         <%} %>
+
+                       </div>
+                         <%}else{ %>
+                           <p>No Notifications</p>
+                         <%}%>
+
+                 </div>
+             </li>
+             <li class="dropdown" style="margin-left:-4%;">
+                 <button style="color:white;font-size:16px;margin-top:-2%;" class="items btn btn-outline-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   <i style="font-size:18px;" class="items far fa-user-circle"><small><b><%=user.name%></b></small></i>
+                 </button>
+                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                   <a style="padding-top:2px;" class="dropdown-item" href="/user/profile">Profile</a>
+                   <a style="padding-top:2px;" class="dropdown-item" href="/users/logout">Logout</a>
+                 </div>
+             </li>
+           </center>
+          </ul>
+        </div>
+      </nav>
+
+
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+          <div class="modal-content" style="background-color: #DDDDDD;background-image:linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4) 75%), url('https://lstore.graphics/paaatterns/images/Waiau-3-p-1080.jpeg');background-size:contain;background-position:150% 100%;background-repeat:no-repeat;">
+            <div class="modal-header">
+              <!-- <h4 class="modal-title">Testimonial</h4> -->
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <table style="width:100%;padding:3%;">
+                <tr>
+                  <td style="width:38%;padding-top:3%;padding-bottom: 1.5%;text-align:center;">
+                    <img style="width:30vh;height:30vh;border-radius:3px;box-shadow:0 10px 25px 0 rgba(0,0,0,.3);"  id="testmodelimg" alt="Raised Image" class="rounded img-raised">
+                    <div id="senderid">
+
+                    </div>
+                  </td>
+                  <td style="width:58%;">
+                    <h1 style="color:#919293;">Testimonial</h1>
+
+                    <form action="/user/testimonial/" method="POST">
+                      <input style="display: none;" type="text" id="testusername" name="usermail" value="">
+                      <input style="display: none;" type="text" id="sender_type" name="sender_type" value="">
+                      <input style="display: none" type="text" id="sender" name="senderid" value="">
+                      <div class="form-group" style="margin-top:5%;">
+                        <label for="exampleFormControlTextarea1">Your Feedback</label>
+                        <textarea style="width:400px;" name="text" placeholder="Give your feedback please..." class="form-control" id="exampleFormControlTextarea1" rows="6"></textarea>
+                      </div>
+                      <br>
+                      <input style="float:right;margin-top:35%" class="btn btn-success btn-sm" type="submit" name="submit" value="Submit">
+                    </form>
+                  </td>
+                </tr>
+              </table>
+              <!-- <div class="modal-footer" style="border-top:none;">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div> -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div id="background">
         <center>
-         <li><a class="items" href="/user/home"><i class="fas fa-home"></i></a></li>
-         <li><a class="items" href="/blog"><i class="fas fa-blog"></i></a></li>
-         <li class="dropdown">
-           <i style="font-size:18px;" class="fas fa-bell dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
-         </li>
-         <li class="dropdown" style="margin-left:-4%;">
-             <button style="color:white;font-size:16px;margin-top:-2%;" class="items btn btn-outline-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               <i style="font-size:18px;" class="items far fa-user-circle"><small><b>User</b></small></i>
-             </button>
-             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-               <a style="padding-top:2px;" class="dropdown-item" href="/users">Profile</a>
-               <a style="padding-top:2px;" class="dropdown-item" href="//">SavedArticles</a>
-               <a style="padding-top:2px;" class="dropdown-item" href="/cos/logout">Logout</a>
-             </div>
-         </li>
-       </center>
-      </ul>
-    </div>
-  </nav>
+          <h2 style="color:white;padding-top:13%">Baby Care</h2>
+          <!-- <p style="margin-top:-17%;margin-bottom:15%;color:white;font-size:40px;">MomsCare Blog</p> -->
+        </center>
+        <%- include ('partials/messages.ejs') %>
 
-  <div id="background">
+      </div>
 
-  </div>
 
 
 
@@ -734,7 +853,7 @@ p{margin-top:23px;}
 
 
 
-<div style="padding-top:60px;">
+<div style="padding-top:80px;">
 <div class="box-1 wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;height:150px;margin-top:1190px;">
   <div class="container1">
     <div class="row">
@@ -743,7 +862,7 @@ p{margin-top:23px;}
         </div>
 
         <div class="grid_4">
-          <a href="/gynac_booking" class="more_btn">get started</a>
+          <a href="/pedia_booking" class="more_btn">get started</a>
         </div>
       </div>
     </div>
@@ -811,7 +930,7 @@ p{margin-top:23px;}
   <div class="vc_column-inner ">
     <div class="wpb_wrapper">
       <div class="ult-animation  ult-animate-viewport  ult-no-mobile " data-animate="zoomInDown" data-animation-delay="2" data-animation-duration="1" data-animation-iteration="1" style="opacity:1;-webkit-transition-delay: 2s; -moz-transition-delay: 2s; transition-delay: 2s;" data-opacity_start_effect="">
-        
+
         <div id="modal-trg-txt-wrap-8082" class="ult-modal-input-wrapper ult-adjust-bottom-margin dt-video-modal-on-image  vc_custom_1498688485509 animated zoomInDown" style="opacity:1;-webkit-animation-delay:2s;-webkit-animation-duration:1s;-webkit-animation-iteration-count:1; -moz-animation-delay:2s;-moz-animation-duration:1s;-moz-animation-iteration-count:1; animation-delay:2s;animation-duration:1s;animation-iteration-count:1;test">
           <a href="https://www.youtube.com/watch?v=28lwh1ej9Z4"><img src="https://1n45h6492x0o2siloqczsz91-wpengine.netdna-ssl.com/wp-content/uploads/2017/05/video-thumb-image2.jpg" alt="video-thumb-image2" data-class-id="content-5e67d799296aa0-18993832" class="ult-modal-img overlay-show ult-align-center ult-modal-image-" data-overlay-class="overlay-cornerbottomleft">
           </a>
@@ -1014,6 +1133,38 @@ const cards = document.querySelectorAll('.card');
   }
 
     </script>
+
+
+        <script type="text/javascript">
+        function noti(x,img,senderid,sender_type){
+          console.log('asasssssssssssssssssss');
+          console.log(x)
+          document.getElementById(x).style.display = "none";
+          document.getElementById('testusername').value = '<%= user.email %>';
+
+          document.getElementById('sender').value =  senderid;
+          document.getElementById('sender_type').value =  sender_type;
+
+          document.getElementById('senderid').innerHTML =  senderid;
+
+          // console.log(x)
+          console.log(img)
+          document.getElementById("testmodelimg").setAttribute('src',img);
+        console.log('called')
+          $.ajax({
+            type:'POST',
+            url:'/user/noti',
+            data:{
+              notiid:x,
+            },
+            sucess:function(){
+              return false
+            }
+          });
+
+        };
+
+        </script>
 
   </body>
 </html>
