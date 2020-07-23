@@ -42,13 +42,18 @@ router.get('/pregnancy_home',function(req,res){
   });
 
 
+
+
+
+
+
+
+
   router.get('/baby_home',function(req,res){
     res.render('baby_home');
   });
 
-  router.get('/babycare_home',function(req,res){
-    res.render('babycare_home');
-  });
+
 
 router.post('/song', urlencodedParser, function(req, res){
       console.log(req.body);
@@ -106,7 +111,7 @@ router.post('/song', urlencodedParser, function(req, res){
                 Articles.find({'topic':'adjustments'},function(err,adjustments){
                   console.log('user',req.user)
                   res.render('articles',{User:req.user,articles:articles,anxiety:anxiety.length,depression:depression.length,abuse:abuse.length,family:family.length,adjustments:adjustments.length});
-  
+
                 })
               })
             })
@@ -121,9 +126,9 @@ router.post('/song', urlencodedParser, function(req, res){
 
   router.get('/articles/:name',function(req,res){
     console.log('--------------------');
-  
+
     console.log(req.params.name);
-  
+
     console.log(req.user);
       Articles.find({},function(err,articles){
         console.log(articles);
@@ -157,7 +162,7 @@ router.post('/song', urlencodedParser, function(req, res){
         })
       })
     });
-  
+
 
     router.get('/one/:id',function(req,res){
       console.log(req.user);
