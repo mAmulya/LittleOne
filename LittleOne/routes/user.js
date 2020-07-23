@@ -42,6 +42,10 @@ router.get('/pregnancy_home',function(req,res){
   });
 
 
+  router.get('/baby_home',function(req,res){
+    res.render('baby_home');
+  });
+
   router.get('/babycare_home',function(req,res){
     res.render('babycare_home');
   });
@@ -86,6 +90,81 @@ router.post('/song', urlencodedParser, function(req, res){
 
   });
 
+
+
+
+
+
+  router.get('/counselors/articles',function(req,res){
+    console.log(req.user);
+      Articles.find({},function(err,articles){
+        console.log(articles);
+        Articles.find({'topic':'anxiety'},function(err,anxiety){
+          Articles.find({'topic':'depression'},function(err,depression){
+            Articles.find({'topic':'abuse'},function(err,abuse){
+              Articles.find({'topic':'family'},function(err,family){
+                Articles.find({'topic':'adjustments'},function(err,adjustments){
+                  console.log('user',req.user)
+                  res.render('articles',{User:req.user,articles:articles,anxiety:anxiety.length,depression:depression.length,abuse:abuse.length,family:family.length,adjustments:adjustments.length});
+  
+                })
+              })
+            })
+          })
+        })
+      })
+  });
+
+
+
+
+
+  router.get('/articles/:name',function(req,res){
+    console.log('--------------------');
+  
+    console.log(req.params.name);
+  
+    console.log(req.user);
+      Articles.find({},function(err,articles){
+        console.log(articles);
+        Articles.find({'topic':'anxiety'},function(err,anxiety){
+          Articles.find({'topic':'depression'},function(err,depression){
+            Articles.find({'topic':'abuse'},function(err,abuse){
+              Articles.find({'topic':'family'},function(err,family){
+                Articles.find({'topic':'adjustments'},function(err,adjustments){
+                  if(req.params.name=='anxiety'){
+                    res.render('articles',{counselor:req.user,articles:anxiety,anxiety:anxiety.length,depression:depression.length,abuse:abuse.length,family:family.length,adjustments:adjustments.length,all:articles.length});
+                  }
+                  if(req.params.name=='depression'){
+                    res.render('articles',{counselor:req.user,articles:depression,anxiety:anxiety.length,depression:depression.length,abuse:abuse.length,family:family.length,adjustments:adjustments.length,all:articles.length});
+                  }
+                  if(req.params.name=='abuse'){
+                    res.render('articles',{counselor:req.user,articles:abuse,anxiety:anxiety.length,depression:depression.length,abuse:abuse.length,family:family.length,adjustments:adjustments.length,all:articles.length});
+                  }
+                  if(req.params.name=='family'){
+                    res.render('articles',{counselor:req.user,articles:family,anxiety:anxiety.length,depression:depression.length,abuse:abuse.length,family:family.length,adjustments:adjustments.length,all:articles.length});
+                  }
+                  if(req.params.name=='adjustments'){
+                    res.render('articles',{counselor:req.user,adjustments:anxiety,anxiety:anxiety.length,depression:depression.length,abuse:abuse.length,family:family.length,adjustments:adjustments.length,all:articles.length});
+                  }
+                  if(req.params.name==null){
+                    res.render('articles',{counselor:req.user,articles:articles,anxiety:anxiety.length,depression:depression.length,abuse:abuse.length,family:family.length,adjustments:adjustments.length,all:articles.length});
+                  }
+                 })
+              })
+            })
+          })
+        })
+      })
+    });
+  
+
+    router.get('/one/:id',function(req,res){
+      console.log(req.user);
+        Articles.findOne({'_id':req.params.id},function(err,article){
+          res.render('co_one',{counselor:req.user,article:article});
+        })
+    });
 
 
 router.get('/counselors/articles',function(req,res){
