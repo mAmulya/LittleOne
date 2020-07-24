@@ -110,7 +110,7 @@ app.use('/blog',require('./routes/blog'));
        console.log(data[0])
        username = data[0].user_name
        guidename = data[0].doc_name
-       res.render('chat', {data:data[0], usertype:uname, user:data[0].user_name, doctor:data[0].doc_name});
+       res.render('chat', {data:data[0], usertype:uname, user:data[0].user_name, doctor:data[0].doc_name, user2:req.user});
      }
    });
 console.log('heyy')

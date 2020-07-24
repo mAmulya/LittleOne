@@ -148,53 +148,13 @@ router.post('/done',urlencodedParser, async(req,res)=>{
          error = 'Your appoitment is confirmed !! check the current Bookings'
          console.log('----------------------------------------------------------------------------------------------------');
          console.log(error);
-         var datetime = new Date();
-         date = datetime.toISOString().slice(0,10);
-           date1 = date.split('-')
-           console.log(date1)
-           var date2 = date1[0]+'/'+date1[1]+'/'+date1[2]
-           var user = req.user;
-           Bookings.find({user:req.user.email}).then(booking=>{
-             console.log('-----------------------------------------------');
-             console.log(booking);
-             for(var i=0;i<booking.length;i++){
-               d2 = new Date()
-               console.log(i);
-               if(booking[i].current == true   ){
-                 console.log('camehere')
-                 d1 = new Date(booking[i].date_n_time.date);
-                 console.log(d1)
-                 console.log(d2)
-
-                 if(d1 <= d2){
-                   console.log('heyy')
-                     console.log('yes');
-                     if(d1==d2){
-                     d2 = new Date().getHours
-                     d1 = booking[i].date_n_time.time
-                     d1 = d1.split(':')
-                     if(Number(d2) >Number(d1[0])){
-                       booking[i].current=false
-                     }
-                   }
-                   else{
-                     booking[i].current=false
-                   }
-                 }
-                 console.log('hip hip hurray')
-               }
-             }
-             // booking.save()
-             if(error==undefined){
-               res.render('profile', { user : user, date : date,booking:booking})
-
-             }
-             else{
-               res.render('profile', { user : user, date : date,booking:booking,error:error})
-               error=undefined
-             }
-
-           })
+         if(error==undefined){
+           res.render('user_home',{user:req.user});
+         }
+         else{
+           res.render('user_home',{user:req.user,error:error});
+           error=undefined;
+         }
 });
 
 
