@@ -31,37 +31,6 @@ Blogs.find().sort({likes:-1}).limit(2)
       max_liked_blog=h_data
   })
 
-  // function CheckUser(req, res, next) {
-  //     if (req.isAuthenticated()){
-  //       if(req.user.usertype == 'user'){
-  //         return next();
-  //       }
-  //       else {
-  //         return res.sendStatus(404)
-  //       }
-  //     }
-  //     res.redirect('/users/login');
-  // }
-  //
-  // function IsAuth(req,res,next){
-  //   if(req.isAuthenticated())
-  //     return next()
-  //   return res.send(404)
-  // }
-  //
-  // function CheckGuide(req, res, next) {
-  //     if (req.isAuthenticated()){
-  //       if(req.user.usertype == 'guide'){
-  //         return next();
-  //       }
-  //       else {
-  //         return res.sendStatus(404)
-  //       }
-  //     }
-  //     res.redirect('/guides/login');
-  // }
-  //
-
 
 var i=0
 router.get('/',function(req,res){
@@ -306,7 +275,7 @@ router.get('/:id/all',function(req,res){
 
            count=0
            posts=0
-           Blogs.find({$and:[{name:user_data[0].name},{type:user_data[0].type},{email:user_data[0].email}]}, function(err,p_data){
+           Blogs.find({$and:[{name:req.user.name},{type:req.user.type},{email:req.user.email}]}, function(err,p_data){
             if(err){
               console.log(err);
             }else{

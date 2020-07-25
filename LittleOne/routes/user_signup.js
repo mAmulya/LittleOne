@@ -215,6 +215,15 @@ router.get('/signup',function(req,res){
                         value:req.body.email
                       }
                       errors.errors.push(error)
+
+                      if(error1==undefined){
+                        return res.render('user_login',{email:undefined,errors:errors})
+                      }
+                      else{
+                        return res.render('user_login',{email:undefined,errors:errors,error:error1});
+                        error1=undefined;
+                      }
+
                     return res.render('user_login',{email:undefined,errors:errors})
 
           }
@@ -245,7 +254,13 @@ router.get('/signup',function(req,res){
     else{
 
         console.log('12345678901234567890123456789');
-        return res.render('user_login',{email:undefined});
+        if(error1==undefined){
+          return res.render('user_login',{email:undefined});
+        }
+        else{
+          return res.render('user_login',{email:undefined,error:error1});
+          error1=undefined;
+        }
 
 
     }
@@ -296,7 +311,7 @@ router.get('/google/redirect',passport.authenticate('google'),(req,res)=>{
 
 
 
-
+var error1=undefined;
 
 
 
@@ -304,7 +319,15 @@ router.get('/google/redirect',passport.authenticate('google'),(req,res)=>{
 
 router.get('/forgot', function(req, res) {
 
-  res.render('forgot');
+
+  if(error1==undefined){
+    res.render('forgot');
+  }
+  else{
+    res.render('forgot',{error:error});
+    error1=undefined;
+  }
+
 });
 router.post('/forgot', function(req, res, next) {
   async.waterfall([
@@ -319,6 +342,7 @@ router.post('/forgot', function(req, res, next) {
       Users.findOne({ email: req.body.email }, function(err, user) {
         if (!user) {
           req.flash('error', 'No account with that email address exists.');
+          error1='No account with that email address exists.'
           return res.redirect('./forgot');
         }
 console.log('sfa');
@@ -353,6 +377,7 @@ console.log('sfa');
       };
       smtpTransport.sendMail(mailOptions, function(err) {
         req.flash('info', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
+        error1='An e-mail has been sent to ' + user.email + ' with further instructions.'
         console.log('sagdf');
         done(err, 'done');
       });
@@ -367,6 +392,7 @@ router.get('/reset/:token', function(req, res) {
   Users.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
     if (!user) {
       req.flash('error', 'Password reset token is invalid or has expired.');
+      error1= 'Password reset token is invalid or has expired.'
       return res.redirect('./forgot');
     }
     res.render('reset');
@@ -392,6 +418,7 @@ console.log(req.body)
       Users.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
         if (!user) {
           req.flash('error', 'Password reset token is invalid or has expired.');
+          error1= 'Password reset token is invalid or has expired.'
           console.log('Password reset token is invalid or has expired.')
           return res.redirect('./forgot');
         }
@@ -436,6 +463,7 @@ console.log(req.body)
       };
       smtpTransport.sendMail(mailOptions, function(err) {
         req.flash('success', 'Success! Your password has been changed.');
+        error1='Success! Your password has been changed.'
         done(err);
       });
     }
