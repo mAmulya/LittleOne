@@ -29,7 +29,7 @@
     "node-cron": "^2.0.3",
     "nodemailer": "^6.4.2",
     "nodemon": "^2.0.2",
-    "otp-generator": "^1.1.0",
+    "otp-generator": "^3.0.0",
     "passport": "^0.4.1",
     "passport-custom": "^1.1.1",
     "passport-google-oauth20": "^2.0.0",
